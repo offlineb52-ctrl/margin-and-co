@@ -97,4 +97,46 @@
   <p class="btn-row"><a class="btn" href="{{ root }}methodology/">Read the full methodology</a></p>
 </section>
 
+<section class="wrap section section--ruled" id="subscribe">
+  <div class="section__head">
+    <p class="eyebrow">The weekly report</p>
+    <h2>Get each week's results by email</h2>
+    <p class="lede">Which indicators survived, which didn't, and how the live
+       paper portfolio did. One email a week. No advertising, and your address
+       is never shared with anyone.</p>
+  </div>
+
+  <form class="subscribe" method="post" action="/api/subscribe">
+    <!-- Honeypot: hidden from people, irresistible to bots. Never remove. -->
+    <div class="subscribe__trap" aria-hidden="true">
+      <label for="website">Leave this field empty</label>
+      <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="subscribe__row">
+      <label class="subscribe__label" for="email">Email address</label>
+      <input class="subscribe__input" type="email" id="email" name="email"
+             required maxlength="254" autocomplete="email"
+             placeholder="you@example.com">
+      <button class="btn btn--solid" type="submit">Subscribe</button>
+    </div>
+
+    <label class="subscribe__consent">
+      <input type="checkbox" name="consent" value="yes" required>
+      <span>I agree to receive the weekly research report by email. I can
+        unsubscribe at any time, and my address will be deleted when I do.
+        See the <a href="{{ root }}privacy/">privacy policy</a>.</span>
+    </label>
+  </form>
+
+  <div class="note">
+    <p><strong>What you are agreeing to, precisely.</strong> Your email
+       address, the date, and the fact that you consented are stored — nothing
+       else. No name, no location, no tracking. The list is held on this
+       site's own infrastructure and is not shared with any mailing company,
+       advertiser, or anyone else. Unsubscribing deletes the record rather than
+       flagging it inactive.</p>
+  </div>
+</section>
+
 {{ archive_section }}

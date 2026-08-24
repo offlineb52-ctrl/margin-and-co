@@ -496,3 +496,47 @@ pre code { background: none; border: 0; padding: 0; }
   body { background: #fff; color: #000; }
   figure img { filter: none !important; }
 }
+
+/* --------------------------------------------------------------------------
+   15. Subscribe form
+
+   Works with JavaScript disabled — it is an ordinary HTML form POST. That is
+   deliberate: it lets the site keep `script-src 'none'` in its Content
+   Security Policy, which rules out cross-site scripting entirely.
+   -------------------------------------------------------------------------- */
+
+.subscribe { margin-block: 2rem; max-width: 44rem; }
+
+.subscribe__row {
+  display: flex; gap: .75rem; flex-wrap: wrap; align-items: flex-end;
+}
+.subscribe__label {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.subscribe__input {
+  flex: 1 1 18rem; min-width: 0;
+  font-family: var(--font-sans); font-size: 1rem;
+  padding: .72rem .9rem;
+  color: var(--ink); background: var(--surface);
+  border: 1px solid var(--rule-strong); border-radius: 2px;
+}
+.subscribe__input::placeholder { color: var(--ink-faint); }
+.subscribe__input:focus-visible { border-color: var(--accent); }
+
+.subscribe button { flex: 0 0 auto; cursor: pointer; padding-block: .72rem; }
+
+.subscribe__consent {
+  display: flex; gap: .65rem; align-items: flex-start;
+  margin-top: 1rem; font-family: var(--font-sans);
+  font-size: .84rem; line-height: 1.5; color: var(--ink-muted);
+  max-width: 54ch;
+}
+.subscribe__consent input { margin-top: .2rem; flex: 0 0 auto; }
+
+/* The honeypot. Hidden from people, left in the DOM for bots to fill in.
+   `display:none` is avoided because some bots skip such fields. */
+.subscribe__trap {
+  position: absolute; left: -9999px; width: 1px; height: 1px;
+  overflow: hidden;
+}

@@ -891,7 +891,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     else:
         print("  (no live portfolio yet -- skipping live/)")
 
-    for name, nav in (("methodology", "method"), ("about", "about")):
+    for name, nav in (("methodology", "method"), ("about", "about"),
+                      ("terms", ""), ("privacy", "")):
         target = DIST / name
         target.mkdir(exist_ok=True)
         (target / "index.html").write_text(builder.build_content_page(name, nav), encoding="utf-8")
@@ -928,7 +929,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         "img-src 'self' data:",
         "object-src 'none'",
         "base-uri 'self'",
-        "form-action 'none'",
+        "form-action 'self'",
         "frame-ancestors 'none'",
         "upgrade-insecure-requests",
     ])
