@@ -27,3 +27,10 @@ site/dist/
 # Committing a binary that changes every week would bloat the history; the
 # published reports remain the record of what was said and when.
 data/archive.db
+
+# Pro (members-only) report artefacts. This repository is PUBLIC — committing
+# these would publish the paid tier to anyone who opens GitHub, which defeats
+# the gate entirely. They are generated locally and deployed to a members-only
+# path, never through the repo.
+reports/output/*_pro.json
+reports/output/*_pro_scores.csv
