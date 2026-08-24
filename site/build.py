@@ -550,8 +550,55 @@ class Builder:
 
     # -- individual pages ----------------------------------------------
 
+    def survival_section(self) -> Dict[str, str]:
+        """Public Survival Score content, read from the free report.
+
+        Only the free report is read here. The Pro report is never opened by
+        the public site builder, so there is no path by which its contents
+        could reach a public page.
+        """
+        # The source directory holds `weekNN_free.json`; `latest_free.json`
+        # is only a name this build gives the newest one on the way out.
+        candidates = sorted(REPORT_SOURCE.glob("week*_free.json"))
+        if not candidates:
+            return {"headline": "", "summary": "", "flagship": ""}
+
+        report = json.loads(candidates[-1].read_text(encoding="utf-8"))
+        flag = report.get("sections", {}).get("flagship") or {}
+
+        if not flag:
+            return {"headline": esc(report.get("headline", "")),
+                    "summary": esc(report.get("summary", "")), "flagship": ""}
+
+        card = f"""<div class="findings">
+  <article class="finding">
+    <div class="finding__head">
+      <h3 class="finding__name">{esc(flag.get('indicator',''))} on {esc(flag.get('ticker',''))}</h3>
+      <span class="pill pill--{'survived' if flag.get('score',0) >= 8 else 'weakened' if flag.get('score',0) >= 6 else 'failed'}">
+        {num(flag.get('score'), 1)} / 10
+      </span>
+    </div>
+    <p class="finding__rule">{esc(flag.get('verdict',''))}</p>
+    <p class="finding__body">
+      In-sample Sharpe <span class="num">{num(flag.get('in_sample_sharpe_gross'))}</span>,
+      out-of-sample net of costs <span class="num">{num(flag.get('out_sample_sharpe_net'))}</span>,
+      positive in <span class="num">{pct(flag.get('pct_windows_positive'), 0)}</span>
+      of walk-forward windows, worst drawdown
+      <span class="num">{pct(flag.get('max_drawdown_net'))}</span>
+      across <span class="num">{num(flag.get('num_trades'), 0)}</span> trades.
+    </p>
+  </article>
+</div>"""
+
+        return {
+            "headline": esc(report.get("headline", "")),
+            "summary": esc(report.get("summary", "")),
+            "flagship": card,
+        }
+
     def build_index(self, weeks: List[Dict[str, Any]]) -> str:
         latest = weeks[0]
+        survival = self.survival_section()
         wc = worst_cost(latest)
         charts = latest.get("charts", {})
 
@@ -590,6 +637,10 @@ class Builder:
             results_table=results_table(latest),
             latest_url=f"{self.root}reports/{slug_for(latest)}/",
             archive_section=archive_section,
+            score_headline=survival["headline"],
+            score_summary=survival["summary"],
+            score_flagship=survival["flagship"],
+            repo_url=site_config.REPO_URL,
         )
         return self.shell(
             content, path="", title=site_config.SITE_NAME,
@@ -855,8 +906,12 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     print("Building Margin & Co. ...")
 
+    # Strictly `weekNN.json`. A looser glob also matches `week01_free.json`
+    # and `week01_pro.json`, which are Survival Score reports with a different
+    # schema entirely -- and loading one here fails deep inside the archive
+    # renderer with an unhelpful error.
     weeks = []
-    for path in sorted(REPORT_SOURCE.glob("week*.json")):
+    for path in sorted(REPORT_SOURCE.glob("week[0-9][0-9].json")):
         weeks.append(json.loads(path.read_text(encoding="utf-8")))
     weeks.sort(key=lambda w: (w.get("week") or 0), reverse=True)
 
@@ -886,6 +941,29 @@ def main(argv: Optional[List[str]] = None) -> int:
         target.mkdir(parents=True, exist_ok=True)
         (target / "index.html").write_text(builder.build_report(week), encoding="utf-8")
         print(f"  reports/{slug_for(week)}/index.html")
+
+    # Pro report artefacts go under /members/, which is gated by
+    # functions/members/_middleware.js. Anonymous requests are refused before
+    # the file is ever read from disk. This is verified by a test rather than
+    # assumed -- see DEPLOY.md.
+    pro_files = sorted(REPORT_SOURCE.glob("week*_pro*.json")) \
+              + sorted(REPORT_SOURCE.glob("week*_pro_scores.csv"))
+    if pro_files:
+        members_data = DIST / "members" / "data"
+        members_data.mkdir(parents=True, exist_ok=True)
+        latest_json = None
+        for src in pro_files:
+            shutil.copy2(src, members_data / src.name)
+            if src.name.endswith("_pro.json"):
+                latest_json = src
+        if latest_json:
+            shutil.copy2(latest_json, members_data / "latest_pro.json")
+        print(f"  members/data/ ({len(pro_files)} Pro file(s), gated)")
+
+    # Free report: public by design. The week's conclusion belongs in the open.
+    free_files = sorted(REPORT_SOURCE.glob("week*_free.json"))
+    if free_files:
+        shutil.copy2(free_files[-1], DIST / "latest_free.json")
 
     # Live portfolio page, if a book has been opened.
     live_file = LIVE_STATE / "live.json"

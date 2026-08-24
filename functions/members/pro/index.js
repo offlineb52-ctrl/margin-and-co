@@ -60,13 +60,14 @@ function upgradeWall(email) {
       </div>
 
       <div class="note">
-        <p><strong>Pro is not on sale yet.</strong> Subscriptions are not open,
-           and no payment is being taken anywhere on this site. When they do
-           open the price is intended to be £5 a month. Until then, the free
-           weekly report carries the actual conclusion — which is the part that
-           should be public anyway.</p>
+        <p><strong>Pro is not for sale.</strong> There is no payment system on
+           this site — no card form, no checkout, no billing of any kind. Access
+           is granted by hand at the moment, so if you want it, just ask.</p>
+        <p>The free weekly report carries the actual conclusion, and always
+           will. Hiding whether the findings were negative would defeat the
+           point of running the study.</p>
         <p>Email <a href="mailto:hello@marginco.co.uk">hello@marginco.co.uk</a>
-           to be told when it opens.</p>
+           and I will turn it on for you.</p>
       </div>`,
     actions: `<p class="btn-row">
                 <a class="btn btn--solid" href="/members/">Back to members</a>

@@ -97,6 +97,25 @@
   <p class="btn-row"><a class="btn" href="{{ root }}methodology/">Read the full methodology</a></p>
 </section>
 
+<section class="wrap section section--ruled">
+  <div class="section__head">
+    <p class="eyebrow">Survival Score</p>
+    <h2>{{ score_headline }}</h2>
+    <p class="lede">{{ score_summary }}</p>
+  </div>
+  {{ score_flagship }}
+  <div class="note">
+    <p><strong>How the score works.</strong> Each indicator-and-stock
+       combination is scored 1 to 10: 60% out-of-sample Sharpe ratio net of
+       costs, 25% how consistently it held up across rolling test windows, 15%
+       worst drawdown. A rule that lost money after costs is capped at 3, and
+       one that barely traded is capped at 5 — otherwise sitting in cash would
+       score well for doing nothing. The
+       <a href="{{ repo_url }}/blob/main/scoring.py">full formula is published</a>,
+       so you can disagree with a weight and recompute the table yourself.</p>
+  </div>
+</section>
+
 <section class="wrap section section--ruled" id="subscribe">
   <div class="section__head">
     <p class="eyebrow">The weekly report</p>
