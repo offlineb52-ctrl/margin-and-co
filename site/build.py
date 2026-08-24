@@ -542,6 +542,7 @@ class Builder:
             head_extra=head_extra,
             nav_home=current if nav == "home" else "",
             nav_live=current if nav == "live" else "",
+            nav_join=current if nav == "join" else "",
             nav_reports=current if nav == "reports" else "",
             nav_method=current if nav == "method" else "",
             nav_about=current if nav == "about" else "",
@@ -909,7 +910,8 @@ def main(argv: Optional[List[str]] = None) -> int:
         print("  (no live portfolio yet -- skipping live/)")
 
     for name, nav in (("methodology", "method"), ("about", "about"),
-                      ("terms", ""), ("privacy", "")):
+                      ("terms", ""), ("privacy", ""),
+                      ("join", "join"), ("login", "")):
         target = DIST / name
         target.mkdir(exist_ok=True)
         (target / "index.html").write_text(builder.build_content_page(name, nav), encoding="utf-8")

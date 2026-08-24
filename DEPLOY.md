@@ -332,3 +332,61 @@ CAPTCHA because every option requires JavaScript, and running any would mean
 relaxing `script-src 'none'` — which currently makes cross-site scripting
 impossible. If spam signups ever become a real problem, add a Cloudflare rate
 limiting rule on `/api/subscribe` rather than reaching for a CAPTCHA.
+
+---
+
+## Accounts and the members area
+
+Passwordless, entirely server-side. There is no client JavaScript anywhere in
+the flow, which is what lets the site keep `script-src 'none'` — every hosted
+auth widget (Clerk, Auth0, Firebase) is JavaScript, and adopting one would have
+meant giving up the header that makes cross-site scripting impossible here.
+
+### How it works
+
+1. `POST /api/auth/request` — member submits an email. A 256-bit token is
+   generated, its **hash** is stored in KV with a 15-minute TTL, and the raw
+   token is emailed as a link. The server never keeps the raw token.
+2. `GET /api/auth/verify?token=…` — the token is deleted, then a session is
+   created and set as an `HttpOnly; Secure; SameSite=Lax` cookie. Single use, so
+   a forwarded link cannot be replayed.
+3. `functions/members/_middleware.js` gates everything under `/members/`.
+   Unauthenticated requests never reach the content.
+4. `POST /api/auth/logout` deletes the server-side session as well as clearing
+   the cookie. Clearing only the cookie is the difference between signing out
+   and looking signed out.
+
+### What is stored
+
+Session and login identifiers are stored **hashed**. A dump of the KV
+namespace would not let anyone sign in as a member, because the usable values
+only ever exist in the member's browser or inbox. Per-member record is email,
+join date, last login. Nothing else.
+
+### Required setup
+
+**KV namespace** `marginco-auth`, bound as `AUTH` on the Pages project.
+
+**Environment variable** `RESEND_API_KEY` — needed to send sign-in emails.
+Cloudflare Email Routing can receive mail but cannot send it, so an outbound
+provider is required. [Resend](https://resend.com) has a free tier of 3,000
+emails a month, which is far beyond what this needs. Add the key under
+**Pages → Settings → Variables and secrets** as an encrypted secret, then
+verify `marginco.co.uk` as a sending domain in Resend so the links do not land
+in spam.
+
+Until that key is set, the sign-in form says so plainly rather than pretending
+to have sent an email that went nowhere.
+
+### The line this must not cross
+
+The members area publishes **research output**: what the mechanical, published
+rule flagged, what the paper portfolio holds, what it cost. It does not publish
+recommendations, price targets, or forecasts, and it must not start.
+
+That is a legal constraint, not a style guide. In the UK, advising on
+investments by way of business without FCA authorisation is an offence under
+s.19 of the Financial Services and Markets Act 2000, and charging for the
+service is what makes "by way of business" straightforward to establish.
+Reporting what a disclosed rule did is research; telling a paying member what
+to buy is advice. Keep the wording on the correct side of that.

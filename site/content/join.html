@@ -1,0 +1,78 @@
+title: Join
+eyebrow: Membership
+heading: Create an account.
+lede: Free while the daily research is being built out. No password to choose, because none is stored — you sign in with a link sent to your inbox.
+description: Create a free Margin & Co. account for daily systematic research updates and the live paper portfolio.
+<!--/meta-->
+
+<form class="subscribe" method="post" action="/api/auth/request">
+  <div class="subscribe__trap" aria-hidden="true">
+    <label for="website">Leave this field empty</label>
+    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+  </div>
+
+  <div class="subscribe__row">
+    <label class="subscribe__label" for="email">Email address</label>
+    <input class="subscribe__input" type="email" id="email" name="email"
+           required maxlength="254" autocomplete="email"
+           placeholder="you@example.com">
+    <button class="btn btn--solid" type="submit">Create account</button>
+  </div>
+
+  <label class="subscribe__consent">
+    <input type="checkbox" name="consent" value="yes" required>
+    <span>I agree to the <a href="../terms/">terms of use</a> and the
+      <a href="../privacy/">privacy policy</a>, and to receiving sign-in links
+      and research updates by email.</span>
+  </label>
+</form>
+
+<div class="prose">
+
+<h2>What you get</h2>
+
+<ul class="limits">
+  <li><strong>The live paper portfolio, in detail.</strong> Open positions,
+      orders committed for the next session before they fill, and every closed
+      trade with the reason it was taken.</li>
+  <li><strong>Research updates as they are produced.</strong> What the
+      published rules flagged, what it cost to act on them, and how that
+      compares to doing nothing.</li>
+  <li><strong>The weekly report</strong>, in full, when it is published.</li>
+</ul>
+
+<h2>What you will never get</h2>
+
+<div class="note note--flag">
+  <p><strong>No stock tips. Not now, not for money.</strong> This site
+     publishes what a mechanical, fully-disclosed rule did — not what you
+     should buy. Nothing here is a recommendation, a price target, or a
+     forecast.</p>
+  <p>That is a legal line as well as an editorial one. In the UK, advising on
+     investments as a business requires FCA authorisation, and I do not have
+     it — I am a sixth-form student running a research project. Anyone selling
+     you daily picks without that authorisation is either exempt in a way they
+     should be able to explain, or is breaking the law.</p>
+</div>
+
+<h2>How sign-in works</h2>
+
+<p>You enter your email address and a single-use link arrives. Clicking it
+   signs you in for thirty days. The link expires in fifteen minutes and stops
+   working once used.</p>
+
+<p>There is no password because there is nothing to store. The most common way
+   accounts are compromised is a password reused from a site that got breached
+   — a risk that cannot exist here. Session identifiers are held hashed, so
+   even a copy of the database would not let anyone sign in as you.</p>
+
+<h2>What is stored about you</h2>
+
+<p>Your email address, when you joined, and when you last signed in. No name,
+   no location, no tracking, no advertising identifiers. The
+   <a href="../privacy/">privacy policy</a> is specific about this, and asking
+   for your account to be deleted takes one email and no explanation.</p>
+
+<p>Already have an account? <a href="../login/">Sign in</a>.</p>
+
+</div>

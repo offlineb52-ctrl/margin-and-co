@@ -1,0 +1,37 @@
+title: Sign in
+eyebrow: Members
+heading: Sign in.
+lede: Enter your email address and a single-use link will arrive. No password — there isn't one to forget, reuse, or have stolen.
+description: Sign in to Margin & Co. with a single-use email link.
+<!--/meta-->
+
+<form class="subscribe" method="post" action="/api/auth/request">
+  <div class="subscribe__trap" aria-hidden="true">
+    <label for="website">Leave this field empty</label>
+    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+  </div>
+
+  <div class="subscribe__row">
+    <label class="subscribe__label" for="email">Email address</label>
+    <input class="subscribe__input" type="email" id="email" name="email"
+           required maxlength="254" autocomplete="email"
+           placeholder="you@example.com">
+    <button class="btn btn--solid" type="submit">Email me a link</button>
+  </div>
+</form>
+
+<div class="prose">
+
+<div class="note">
+  <p>The same form works whether or not you already have an account, and it
+     gives the same answer either way. That is deliberate: a form that says
+     "no account with that email" tells a stranger who is a member here, which
+     is both a privacy leak and the first step of a targeted attack.</p>
+</div>
+
+<p>Links last fifteen minutes and work once. If one expires, just ask for
+   another — it costs nothing and there is no lockout.</p>
+
+<p>Not a member yet? <a href="../join/">Create an account</a> — it is free.</p>
+
+</div>
