@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import hashlib
 import html
 import json
 import re
@@ -475,9 +476,24 @@ def archive_list(weeks: List[Dict[str, Any]], root: str) -> str:
 # Page assembly
 # --------------------------------------------------------------------------
 
+def stylesheet_name() -> str:
+    """`site.<hash>.css` — the filename changes whenever the CSS does.
+
+    This is not a nicety. The cache headers mark stylesheets `immutable` with
+    a one-year lifetime, which is only safe if the URL changes when the file
+    does. With a fixed `site.css`, a visitor who loaded the site once would be
+    pinned to that stylesheet for a year and would never see a redesign — the
+    first version of this build shipped exactly that bug, and it showed up as
+    a hidden honeypot field rendering in plain sight.
+    """
+    css = (STATIC_DIR / "css" / "site.css").read_bytes()
+    return f"site.{hashlib.sha256(css).hexdigest()[:10]}.css"
+
+
 class Builder:
     def __init__(self) -> None:
         self.base = load_template("base.html")
+        self.stylesheet = stylesheet_name()
         self.root = site_config.BASE_PATH
         self.domain = site_config.DOMAIN.rstrip("/")
         self.build_date = dt.date.today()
@@ -518,6 +534,7 @@ class Builder:
             og_type=og_type,
             og_image=f"{self.domain}{self.root}{og_image}",
             root=self.root,
+            stylesheet=f"{self.root}css/{self.stylesheet}",
             repo_url=site_config.REPO_URL,
             year=self.build_date.year,
             build_date=self.build_date.strftime("%-d %B %Y"),
@@ -934,9 +951,25 @@ def main(argv: Optional[List[str]] = None) -> int:
         "upgrade-insecure-requests",
     ])
 
+    # Ship the stylesheet under its content-hashed name as well. The plain
+    # `site.css` stays for the signup Function's response pages, which are
+    # generated outside this build and cannot know the hash -- so it gets a
+    # short cache instead of an immutable one.
+    css_src = DIST / "css" / "site.css"
+    if css_src.exists():
+        shutil.copy2(css_src, css_src.with_name(builder.stylesheet))
+
     (DIST / "_headers").write_text(
-        "/css/*\n  Cache-Control: public, max-age=31536000, immutable\n"
-        "/reports/*.png\n  Cache-Control: public, max-age=31536000, immutable\n"
+        # Hashed assets only: the URL changes when the bytes change.
+        "/css/site.*.css\n  Cache-Control: public, max-age=31536000, immutable\n"
+        # Unhashed, and referenced by the Function's pages. Must revalidate.
+        "/css/site.css\n  Cache-Control: public, max-age=300\n"
+        # Week-scoped filenames, genuinely immutable once published.
+        "/reports/week-*/*.png\n  Cache-Control: public, max-age=31536000, immutable\n"
+        # The live portfolio chart is REGENERATED DAILY under the same name.
+        # Caching it immutably would freeze the published track record.
+        "/live/*.png\n  Cache-Control: public, max-age=300\n"
+        "/live/*.json\n  Cache-Control: public, max-age=300\n"
         "/*\n"
         "  X-Content-Type-Options: nosniff\n"
         "  Referrer-Policy: strict-origin-when-cross-origin\n"
