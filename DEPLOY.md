@@ -391,7 +391,41 @@ service is what makes "by way of business" straightforward to establish.
 Reporting what a disclosed rule did is research; telling a paying member what
 to buy is advice. Keep the wording on the correct side of that.
 
-### Setting up Resend (sign-in emails)
+### Resend — as actually configured (24 Aug 2026)
+
+Sending domain is the **subdomain** `send.marginco.co.uk`, region Ireland
+(eu-west-1). The subdomain matters: the root already carries an SPF record from
+Email Routing, and a domain may only have one. Verifying the root would have
+meant merging includes into that single record by hand, with a broken
+`hello@marginco.co.uk` inbox as the failure mode. The subdomain gets its own
+SPF and the root is untouched.
+
+Click tracking and open tracking are both **off**. Click tracking rewrites
+every link to log who clicked what, which would contradict the privacy policy's
+"no tracking".
+
+Three records were added in Cloudflare (verified resolving):
+
+| Type | Name | Content | Priority |
+|---|---|---|---|
+| TXT | `resend._domainkey.send` | the DKIM public key | — |
+| MX | `send.send` | `feedback-smtp.eu-west-1.amazonses.com` | 10 |
+| TXT | `send.send` | `v=spf1 include:amazonses.com ~all` | — |
+
+The fourth record Resend offers, an MX on `send` pointing at
+`inbound-smtp.eu-west-1.amazonaws.com`, is under "Enable Receiving" and was
+**not** added. This project only sends.
+
+**Remaining, and only you can do these:**
+
+1. Resend → **API Keys → Create**, with *sending access only*.
+2. Cloudflare → Workers & Pages → marginco → Settings → Variables and secrets:
+   - `RESEND_API_KEY` — type **Secret** (encrypted)
+   - `MAIL_FROM` — `Margin & Co. <hello@send.marginco.co.uk>`
+3. Redeploy: `git commit --allow-empty -m "Pick up Resend key" && git push`
+4. Test at `/login/` with your own address.
+
+### Original setup notes
 
 Sign-in links cannot send until this is done. Until then the form says so
 rather than pretending.
