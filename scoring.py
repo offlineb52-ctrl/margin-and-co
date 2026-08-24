@@ -71,6 +71,11 @@ flatter strategies that deserve nothing.
     observations to mean much, and its drawdown score is an artefact of
     sitting in cash.
 
+  * **Fewer than ten out-of-sample trades cannot score above 5.0.** A rule can
+    be invested constantly and still have made only a handful of distinct
+    bets. The first full-universe run produced a combination scoring 8.0 on
+    four trades, which is not evidence of anything.
+
 Both are applied after the weighted sum and are recorded in the output, so a
 capped score is visibly capped rather than silently different.
 
@@ -115,7 +120,24 @@ LOSING_STRATEGY_CAP = 3.0     # applied when out-of-sample net Sharpe <= 0
 INACTIVE_STRATEGY_CAP = 5.0   # applied when time in market < 5%
 MIN_TIME_IN_MARKET = 0.05
 
+# A rule can be in the market constantly and still have made only a handful of
+# distinct bets -- a trend follower that flipped four times in a decade is
+# always invested but has four observations. Four is not evidence, however
+# good the Sharpe ratio looks, so the same cap applies.
+FEW_TRADES_CAP = 5.0
+MIN_TRADES = 10
+
 SCORE_MIN, SCORE_MAX = 1.0, 10.0
+
+# Minimum price history before a combination is scored at all.
+#
+# 1,260 trading days is about five years. Below that, a 70/30 split leaves a
+# test window too short to say much, and the walk-forward scheme (three years
+# train, one year test) produces no windows at all -- which would drive the
+# consistency component to zero for a reason that has nothing to do with the
+# indicator. Rather than publish a score that is really a comment on the data,
+# short-history tickers are skipped and counted.
+MIN_BARS_TO_SCORE = 1260
 
 
 def _clamp(value: float, low: float, high: float) -> float:
@@ -230,6 +252,9 @@ def compute(
         if score > INACTIVE_STRATEGY_CAP:
             score, capped_by = INACTIVE_STRATEGY_CAP, "barely traded"
 
+    if num_trades < MIN_TRADES and score > FEW_TRADES_CAP:
+        score, capped_by = FEW_TRADES_CAP, f"only {num_trades} trades"
+
     score = round(_clamp(score, SCORE_MIN, SCORE_MAX), 1)
 
     return SurvivalScore(
@@ -272,7 +297,7 @@ def evaluate(
     window. No parameter is chosen using test-period data -- the test half is
     measured, never searched.
     """
-    if len(df) < 400:
+    if len(df) < MIN_BARS_TO_SCORE:
         return None
 
     positions = signal_fn(df)

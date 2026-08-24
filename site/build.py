@@ -946,19 +946,23 @@ def main(argv: Optional[List[str]] = None) -> int:
     # functions/members/_middleware.js. Anonymous requests are refused before
     # the file is ever read from disk. This is verified by a test rather than
     # assumed -- see DEPLOY.md.
-    pro_files = sorted(REPORT_SOURCE.glob("week*_pro*.json")) \
-              + sorted(REPORT_SOURCE.glob("week*_pro_scores.csv"))
-    if pro_files:
+    # Only the newest Pro report is deployed, under one stable name.
+    #
+    # A full-universe report is ~2.8MB of JSON. Shipping every week's copy AND
+    # a duplicate named `latest` meant each week added roughly 3.4MB to the
+    # deployment for no benefit -- the Pro page reads `latest_pro.json` and
+    # nothing else. Over a year that is ~175MB of static assets nobody
+    # requests. Historical weeks live in the SQLite archive and can be served
+    # properly from KV or R2 when there is a reason to.
+    pro_json = sorted(REPORT_SOURCE.glob("week*_pro.json"))
+    pro_csv = sorted(REPORT_SOURCE.glob("week*_pro_scores.csv"))
+    if pro_json:
         members_data = DIST / "members" / "data"
         members_data.mkdir(parents=True, exist_ok=True)
-        latest_json = None
-        for src in pro_files:
-            shutil.copy2(src, members_data / src.name)
-            if src.name.endswith("_pro.json"):
-                latest_json = src
-        if latest_json:
-            shutil.copy2(latest_json, members_data / "latest_pro.json")
-        print(f"  members/data/ ({len(pro_files)} Pro file(s), gated)")
+        shutil.copy2(pro_json[-1], members_data / "latest_pro.json")
+        if pro_csv:
+            shutil.copy2(pro_csv[-1], members_data / pro_csv[-1].name)
+        print(f"  members/data/ (latest Pro report + CSV, gated)")
 
     # Free report: public by design. The week's conclusion belongs in the open.
     free_files = sorted(REPORT_SOURCE.glob("week*_free.json"))

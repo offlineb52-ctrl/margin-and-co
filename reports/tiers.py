@@ -105,8 +105,12 @@ def _headline(scores: pd.DataFrame) -> str:
 
     if not survived.empty:
         row = survived.iloc[0]
-        return (f"{row['indicator']} on {row['ticker']} scored "
-                f"{row['score']:.1f} — the only rule to survive convincingly.")
+        n = len(survived)
+        if n == 1:
+            return (f"{row['indicator']} on {row['ticker']} scored "
+                    f"{row['score']:.1f} — the only combination to survive.")
+        return (f"{n} of {len(scores):,} combinations survived. The best was "
+                f"{row['indicator']} on {row['ticker']} at {row['score']:.1f}.")
 
     if top["score"] >= 6.0:
         return (f"{top['indicator']} on {top['ticker']} led at "
@@ -129,7 +133,7 @@ def _summary(scores: pd.DataFrame) -> str:
     median = float(scores["score"].median())
 
     parts = [
-        f"{total} indicator-and-stock combinations were tested this week. "
+        f"{total:,} indicator-and-stock combinations were tested this week. "
         f"Each was scored from 1 to 10 on whether it still made money on data "
         f"it had never seen, after paying realistic trading costs."
     ]
@@ -144,15 +148,35 @@ def _summary(scores: pd.DataFrame) -> str:
     # reads as a contradiction unless the difference is spelled out: a small
     # positive Sharpe still loses to simply owning the stock, and that is the
     # comparison that matters.
-    parts.append(f"{positive} of {total} finished with a positive Sharpe ratio "
-                 f"after costs — but a positive Sharpe is a low bar, and none "
-                 f"of them beat simply buying and holding the same stock. The "
-                 f"median score was {median:.1f}.")
+    # Only claims that the numbers in this table support. An earlier draft
+    # asserted that none of these beat buy & hold on the same stock -- true of
+    # the single-ticker pilot, but the scoreboard does not compute a per-stock
+    # benchmark, so across a full universe it was an unsupported claim in
+    # published copy. Removed rather than guessed at.
+    parts.append(f"{positive:,} of {total:,} finished with a positive Sharpe "
+                 f"ratio after costs, though a positive Sharpe is a low bar "
+                 f"and says nothing about whether the rule beat simply owning "
+                 f"the stock. The median score was {median:.1f}.")
 
     parts.append("A low median is the expected result rather than a broken "
                  "test: most published indicator backtests do not subtract "
                  "trading costs or check performance on unseen data, and doing "
                  "both is what removes the apparent edge.")
+
+    # The multiple-comparisons warning. Testing thousands of combinations and
+    # then reporting the best of them is how data mining produces findings
+    # that do not repeat, and a study this wide has to say so itself.
+    if total >= 200 and survived:
+        rate = survived / total
+        parts.append(
+            f"Treat the {survived} survivors with suspicion rather than "
+            f"excitement. Testing {total:,} combinations and reporting the best "
+            f"of them is precisely how a search produces results that do not "
+            f"repeat — at {rate:.1%} of everything tested, this is close to "
+            f"what pure chance would throw up. A combination is only "
+            f"interesting if it survives again next week, on data that did not "
+            f"exist when it was selected."
+        )
 
     return " ".join(parts)
 
@@ -282,6 +306,12 @@ METHODOLOGY_NOTES = [
     "25% walk-forward consistency, 15% drawdown resilience, with hard caps for "
     "strategies that lost money or barely traded. Every constant is documented "
     "in scoring.py and can be changed and recomputed.",
+
+    "The cost model applies one figure to every stock. That is roughly right "
+    "for large caps and materially too optimistic for smaller names, where "
+    "real spreads are often several times wider. High scores concentrated in "
+    "small or recently-listed companies should be read as a warning about the "
+    "cost assumption before they are read as a finding.",
 
     "Universe uses current index membership, so companies delisted along the "
     "way are absent. This flatters absolute returns; it affects the in-sample "
