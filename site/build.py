@@ -913,11 +913,37 @@ def main(argv: Optional[List[str]] = None) -> int:
         (DIST / "CNAME").write_text(bare_domain + "\n", encoding="utf-8")
 
     # Cloudflare Pages and Netlify both read _headers for cache policy.
+    # Security headers. Cloudflare Pages reads _headers at deploy time.
+    #
+    # The strongest line here is `script-src 'none'`: this site ships no
+    # JavaScript at all, so the browser is told to refuse any that appears.
+    # That makes cross-site scripting — the most common web vulnerability —
+    # structurally impossible rather than merely unlikely. The only external
+    # origins allowed are Google Fonts, and nothing may frame the site.
+    csp = "; ".join([
+        "default-src 'self'",
+        "script-src 'none'",
+        "style-src 'self' https://fonts.googleapis.com",
+        "font-src 'self' https://fonts.gstatic.com",
+        "img-src 'self' data:",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'none'",
+        "frame-ancestors 'none'",
+        "upgrade-insecure-requests",
+    ])
+
     (DIST / "_headers").write_text(
         "/css/*\n  Cache-Control: public, max-age=31536000, immutable\n"
         "/reports/*.png\n  Cache-Control: public, max-age=31536000, immutable\n"
-        "/*\n  X-Content-Type-Options: nosniff\n"
-        "  Referrer-Policy: strict-origin-when-cross-origin\n", encoding="utf-8")
+        "/*\n"
+        "  X-Content-Type-Options: nosniff\n"
+        "  Referrer-Policy: strict-origin-when-cross-origin\n"
+        "  X-Frame-Options: DENY\n"
+        "  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload\n"
+        "  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()\n"
+        "  Cross-Origin-Opener-Policy: same-origin\n"
+        f"  Content-Security-Policy: {csp}\n", encoding="utf-8")
 
     files = sum(1 for _ in DIST.rglob("*") if _.is_file())
     size = sum(f.stat().st_size for f in DIST.rglob("*") if f.is_file()) / 1024
