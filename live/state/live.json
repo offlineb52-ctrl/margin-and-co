@@ -1,0 +1,1516 @@
+{
+  "schema_version": 1,
+  "generated": "2026-08-23",
+  "strategy": {
+    "name": "RSI(14) mean reversion, long only",
+    "rationale": "Across 763 S&P 500 and FTSE 350 companies, RSI was the only one of the four indicators to post a positive out-of-sample Sharpe ratio after costs (0.48). The other three are trend-following, and all three went negative net of what it cost to trade them. RSI still lost to buy & hold, which is why this portfolio publishes both side by side. It is being traded live because a rule that survived one honest test deserves a second one that cannot be re-run.",
+    "rules": [
+      "Buy when 14-day RSI closes below 30 (oversold).",
+      "Hold until RSI recovers through 50, then sell.",
+      "Never short. The research tests long/short; this book trades the long leg only, because stock borrow costs are real and this project does not model them.",
+      "Equal weight across every live signal, capped at 20% of the book in any one name.",
+      "Orders are decided on the close and filled at the next session's open."
+    ],
+    "universe": [
+      "AAPL",
+      "AMZN",
+      "COST",
+      "CSCO",
+      "CVX",
+      "GOOGL",
+      "HD",
+      "JNJ",
+      "JPM",
+      "KO",
+      "MCD",
+      "META",
+      "MSFT",
+      "NVDA",
+      "PEP",
+      "PG",
+      "UNH",
+      "V",
+      "WMT",
+      "XOM"
+    ],
+    "universe_size": 20,
+    "costs_bps_per_side": 8.0,
+    "max_weight": 0.2
+  },
+  "book": {
+    "opened": "2026-08-23",
+    "inception": "2026-02-20",
+    "currency": "USD",
+    "starting_capital": 100000.0,
+    "sessions": 127,
+    "last_mark": "2026-08-21"
+  },
+  "performance": {
+    "nav": 108485.19,
+    "cash": 86811.89,
+    "market_value": 21673.3,
+    "total_return": 0.0849,
+    "benchmark_nav": 108948.08,
+    "benchmark_return": 0.0895,
+    "excess_return": -0.0046,
+    "max_drawdown": -0.0458,
+    "avg_invested": 0.3232,
+    "current_invested": 0.1998,
+    "total_costs_paid": 437.71,
+    "closed_trades": 13,
+    "win_rate": 0.6923
+  },
+  "positions": [
+    {
+      "ticker": "WMT",
+      "shares": 209,
+      "cost_basis": 103.69,
+      "opened_on": "2026-08-21",
+      "value_at_cost": 21671.21
+    }
+  ],
+  "pending_orders": [],
+  "closed_trades_list": [
+    {
+      "ticker": "WMT",
+      "opened_on": "2026-06-01",
+      "closed_on": "2026-07-30",
+      "shares": 181,
+      "avg_entry": 114.46,
+      "avg_exit": 111.34,
+      "fees": 32.69,
+      "pnl": -596.07,
+      "pnl_pct": -0.0288,
+      "open_reason": "Opening position \u2014 RSI 29.0 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "close_reason": "Closing position \u2014 RSI 51.5 \u2014 no oversold signal",
+      "backfilled": true
+    },
+    {
+      "ticker": "CVX",
+      "opened_on": "2026-07-01",
+      "closed_on": "2026-07-14",
+      "shares": 129,
+      "avg_entry": 163.35,
+      "avg_exit": 181.17,
+      "fees": 35.56,
+      "pnl": 2262.51,
+      "pnl_pct": 0.1074,
+      "open_reason": "Opening position \u2014 RSI 28.1 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "close_reason": "Closing position \u2014 RSI 57.6 \u2014 no oversold signal",
+      "backfilled": true
+    },
+    {
+      "ticker": "MSFT",
+      "opened_on": "2026-06-26",
+      "closed_on": "2026-07-14",
+      "shares": 59,
+      "avg_entry": 356.48,
+      "avg_exit": 382.1,
+      "fees": 34.87,
+      "pnl": 1476.82,
+      "pnl_pct": 0.0702,
+      "open_reason": "Opening position \u2014 RSI 28.8 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "close_reason": "Closing position \u2014 RSI 51.0 \u2014 no oversold signal",
+      "backfilled": true
+    },
+    {
+      "ticker": "MCD",
+      "opened_on": "2026-05-11",
+      "closed_on": "2026-06-10",
+      "shares": 75,
+      "avg_entry": 273.97,
+      "avg_exit": 284.32,
+      "fees": 33.5,
+      "pnl": 742.61,
+      "pnl_pct": 0.0361,
+      "open_reason": "Opening position \u2014 RSI 25.2 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "close_reason": "Closing position \u2014 RSI 51.9 \u2014 no oversold signal",
+      "backfilled": true
+    },
+    {
+      "ticker": "JNJ",
+      "opened_on": "2026-04-22",
+      "closed_on": "2026-05-14",
+      "shares": 92,
+      "avg_entry": 224.89,
+      "avg_exit": 229.68,
+      "fees": 33.45,
+      "pnl": 407.45,
+      "pnl_pct": 0.0197,
+      "open_reason": "Opening position \u2014 RSI 28.6 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "close_reason": "Closing position \u2014 RSI 52.0 \u2014 no oversold signal",
+      "backfilled": true
+    },
+    {
+      "ticker": "MCD",
+      "opened_on": "2026-03-25",
+      "closed_on": "2026-04-20",
+      "shares": 64,
+      "avg_entry": 307.97,
+      "avg_exit": 310.05,
+      "fees": 31.64,
+      "pnl": 101.22,
+      "pnl_pct": 0.0051,
+      "open_reason": "Opening position \u2014 RSI 29.9 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "close_reason": "Closing position \u2014 RSI 50.2 \u2014 no oversold signal",
+      "backfilled": true
+    },
+    {
+      "ticker": "PG",
+      "opened_on": "2026-03-25",
+      "closed_on": "2026-04-20",
+      "shares": 140,
+      "avg_entry": 141.61,
+      "avg_exit": 143.89,
+      "fees": 31.98,
+      "pnl": 288.0,
+      "pnl_pct": 0.0145,
+      "open_reason": "Opening position \u2014 RSI 29.6 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "close_reason": "Closing position \u2014 RSI 51.4 \u2014 no oversold signal",
+      "backfilled": true
+    },
+    {
+      "ticker": "MSFT",
+      "opened_on": "2026-02-23",
+      "closed_on": "2026-04-14",
+      "shares": 50,
+      "avg_entry": 393.41,
+      "avg_exit": 386.35,
+      "fees": 31.19,
+      "pnl": -383.76,
+      "pnl_pct": -0.0195,
+      "open_reason": "Opening position \u2014 RSI 32.4 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "close_reason": "Closing position \u2014 RSI 51.5 \u2014 no oversold signal",
+      "backfilled": true
+    },
+    {
+      "ticker": "HD",
+      "opened_on": "2026-03-13",
+      "closed_on": "2026-04-10",
+      "shares": 60,
+      "avg_entry": 339.15,
+      "avg_exit": 338.5,
+      "fees": 32.53,
+      "pnl": -71.24,
+      "pnl_pct": -0.0035,
+      "open_reason": "Opening position \u2014 RSI 29.2 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "close_reason": "Closing position \u2014 RSI 50.8 \u2014 no oversold signal",
+      "backfilled": true
+    },
+    {
+      "ticker": "META",
+      "opened_on": "2026-03-27",
+      "closed_on": "2026-04-09",
+      "shares": 34,
+      "avg_entry": 563.39,
+      "avg_exit": 626.39,
+      "fees": 32.37,
+      "pnl": 2109.72,
+      "pnl_pct": 0.1101,
+      "open_reason": "Opening position \u2014 RSI 25.8 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "close_reason": "Closing position \u2014 RSI 53.3 \u2014 no oversold signal",
+      "backfilled": true
+    },
+    {
+      "ticker": "GOOGL",
+      "opened_on": "2026-03-27",
+      "closed_on": "2026-04-07",
+      "shares": 58,
+      "avg_entry": 277.11,
+      "avg_exit": 302.55,
+      "fees": 26.9,
+      "pnl": 1448.32,
+      "pnl_pct": 0.0901,
+      "open_reason": "Opening position \u2014 RSI 28.3 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "close_reason": "Closing position \u2014 RSI 51.0 \u2014 no oversold signal",
+      "backfilled": true
+    },
+    {
+      "ticker": "AMZN",
+      "opened_on": "2026-02-23",
+      "closed_on": "2026-03-05",
+      "shares": 95,
+      "avg_entry": 208.1,
+      "avg_exit": 215.98,
+      "fees": 32.23,
+      "pnl": 716.37,
+      "pnl_pct": 0.0362,
+      "open_reason": "Opening position \u2014 RSI 39.3 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "close_reason": "Closing position \u2014 RSI 51.7 \u2014 no oversold signal",
+      "backfilled": true
+    },
+    {
+      "ticker": "UNH",
+      "opened_on": "2026-02-23",
+      "closed_on": "2026-03-03",
+      "shares": 69,
+      "avg_entry": 284.7,
+      "avg_exit": 285.13,
+      "fees": 31.46,
+      "pnl": -1.51,
+      "pnl_pct": -0.0001,
+      "open_reason": "Opening position \u2014 RSI 43.8 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "close_reason": "Closing position \u2014 RSI 50.2 \u2014 no oversold signal",
+      "backfilled": true
+    }
+  ],
+  "fills": [
+    {
+      "decided_on": "2026-08-20",
+      "filled_on": "2026-08-21",
+      "ticker": "WMT",
+      "side": "BUY",
+      "shares": 209,
+      "price": 103.69,
+      "gross": 21671.21,
+      "cost": 17.34,
+      "reason": "Opening position \u2014 RSI 29.8 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 29.78,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-07-29",
+      "filled_on": "2026-07-30",
+      "ticker": "WMT",
+      "side": "SELL",
+      "shares": 181,
+      "price": 111.3434,
+      "gross": 20153.16,
+      "cost": 16.12,
+      "reason": "Closing position \u2014 RSI 51.5 \u2014 no oversold signal",
+      "signal_value": 51.49,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-07-13",
+      "filled_on": "2026-07-14",
+      "ticker": "MSFT",
+      "side": "SELL",
+      "shares": 59,
+      "price": 382.1007,
+      "gross": 22543.94,
+      "cost": 18.04,
+      "reason": "Closing position \u2014 RSI 51.0 \u2014 no oversold signal",
+      "signal_value": 51.0,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-07-13",
+      "filled_on": "2026-07-14",
+      "ticker": "CVX",
+      "side": "SELL",
+      "shares": 129,
+      "price": 181.1689,
+      "gross": 23370.79,
+      "cost": 18.7,
+      "reason": "Closing position \u2014 RSI 57.6 \u2014 no oversold signal",
+      "signal_value": 57.63,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-06-30",
+      "filled_on": "2026-07-01",
+      "ticker": "CVX",
+      "side": "BUY",
+      "shares": 129,
+      "price": 163.3544,
+      "gross": 21072.71,
+      "cost": 16.86,
+      "reason": "Opening position \u2014 RSI 28.1 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 28.11,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-06-25",
+      "filled_on": "2026-06-26",
+      "ticker": "MSFT",
+      "side": "BUY",
+      "shares": 59,
+      "price": 356.4789,
+      "gross": 21032.26,
+      "cost": 16.83,
+      "reason": "Opening position \u2014 RSI 28.8 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 28.76,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-06-09",
+      "filled_on": "2026-06-10",
+      "ticker": "MCD",
+      "side": "SELL",
+      "shares": 75,
+      "price": 284.32,
+      "gross": 21324.0,
+      "cost": 17.06,
+      "reason": "Closing position \u2014 RSI 51.9 \u2014 no oversold signal",
+      "signal_value": 51.93,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-05-29",
+      "filled_on": "2026-06-01",
+      "ticker": "WMT",
+      "side": "BUY",
+      "shares": 181,
+      "price": 114.456,
+      "gross": 20716.54,
+      "cost": 16.57,
+      "reason": "Opening position \u2014 RSI 29.0 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 28.96,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-05-13",
+      "filled_on": "2026-05-14",
+      "ticker": "JNJ",
+      "side": "SELL",
+      "shares": 92,
+      "price": 229.6791,
+      "gross": 21130.48,
+      "cost": 16.9,
+      "reason": "Closing position \u2014 RSI 52.0 \u2014 no oversold signal",
+      "signal_value": 51.98,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-05-08",
+      "filled_on": "2026-05-11",
+      "ticker": "MCD",
+      "side": "BUY",
+      "shares": 75,
+      "price": 273.9719,
+      "gross": 20547.89,
+      "cost": 16.44,
+      "reason": "Opening position \u2014 RSI 25.2 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 25.2,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-04-21",
+      "filled_on": "2026-04-22",
+      "ticker": "JNJ",
+      "side": "BUY",
+      "shares": 92,
+      "price": 224.8867,
+      "gross": 20689.57,
+      "cost": 16.55,
+      "reason": "Opening position \u2014 RSI 28.6 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 28.64,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-04-17",
+      "filled_on": "2026-04-20",
+      "ticker": "PG",
+      "side": "SELL",
+      "shares": 140,
+      "price": 143.8942,
+      "gross": 20145.19,
+      "cost": 16.12,
+      "reason": "Closing position \u2014 RSI 51.4 \u2014 no oversold signal",
+      "signal_value": 51.36,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-04-17",
+      "filled_on": "2026-04-20",
+      "ticker": "MCD",
+      "side": "SELL",
+      "shares": 64,
+      "price": 310.0472,
+      "gross": 19843.02,
+      "cost": 15.87,
+      "reason": "Closing position \u2014 RSI 50.2 \u2014 no oversold signal",
+      "signal_value": 50.2,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-04-13",
+      "filled_on": "2026-04-14",
+      "ticker": "MSFT",
+      "side": "SELL",
+      "shares": 50,
+      "price": 386.3543,
+      "gross": 19317.72,
+      "cost": 15.45,
+      "reason": "Closing position \u2014 RSI 51.5 \u2014 no oversold signal",
+      "signal_value": 51.52,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-04-09",
+      "filled_on": "2026-04-10",
+      "ticker": "HD",
+      "side": "SELL",
+      "shares": 60,
+      "price": 338.501,
+      "gross": 20310.06,
+      "cost": 16.25,
+      "reason": "Closing position \u2014 RSI 50.8 \u2014 no oversold signal",
+      "signal_value": 50.84,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-04-08",
+      "filled_on": "2026-04-09",
+      "ticker": "META",
+      "side": "SELL",
+      "shares": 34,
+      "price": 626.3894,
+      "gross": 21297.24,
+      "cost": 17.04,
+      "reason": "Closing position \u2014 RSI 53.3 \u2014 no oversold signal",
+      "signal_value": 53.26,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-04-06",
+      "filled_on": "2026-04-07",
+      "ticker": "META",
+      "side": "BUY",
+      "shares": 25,
+      "price": 571.9499,
+      "gross": 14298.75,
+      "cost": 11.44,
+      "reason": "Topping up to target weight \u2014 RSI 41.0 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 40.96,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-04-06",
+      "filled_on": "2026-04-07",
+      "ticker": "GOOGL",
+      "side": "SELL",
+      "shares": 58,
+      "price": 302.5493,
+      "gross": 17547.86,
+      "cost": 14.04,
+      "reason": "Closing position \u2014 RSI 51.0 \u2014 no oversold signal",
+      "signal_value": 50.97,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-03-26",
+      "filled_on": "2026-03-27",
+      "ticker": "META",
+      "side": "BUY",
+      "shares": 9,
+      "price": 539.5998,
+      "gross": 4856.4,
+      "cost": 3.89,
+      "reason": "Opening position \u2014 RSI 25.8 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 25.78,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-03-26",
+      "filled_on": "2026-03-27",
+      "ticker": "GOOGL",
+      "side": "BUY",
+      "shares": 58,
+      "price": 277.1145,
+      "gross": 16072.64,
+      "cost": 12.86,
+      "reason": "Opening position \u2014 RSI 28.3 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 28.34,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-03-24",
+      "filled_on": "2026-03-25",
+      "ticker": "PG",
+      "side": "BUY",
+      "shares": 140,
+      "price": 141.6086,
+      "gross": 19825.21,
+      "cost": 15.86,
+      "reason": "Opening position \u2014 RSI 29.6 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 29.58,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-03-24",
+      "filled_on": "2026-03-25",
+      "ticker": "MCD",
+      "side": "BUY",
+      "shares": 64,
+      "price": 307.9713,
+      "gross": 19710.16,
+      "cost": 15.77,
+      "reason": "Opening position \u2014 RSI 29.9 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 29.88,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-03-12",
+      "filled_on": "2026-03-13",
+      "ticker": "HD",
+      "side": "BUY",
+      "shares": 60,
+      "price": 339.1462,
+      "gross": 20348.77,
+      "cost": 16.28,
+      "reason": "Opening position \u2014 RSI 29.2 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 29.21,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-03-04",
+      "filled_on": "2026-03-05",
+      "ticker": "AMZN",
+      "side": "SELL",
+      "shares": 95,
+      "price": 215.98,
+      "gross": 20518.1,
+      "cost": 16.41,
+      "reason": "Closing position \u2014 RSI 51.7 \u2014 no oversold signal",
+      "signal_value": 51.65,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-03-02",
+      "filled_on": "2026-03-03",
+      "ticker": "UNH",
+      "side": "SELL",
+      "shares": 69,
+      "price": 285.1321,
+      "gross": 19674.12,
+      "cost": 15.74,
+      "reason": "Closing position \u2014 RSI 50.2 \u2014 no oversold signal",
+      "signal_value": 50.25,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-02-20",
+      "filled_on": "2026-02-23",
+      "ticker": "UNH",
+      "side": "BUY",
+      "shares": 69,
+      "price": 284.698,
+      "gross": 19644.16,
+      "cost": 15.72,
+      "reason": "Opening position \u2014 RSI 43.8 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 43.75,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-02-20",
+      "filled_on": "2026-02-23",
+      "ticker": "MSFT",
+      "side": "BUY",
+      "shares": 50,
+      "price": 393.4057,
+      "gross": 19670.29,
+      "cost": 15.74,
+      "reason": "Opening position \u2014 RSI 32.4 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 32.35,
+      "backfilled": true
+    },
+    {
+      "decided_on": "2026-02-20",
+      "filled_on": "2026-02-23",
+      "ticker": "AMZN",
+      "side": "BUY",
+      "shares": 95,
+      "price": 208.1,
+      "gross": 19769.5,
+      "cost": 15.82,
+      "reason": "Opening position \u2014 RSI 39.3 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 39.34,
+      "backfilled": true
+    }
+  ],
+  "equity_curve": [
+    {
+      "date": "2026-02-20",
+      "nav": 100000.0,
+      "benchmark": 100682.98,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-02-23",
+      "nav": 98736.73,
+      "benchmark": 100271.85,
+      "invested": 0.5861,
+      "backfilled": true
+    },
+    {
+      "date": "2026-02-24",
+      "nav": 98703.68,
+      "benchmark": 100665.09,
+      "invested": 0.5859,
+      "backfilled": true
+    },
+    {
+      "date": "2026-02-25",
+      "nav": 100176.75,
+      "benchmark": 101196.26,
+      "invested": 0.592,
+      "backfilled": true
+    },
+    {
+      "date": "2026-02-26",
+      "nav": 100141.6,
+      "benchmark": 100692.12,
+      "invested": 0.5919,
+      "backfilled": true
+    },
+    {
+      "date": "2026-02-27",
+      "nav": 100342.01,
+      "benchmark": 101393.33,
+      "invested": 0.5927,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-02",
+      "nav": 100591.4,
+      "benchmark": 101085.32,
+      "invested": 0.5937,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-03",
+      "nav": 100471.48,
+      "benchmark": 100581.83,
+      "invested": 0.3976,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-04",
+      "nav": 101303.28,
+      "benchmark": 100770.78,
+      "invested": 0.4025,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-05",
+      "nav": 101479.96,
+      "benchmark": 99825.18,
+      "invested": 0.2015,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-06",
+      "nav": 101394.31,
+      "benchmark": 99179.33,
+      "invested": 0.2009,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-09",
+      "nav": 101416.72,
+      "benchmark": 99562.12,
+      "invested": 0.201,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-10",
+      "nav": 101234.95,
+      "benchmark": 99539.22,
+      "invested": 0.1996,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-11",
+      "nav": 101191.13,
+      "benchmark": 99442.31,
+      "invested": 0.1992,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-12",
+      "nav": 101040.74,
+      "benchmark": 98731.81,
+      "invested": 0.1981,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-13",
+      "nav": 100551.82,
+      "benchmark": 98612.55,
+      "invested": 0.3967,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-16",
+      "nav": 100982.35,
+      "benchmark": 99299.39,
+      "invested": 0.3993,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-17",
+      "nav": 100886.97,
+      "benchmark": 99292.55,
+      "invested": 0.3987,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-18",
+      "nav": 99882.2,
+      "benchmark": 97693.02,
+      "invested": 0.3926,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-19",
+      "nav": 99582.27,
+      "benchmark": 97306.17,
+      "invested": 0.3908,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-20",
+      "nav": 98781.95,
+      "benchmark": 96322.5,
+      "invested": 0.3859,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-23",
+      "nav": 99442.69,
+      "benchmark": 97089.64,
+      "invested": 0.39,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-24",
+      "nav": 98932.35,
+      "benchmark": 97029.97,
+      "invested": 0.3868,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-25",
+      "nav": 99040.43,
+      "benchmark": 97541.88,
+      "invested": 0.787,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-26",
+      "nav": 98162.0,
+      "benchmark": 96544.55,
+      "invested": 0.7851,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-27",
+      "nav": 96831.01,
+      "benchmark": 95570.97,
+      "invested": 0.9984,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-30",
+      "nav": 97541.81,
+      "benchmark": 95937.65,
+      "invested": 0.9985,
+      "backfilled": true
+    },
+    {
+      "date": "2026-03-31",
+      "nav": 99662.53,
+      "benchmark": 97430.84,
+      "invested": 0.9985,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-01",
+      "nav": 100025.47,
+      "benchmark": 97196.14,
+      "invested": 0.9985,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-02",
+      "nav": 99476.77,
+      "benchmark": 97514.68,
+      "invested": 0.9985,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-06",
+      "nav": 100096.79,
+      "benchmark": 98151.99,
+      "invested": 0.9985,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-07",
+      "nav": 99299.05,
+      "benchmark": 98094.52,
+      "invested": 0.966,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-08",
+      "nav": 102339.5,
+      "benchmark": 99735.03,
+      "invested": 0.967,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-09",
+      "nav": 103361.84,
+      "benchmark": 100484.37,
+      "invested": 0.7615,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-10",
+      "nav": 102870.09,
+      "benchmark": 99876.1,
+      "invested": 0.5631,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-13",
+      "nav": 103250.06,
+      "benchmark": 100242.22,
+      "invested": 0.5647,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-14",
+      "nav": 103439.74,
+      "benchmark": 100935.37,
+      "invested": 0.3789,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-15",
+      "nav": 103495.06,
+      "benchmark": 101291.63,
+      "invested": 0.3792,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-16",
+      "nav": 103502.32,
+      "benchmark": 101796.32,
+      "invested": 0.3792,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-17",
+      "nav": 104308.89,
+      "benchmark": 102746.5,
+      "invested": 0.384,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-20",
+      "nav": 104207.12,
+      "benchmark": 102443.14,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-21",
+      "nav": 104207.12,
+      "benchmark": 102423.19,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-22",
+      "nav": 104183.25,
+      "benchmark": 103111.25,
+      "invested": 0.1985,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-23",
+      "nav": 104599.46,
+      "benchmark": 103182.81,
+      "invested": 0.2017,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-24",
+      "nav": 104311.32,
+      "benchmark": 103610.06,
+      "invested": 0.1995,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-27",
+      "nav": 104113.73,
+      "benchmark": 103293.65,
+      "invested": 0.198,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-28",
+      "nav": 104337.84,
+      "benchmark": 103791.34,
+      "invested": 0.1997,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-29",
+      "nav": 104297.6,
+      "benchmark": 104347.9,
+      "invested": 0.1994,
+      "backfilled": true
+    },
+    {
+      "date": "2026-04-30",
+      "nav": 104526.28,
+      "benchmark": 104772.23,
+      "invested": 0.2011,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-01",
+      "nav": 104282.96,
+      "benchmark": 104612.32,
+      "invested": 0.1993,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-04",
+      "nav": 104009.45,
+      "benchmark": 104150.47,
+      "invested": 0.1972,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-05",
+      "nav": 104132.94,
+      "benchmark": 104481.73,
+      "invested": 0.1981,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-06",
+      "nav": 104047.87,
+      "benchmark": 104740.1,
+      "invested": 0.1975,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-07",
+      "nav": 103854.86,
+      "benchmark": 104621.63,
+      "invested": 0.196,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-08",
+      "nav": 103746.01,
+      "benchmark": 104809.08,
+      "invested": 0.1951,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-11",
+      "nav": 103648.0,
+      "benchmark": 104541.72,
+      "invested": 0.3928,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-12",
+      "nav": 103924.75,
+      "benchmark": 105362.88,
+      "invested": 0.3944,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-13",
+      "nav": 104552.3,
+      "benchmark": 106115.74,
+      "invested": 0.398,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-14",
+      "nav": 104534.07,
+      "benchmark": 107357.75,
+      "invested": 0.196,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-15",
+      "nav": 104639.85,
+      "benchmark": 107371.83,
+      "invested": 0.1968,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-18",
+      "nav": 105092.78,
+      "benchmark": 108054.7,
+      "invested": 0.2002,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-19",
+      "nav": 104968.37,
+      "benchmark": 107591.29,
+      "invested": 0.1993,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-20",
+      "nav": 104928.89,
+      "benchmark": 107355.43,
+      "invested": 0.199,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-21",
+      "nav": 105220.16,
+      "benchmark": 107226.38,
+      "invested": 0.2012,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-22",
+      "nav": 105077.88,
+      "benchmark": 107302.85,
+      "invested": 0.2001,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-26",
+      "nav": 104853.65,
+      "benchmark": 106046.12,
+      "invested": 0.1984,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-27",
+      "nav": 104977.31,
+      "benchmark": 106708.9,
+      "invested": 0.1993,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-28",
+      "nav": 104757.55,
+      "benchmark": 106636.47,
+      "invested": 0.1977,
+      "backfilled": true
+    },
+    {
+      "date": "2026-05-29",
+      "nav": 104849.18,
+      "benchmark": 105950.52,
+      "invested": 0.1984,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-01",
+      "nav": 104578.95,
+      "benchmark": 105507.73,
+      "invested": 0.3946,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-02",
+      "nav": 104459.12,
+      "benchmark": 105498.92,
+      "invested": 0.3939,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-03",
+      "nav": 104920.45,
+      "benchmark": 105161.17,
+      "invested": 0.3965,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-04",
+      "nav": 105031.18,
+      "benchmark": 106458.77,
+      "invested": 0.3972,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-05",
+      "nav": 105771.03,
+      "benchmark": 105538.1,
+      "invested": 0.4014,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-08",
+      "nav": 105788.07,
+      "benchmark": 105539.11,
+      "invested": 0.4015,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-09",
+      "nav": 105951.78,
+      "benchmark": 105549.07,
+      "invested": 0.4024,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-10",
+      "nav": 106398.74,
+      "benchmark": 105123.92,
+      "invested": 0.2047,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-11",
+      "nav": 106382.49,
+      "benchmark": 105229.28,
+      "invested": 0.2045,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-12",
+      "nav": 106479.99,
+      "benchmark": 105524.14,
+      "invested": 0.2053,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-15",
+      "nav": 106440.27,
+      "benchmark": 106007.67,
+      "invested": 0.205,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-16",
+      "nav": 106478.19,
+      "benchmark": 106396.99,
+      "invested": 0.2052,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-17",
+      "nav": 105954.54,
+      "benchmark": 104466.4,
+      "invested": 0.2013,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-18",
+      "nav": 105783.0,
+      "benchmark": 104513.15,
+      "invested": 0.2,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-22",
+      "nav": 105783.0,
+      "benchmark": 103721.97,
+      "invested": 0.2,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-23",
+      "nav": 106187.47,
+      "benchmark": 104104.13,
+      "invested": 0.2031,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-24",
+      "nav": 106111.64,
+      "benchmark": 103965.44,
+      "invested": 0.2025,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-25",
+      "nav": 105530.21,
+      "benchmark": 102786.28,
+      "invested": 0.1981,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-26",
+      "nav": 106428.75,
+      "benchmark": 103580.64,
+      "invested": 0.4027,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-29",
+      "nav": 105972.82,
+      "benchmark": 104086.28,
+      "invested": 0.4001,
+      "backfilled": true
+    },
+    {
+      "date": "2026-06-30",
+      "nav": 105992.92,
+      "benchmark": 103919.81,
+      "invested": 0.4002,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-01",
+      "nav": 105953.8,
+      "benchmark": 104871.96,
+      "invested": 0.599,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-02",
+      "nav": 107313.69,
+      "benchmark": 106024.67,
+      "invested": 0.6041,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-06",
+      "nav": 106737.31,
+      "benchmark": 105866.76,
+      "invested": 0.602,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-07",
+      "nav": 107777.47,
+      "benchmark": 106736.75,
+      "invested": 0.6058,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-08",
+      "nav": 107985.92,
+      "benchmark": 106184.75,
+      "invested": 0.6066,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-09",
+      "nav": 107639.75,
+      "benchmark": 106203.26,
+      "invested": 0.6053,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-10",
+      "nav": 108289.01,
+      "benchmark": 106930.73,
+      "invested": 0.6077,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-13",
+      "nav": 109536.49,
+      "benchmark": 107229.0,
+      "invested": 0.6121,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-14",
+      "nav": 108893.95,
+      "benchmark": 106954.88,
+      "invested": 0.1885,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-15",
+      "nav": 108682.69,
+      "benchmark": 107217.28,
+      "invested": 0.187,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-16",
+      "nav": 109119.66,
+      "benchmark": 107798.31,
+      "invested": 0.1902,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-17",
+      "nav": 108991.46,
+      "benchmark": 106962.07,
+      "invested": 0.1893,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-20",
+      "nav": 108623.1,
+      "benchmark": 106713.04,
+      "invested": 0.1865,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-21",
+      "nav": 108296.27,
+      "benchmark": 106958.79,
+      "invested": 0.1841,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-22",
+      "nav": 108104.87,
+      "benchmark": 106872.85,
+      "invested": 0.1826,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-23",
+      "nav": 107936.95,
+      "benchmark": 105595.08,
+      "invested": 0.1813,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-24",
+      "nav": 108130.15,
+      "benchmark": 106330.82,
+      "invested": 0.1828,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-27",
+      "nav": 108540.04,
+      "benchmark": 106830.76,
+      "invested": 0.1859,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-28",
+      "nav": 108785.61,
+      "benchmark": 107918.05,
+      "invested": 0.1877,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-29",
+      "nav": 108987.85,
+      "benchmark": 107226.27,
+      "invested": 0.1892,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-30",
+      "nav": 108500.44,
+      "benchmark": 107263.99,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-07-31",
+      "nav": 108500.44,
+      "benchmark": 108537.05,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-03",
+      "nav": 108500.44,
+      "benchmark": 109523.74,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-04",
+      "nav": 108500.44,
+      "benchmark": 110223.79,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-05",
+      "nav": 108500.44,
+      "benchmark": 110103.12,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-06",
+      "nav": 108500.44,
+      "benchmark": 110165.74,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-07",
+      "nav": 108500.44,
+      "benchmark": 110261.03,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-10",
+      "nav": 108500.44,
+      "benchmark": 110802.59,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-11",
+      "nav": 108500.44,
+      "benchmark": 110202.14,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-12",
+      "nav": 108500.44,
+      "benchmark": 110220.42,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-13",
+      "nav": 108500.44,
+      "benchmark": 109848.72,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-14",
+      "nav": 108500.44,
+      "benchmark": 109702.62,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-17",
+      "nav": 108500.44,
+      "benchmark": 108994.73,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-18",
+      "nav": 108500.44,
+      "benchmark": 109410.48,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-19",
+      "nav": 108500.44,
+      "benchmark": 109763.5,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-20",
+      "nav": 108500.44,
+      "benchmark": 108433.99,
+      "invested": 0.0,
+      "backfilled": true
+    },
+    {
+      "date": "2026-08-21",
+      "nav": 108485.19,
+      "benchmark": 108948.08,
+      "invested": 0.1998,
+      "backfilled": true
+    }
+  ],
+  "live_since": null,
+  "backfilled_sessions": 127
+}

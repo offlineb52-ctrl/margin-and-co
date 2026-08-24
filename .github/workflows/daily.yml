@@ -1,0 +1,65 @@
+# Advance the live paper portfolio every trading day and republish the site.
+#
+# The live page is only honest if it actually runs daily -- a book that skips a
+# week and then catches up in one go is reconstructing, not recording. Running
+# this in CI rather than on a laptop is what makes the forward record credible,
+# because it does not depend on anyone remembering.
+#
+# The committed state (live/state/*.json) is the track record, so this workflow
+# commits it back to the repository. That commit history is itself an audit
+# trail: every fill has a git timestamp showing when it was written.
+
+name: Daily live portfolio
+
+on:
+  schedule:
+    # 22:15 UTC, Monday to Friday -- after the US close (21:00 UTC / 20:00 BST)
+    # with enough margin for Yahoo to publish settled daily bars.
+    - cron: "15 22 * * 1-5"
+  workflow_dispatch:        # allows a manual run from the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  # Never let two runs advance the ledger at the same time.
+  group: live-portfolio
+  cancel-in-progress: false
+
+jobs:
+  advance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Sanity checks
+        run: python -m tests.test_indicators
+
+      - name: Advance the live portfolio
+        run: python live/run_live.py
+
+      - name: Export book and charts
+        run: python -m live.export
+
+      - name: Build site
+        run: python site/build.py
+
+      - name: Commit the day's record
+        run: |
+          git config user.name  "margin-and-co-bot"
+          git config user.email "actions@github.com"
+          git add live/state reports/output
+          if git diff --staged --quiet; then
+            echo "No change today (likely a market holiday)."
+          else
+            git commit -m "Live portfolio: $(date -u +%Y-%m-%d)"
+            git push
+          fi

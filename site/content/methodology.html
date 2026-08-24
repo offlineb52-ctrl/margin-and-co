@@ -1,0 +1,151 @@
+title: Methodology
+eyebrow: How it works
+heading: The method, in full.
+lede: Every design decision here exists to make a favourable result harder to produce. That is the point: a test you cannot fail tells you nothing.
+description: How Margin & Co. tests trading indicators — out-of-sample validation, walk-forward windows, an explicit cost model, and a test suite that tries to cheat.
+<!--/meta-->
+
+<div class="prose">
+
+<h2>The problem being solved</h2>
+
+<p>Almost every published indicator backtest is wrong in at least one of three
+ways, and the three failures compound. Correcting for all of them usually
+turns a spectacular strategy into an unremarkable one — which is the finding,
+not an inconvenience.</p>
+
+</div>
+
+<div class="findings">
+  <article class="finding">
+    <div class="finding__head"><h3 class="finding__name">1. Testing on the data used to build it</h3></div>
+    <p class="finding__body">There are thousands of combinations of moving-average
+      lengths and RSI thresholds. Search enough of them against one price series
+      and some will look excellent by chance alone. Reporting the best one as a
+      discovery confuses a search result with evidence.</p>
+  </article>
+  <article class="finding">
+    <div class="finding__head"><h3 class="finding__name">2. Ignoring what trading costs</h3></div>
+    <p class="finding__body">Every position change pays the bid–ask spread,
+      commission, and slippage. Two strategies with identical signal quality can
+      differ enormously in net return purely because one trades ten times as
+      often — and the frequent trader is usually the one that looks better gross.</p>
+  </article>
+  <article class="finding">
+    <div class="finding__head"><h3 class="finding__name">3. Quietly using tomorrow’s information</h3></div>
+    <p class="finding__body">An indicator computed from Monday’s closing price is
+      only knowable once Monday has closed. Most homemade backtests nonetheless
+      let it earn Monday’s return. The resulting equity curve looks beautiful
+      rather than broken, so the bug survives review.</p>
+  </article>
+</div>
+
+<div class="prose">
+
+<h2>Data</h2>
+
+<p>Daily bars from Yahoo Finance for S&amp;P 500 and FTSE 350 constituents,
+adjusted for splits and dividends. Adjustment is not optional: without it a
+four-for-one split reads as a 75% crash and every indicator fires a false
+signal on the same day.</p>
+
+<p>Rows with unusable prices are dropped rather than forward-filled. Filling a
+missing close invents a zero-return day that never happened, which suppresses
+measured volatility and therefore inflates every Sharpe ratio downstream.</p>
+
+<h2>Signals</h2>
+
+<p>Every indicator returns the same thing: a target position of <strong>+1</strong>
+(long), <strong>0</strong> (flat) or <strong>−1</strong> (short), for every day
+in the sample. Nothing else. Converting that into a return is the backtester’s
+job.</p>
+
+<p>This matters more than it sounds. A single shared convention means turnover
+is trivially computable as the absolute change in position, and turnover is what
+costs are charged on. Event-based “buy/sell” signals require tracking state to
+know whether a buy opens or adds to a position — which is where homemade
+backtesters develop quiet bugs.</p>
+
+<h2>The one-bar shift</h2>
+
+<p>The position held during day <em>t</em> is the position decided at the close
+of day <em>t−1</em>. In code, that is a single line in a single file:</p>
+
+<pre><code>held = positions.shift(1)</code></pre>
+
+<p>It lives in the engine rather than in each indicator, so it cannot be applied
+to one strategy and forgotten in another. Omitting it typically adds one to
+three points of Sharpe ratio out of nothing.</p>
+
+<div class="note">
+<p><strong>The test that tries to cheat.</strong> The suite builds a signal from
+each day’s <em>own</em> return — information available only once the day is
+over — and confirms the engine refuses to let it profit. It scores near zero,
+as it must. The same signal with the shift removed scores a Sharpe above
+<span class="num">20</span>. If anyone ever deletes the safeguard, the test
+fails loudly instead of quietly printing better numbers.</p>
+</div>
+
+<h2>Costs</h2>
+
+<p>Charged on turnover, not on a per-trade flat fee: <code>cost = |change in
+position| × rate</code>. Going from flat to fully long is one unit of turnover;
+flipping from long to short is two, because you sell twice.</p>
+
+<p>The default assumption is 8 basis points per side, built from a 5bp half
+spread, 1bp commission and 2bp slippage. Every one of those is adjustable in a
+single configuration file, and each week’s report includes a sensitivity
+analysis showing how the conclusions change as the assumption rises from zero
+to 40bp. Defending a whole curve is more honest than defending one number.</p>
+
+<p>“Zero-commission” brokers are not free. They monetise through payment for
+order flow, which shows up as worse fill prices rather than as a line item.</p>
+
+<h2>Validation</h2>
+
+<p>Two schemes run on every indicator, because they answer different questions.</p>
+
+<p><strong>A single 70/30 chronological split.</strong> The first 70% of history
+is used to fix the rules; the last 30% is measured once. The split is always
+chronological, never random — shuffling a time series lets tomorrow’s
+information leak into today’s training set and makes almost anything look
+predictive.</p>
+
+<p><strong>Rolling walk-forward windows.</strong> Train on three years, test on
+the next one, roll forward a year, repeat. This produces many independent
+out-of-sample readings instead of one. The headline statistic is not the mean
+Sharpe across windows but the share of windows that were positive: a strategy
+averaging 0.4 on the strength of one exceptional year and four flat ones is a
+different proposition entirely from one that earns 0.4 every year.</p>
+
+<h2>Metrics</h2>
+
+<p>Sharpe ratio, annualised on 252 trading days, with the risk-free rate stated
+explicitly rather than silently assumed to be zero. Maximum drawdown measured
+from initial capital, not from the first observation — a strategy that loses
+half its value on day one has a 50% drawdown, and an earlier version of this
+code reported 0% until a test caught it.</p>
+
+<p>Win rate is measured <strong>per trade</strong>, not per day. Day-level win
+rates flatter any strategy that stays in the market, because markets rise on
+roughly 53% of days; scoring 53% that way requires no skill at all.</p>
+
+<h2>What is deliberately not done</h2>
+
+<p>No parameter optimisation. The training period is used to sanity-check the
+standard textbook settings, not to search for the best ones. Adding a grid
+search would let this project claim far more, and would commit precisely the
+error it exists to expose.</p>
+
+<h2>Reproducing it</h2>
+
+<p>Every figure published here is generated by one command against free, public
+data. The code is open, the intermediate data for each week is published
+alongside the report, and the test suite runs in under a second.</p>
+
+<pre><code>git clone &lt;repository&gt;
+pip install -r requirements.txt
+python run_pipeline.py --universe all --week 1
+python -m tests.test_indicators</code></pre>
+
+</div>

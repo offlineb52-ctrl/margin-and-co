@@ -1,0 +1,24 @@
+# Virtual environment
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+.DS_Store
+
+# Cached market data — regenerate with `python run_pipeline.py --no-cache`.
+# Kept out of git so the repo stays small and the data stays reproducible
+# from source rather than from a stale snapshot.
+data/cache/*.csv
+
+# Generated reports and charts are committed on purpose (see README) --
+# they are the published record. Only scratch output is ignored here.
+reports/output/*.tmp
+
+# Built website. Cloudflare Pages runs `python site/build.py` itself, so the
+# output is regenerated on every deploy and does not belong in git.
+site/dist/
+
+# Local upload artefacts
+*.zip

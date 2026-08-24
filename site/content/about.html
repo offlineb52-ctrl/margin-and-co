@@ -1,0 +1,88 @@
+title: About
+eyebrow: About
+heading: Why I built this.
+lede: I made a trading bot that looked like it worked. Finding out why it didn't turned into a better project than the bot ever was.
+description: About Margin & Co. — an independent research project testing whether retail trading indicators survive realistic trading costs.
+<!--/meta-->
+
+<div class="prose">
+
+<p>I built a trading bot. It used the four indicators everyone uses — EMA,
+VWAP, MACD and RSI — and when I backtested it, the results looked good.</p>
+
+<p>That was the problem. I hadn't done anything clever. I'd used four
+indicators that every retail trader already knows, on data anyone can
+download, and apparently beaten the market. If it were that easy, everyone
+would be doing it. So either I'd found something thousands of people missed,
+or I'd made a mistake somewhere.</p>
+
+<p>I'd made a mistake. Three, actually.</p>
+
+<p>I was testing on the same data I'd used to pick the settings, so I was
+really just reporting the best result out of everything I'd tried. I wasn't
+subtracting what it costs to trade — the spread, the commission, the slippage
+— which for a strategy trading every few days adds up fast. And my backtest
+was letting signals earn the same day's return, which you can't do in real
+life, because a signal from Monday's closing price isn't knowable until Monday
+has closed.</p>
+
+<p>Fixing all three took most of the performance away. One of the four
+indicators turned out not to be what I thought it was either: real VWAP is an
+intraday measure that resets every session, so on daily charts it can't
+actually be calculated. What retail traders call daily VWAP is something
+else.</p>
+
+<p>I found that more interesting than the bot. So this is the project now:
+take the indicators millions of people trade on, test them in a way that's
+hard to fool, and publish what's left every week. Including the weeks the
+answer is nothing.</p>
+
+<h2>How I try to keep myself honest</h2>
+
+</div>
+
+<ul class="limits">
+  <li><strong>Publish the bad weeks.</strong> A week where nothing worked is a
+      result. It's also the week I'm most likely to be right about.</li>
+  <li><strong>Decide the thresholds first.</strong> Survived, weakened and
+      failed are defined in code with fixed cut-offs, before I see the numbers.
+      If I could move them afterwards they wouldn't mean anything.</li>
+  <li><strong>Say what's wrong with it every time.</strong> Survivorship bias,
+      one cost assumption applied to every stock, no borrow costs on shorts.
+      These are in every report because they don't stop being true.</li>
+  <li><strong>Never edit a published number.</strong> If a later week
+      contradicts an earlier one, both stay up and I write about the gap.</li>
+  <li><strong>Publish the code and the data.</strong> Every figure comes from
+      one command anyone can run. A result nobody can check is just an
+      opinion.</li>
+</ul>
+
+<div class="prose">
+
+<h2>The live portfolio</h2>
+
+<p>Testing on history only proves so much, because I could always run it again
+until I liked the answer. So there's also a
+<a href="../live/">paper portfolio</a> trading the one strategy that survived.
+Orders are published before they fill, and the whole order book is public. It
+can't be re-run, which is the point.</p>
+
+<h2>Me</h2>
+
+<p>I'm a sixth-form student at TASIS England, applying to read economics and
+finance at university. I have the CFA Institute Investment Foundations
+certificate and a Wharton online finance certificate, and I've been writing
+Python trading systems for a while — which is how this started, and why the
+first thing it proved was that mine didn't work.</p>
+
+<p>I'm not a professional and this isn't investment advice. It's a student
+project, run in public, with the workings shown.</p>
+
+<div class="note">
+  <p><strong>Corrections welcome.</strong> If you can show me a number here is
+     wrong, that's the most useful thing you could send me, and I'll publish
+     the correction.</p>
+  <p>REPLACE THIS with your email or LinkedIn URL before you go live.</p>
+</div>
+
+</div>

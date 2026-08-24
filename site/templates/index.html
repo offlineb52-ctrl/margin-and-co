@@ -1,0 +1,100 @@
+<section class="wrap hero">
+  <p class="eyebrow eyebrow--accent">Independent quantitative research</p>
+  <h1>Most trading indicators stop working once you pay to trade them.</h1>
+  <p class="lede">Margin &amp; Co. tests the four indicators retail traders rely on
+     most — EMA, VWAP, MACD and RSI — on data they have never seen, after
+     spreads, commission and slippage. The results are published weekly,
+     including the weeks nothing works.</p>
+  <div class="btn-row">
+    <a class="btn btn--solid" href="#latest">Read the latest report</a>
+    <a class="btn" href="{{ root }}methodology/">How it is tested</a>
+  </div>
+</section>
+
+<section class="wrap" id="latest">
+  <div class="verdict">
+    <p class="eyebrow">{{ week_label }} &middot; {{ published_long }}</p>
+    <p class="verdict__headline">{{ headline }}</p>
+    <p class="verdict__detail">{{ headline_detail }}</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat__label">Indicators tested</div>
+      <div class="stat__value">{{ stat_tested }}</div>
+      <div class="stat__note">EMA, VWAP, MACD, RSI</div>
+    </div>
+    <div class="stat">
+      <div class="stat__label">Beat buy &amp; hold</div>
+      <div class="stat__value">{{ stat_survived }}</div>
+      <div class="stat__note">after costs, out-of-sample</div>
+    </div>
+    <div class="stat">
+      <div class="stat__label">Benchmark Sharpe</div>
+      <div class="stat__value">{{ stat_benchmark }}</div>
+      <div class="stat__note">buy &amp; hold, net</div>
+    </div>
+    <div class="stat">
+      <div class="stat__label">Worst cost drag</div>
+      <div class="stat__value">{{ stat_worst_cost }}</div>
+      <div class="stat__note">{{ stat_worst_cost_name }}, of notional</div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="section__head">
+    <p class="eyebrow">The decay curve</p>
+    <h2>What survives contact with unseen data</h2>
+  </div>
+  {{ decay_figure }}
+</section>
+
+<section class="wrap section section--ruled">
+  <div class="section__head">
+    <p class="eyebrow">Results</p>
+    <h2>{{ week_label }} in full</h2>
+    <p class="lede">{{ universe_line }}</p>
+  </div>
+  {{ results_table }}
+  <p class="btn-row"><a class="btn" href="{{ latest_url }}">Full report &amp; walk-forward detail</a></p>
+</section>
+
+<section class="wrap section section--ruled">
+  <div class="section__head">
+    <p class="eyebrow">Why this exists</p>
+    <h2>Three ways a backtest lies</h2>
+  </div>
+  <div class="prose">
+    <p>Search for “MACD strategy backtest” and you will find thousands of
+       results showing spectacular returns. Almost all of them share the same
+       three flaws.</p>
+  </div>
+  <div class="findings">
+    <article class="finding">
+      <div class="finding__head"><h3 class="finding__name">It is tested on the data used to build it</h3></div>
+      <p class="finding__body">Try enough combinations of moving-average lengths
+         and one of them will have worked, by chance. That is a search result,
+         not a discovery. Here the rules are fixed on the first 70% of history
+         and the remainder is measured once.</p>
+    </article>
+    <article class="finding">
+      <div class="finding__head"><h3 class="finding__name">It ignores what trading costs</h3></div>
+      <p class="finding__body">Every trade pays the bid–ask spread, commission
+         and slippage. A strategy that trades daily pays those costs roughly
+         250 times a year. In {{ week_label_lower }}, the worst offender paid
+         away <span class="num">{{ stat_worst_cost }}</span> of its notional value.</p>
+    </article>
+    <article class="finding">
+      <div class="finding__head"><h3 class="finding__name">It quietly uses tomorrow’s information</h3></div>
+      <p class="finding__body">A signal computed from Monday’s closing price
+         cannot be traded until Monday has closed — but most homemade
+         backtests let it earn Monday’s return anyway. That single mistake is
+         worth about <span class="num">20</span> points of Sharpe ratio in our
+         own test harness, which is why a test exists specifically to catch it.</p>
+    </article>
+  </div>
+  <p class="btn-row"><a class="btn" href="{{ root }}methodology/">Read the full methodology</a></p>
+</section>
+
+{{ archive_section }}

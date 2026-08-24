@@ -1,0 +1,14 @@
+# Margin & Co. — dependencies
+#
+# Deliberately minimal. Every library here is one a reader can be expected to
+# know, and the backtester itself is written in plain pandas rather than a
+# framework, so there is no black box between a signal and a P&L number.
+#
+#   python3 -m venv .venv
+#   source .venv/bin/activate
+#   pip install -r requirements.txt
+
+pandas>=2.0
+numpy>=1.24
+yfinance>=0.2.40
+matplotlib>=3.7

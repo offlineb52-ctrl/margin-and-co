@@ -1,0 +1,108 @@
+<article>
+<section class="wrap hero">
+  <p class="eyebrow eyebrow--accent">{{ week_label }} &middot; {{ published_long }}</p>
+  <h1>{{ headline }}</h1>
+  <p class="lede">{{ headline_detail }}</p>
+</section>
+
+<section class="wrap">
+  <div class="stats">
+    <div class="stat">
+      <div class="stat__label">Universe</div>
+      <div class="stat__value">{{ stat_universe }}</div>
+      <div class="stat__note">S&amp;P 500 &amp; FTSE 350 names</div>
+    </div>
+    <div class="stat">
+      <div class="stat__label">Out-of-sample</div>
+      <div class="stat__value">{{ stat_oos_years }}</div>
+      <div class="stat__note">{{ oos_window }}</div>
+    </div>
+    <div class="stat">
+      <div class="stat__label">Cost assumption</div>
+      <div class="stat__value">{{ stat_costs }}</div>
+      <div class="stat__note">bps per side, all in</div>
+    </div>
+    <div class="stat">
+      <div class="stat__label">Benchmark Sharpe</div>
+      <div class="stat__value">{{ stat_benchmark }}</div>
+      <div class="stat__note">buy &amp; hold, net</div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="section__head">
+    <p class="eyebrow">The decay curve</p>
+    <h2>In-sample, out-of-sample, and after costs</h2>
+  </div>
+  {{ decay_figure }}
+</section>
+
+<section class="wrap section section--ruled">
+  <div class="section__head">
+    <p class="eyebrow">Results</p>
+    <h2>Every number, in one table</h2>
+    <p class="lede">{{ universe_line }}</p>
+  </div>
+  {{ results_table }}
+  <div class="note">
+    <p><strong>SURVIVED</strong> — positive out-of-sample Sharpe after costs,
+       and beat buy &amp; hold.<br>
+       <strong>WEAKENED</strong> — still positive after costs, but lost to
+       buy &amp; hold.<br>
+       <strong>FAILED</strong> — out-of-sample Sharpe was zero or negative
+       once costs were applied.</p>
+    <p>Thresholds are fixed in code, not judged by eye, so the standard cannot
+       drift week to week to suit the result.</p>
+  </div>
+</section>
+
+<section class="wrap section section--ruled">
+  <div class="section__head">
+    <p class="eyebrow">Indicator by indicator</p>
+    <h2>What happened, and why</h2>
+  </div>
+  {{ findings }}
+</section>
+
+{{ walk_forward_section }}
+
+{{ equity_section }}
+
+{{ sensitivity_section }}
+
+<section class="wrap section section--ruled">
+  <div class="section__head">
+    <p class="eyebrow">Caveats</p>
+    <h2>What this study cannot tell you</h2>
+  </div>
+  <div class="prose">
+    <p>Stated every week, because they do not go away.</p>
+  </div>
+  <ul class="limits">
+    <li><strong>Survivorship bias.</strong> The universe uses current index
+        membership, so companies delisted or dropped along the way are absent.
+        This flatters absolute returns. It affects the in-sample versus
+        out-of-sample <em>comparison</em> far less, since both halves share the
+        bias — which is why that comparison, not the absolute return, is the
+        headline.</li>
+    <li><strong>One cost assumption, applied uniformly.</strong> Real spreads
+        vary by stock and by day, and widen exactly when you most want to
+        trade. The sensitivity analysis shows how conclusions change across
+        the full range rather than defending a single number.</li>
+    <li><strong>What is labelled VWAP is a rolling volume-weighted moving
+        average.</strong> True VWAP is intraday: it resets each session and
+        cannot be computed from daily bars at all. The daily-chart “VWAP” used
+        across retail trading is the rolling version tested here.</li>
+    <li><strong>No position sizing, leverage or borrow costs.</strong> Every
+        position is the same size, and shorting is assumed free. It is not.</li>
+  </ul>
+  <div class="note">
+    <p><strong>Reproduce this.</strong> Every figure above comes from one
+       command against public data:
+       <code>python run_pipeline.py --universe all --week {{ week_number }}</code>.
+       The <a href="{{ markdown_url }}">plain-text report</a> and the
+       <a href="{{ json_url }}">underlying data</a> are both published.</p>
+  </div>
+</section>
+</article>

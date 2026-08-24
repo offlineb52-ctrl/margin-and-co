@@ -1,0 +1,112 @@
+<section class="wrap hero">
+  <p class="eyebrow eyebrow--accent">Live paper portfolio</p>
+  <h1>{{ strategy_name }}</h1>
+  <p class="lede">{{ rationale }}</p>
+</section>
+
+<section class="wrap">
+  <div class="note note--flag">
+    <p><strong>Read this before the numbers.</strong> {{ provenance }}</p>
+    <p>This is a paper portfolio. No real money is at risk, and nothing here is
+       investment advice. Orders are decided on the close and filled at the
+       next session’s open, paying {{ costs_bps }} basis points per side —
+       the same cost model as the research.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat__label">Portfolio value</div>
+      <div class="stat__value">{{ stat_nav }}</div>
+      <div class="stat__note">from {{ stat_capital }} at inception</div>
+    </div>
+    <div class="stat">
+      <div class="stat__label">Total return</div>
+      <div class="stat__value">{{ stat_return }}</div>
+      <div class="stat__note">{{ stat_sessions }} sessions</div>
+    </div>
+    <div class="stat">
+      <div class="stat__label">Buy &amp; hold, same names</div>
+      <div class="stat__value">{{ stat_bench }}</div>
+      <div class="stat__note">{{ stat_excess }} difference</div>
+    </div>
+    <div class="stat">
+      <div class="stat__label">Average exposure</div>
+      <div class="stat__value">{{ stat_invested }}</div>
+      <div class="stat__note">rest of the book in cash</div>
+    </div>
+  </div>
+
+  <div class="note">
+    <p>{{ exposure_note }}</p>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="section__head">
+    <p class="eyebrow">Track record</p>
+    <h2>Portfolio value against buy &amp; hold</h2>
+  </div>
+  {{ equity_figure }}
+</section>
+
+<section class="wrap section section--ruled">
+  <div class="section__head">
+    <p class="eyebrow">Committed, not yet filled</p>
+    <h2>Orders standing for the next open</h2>
+    <p class="lede">Published before they execute. This is the part of a paper
+       track record that cannot be constructed after the fact — whatever is
+       listed here today either fills at tomorrow’s open or is withdrawn on the
+       record.</p>
+  </div>
+  {{ pending_table }}
+</section>
+
+<section class="wrap section section--ruled">
+  <div class="section__head">
+    <p class="eyebrow">Open positions</p>
+    <h2>What the book holds right now</h2>
+  </div>
+  {{ positions_table }}
+</section>
+
+<section class="wrap section section--ruled">
+  <div class="section__head">
+    <p class="eyebrow">Closed trades</p>
+    <h2>Every completed round trip, with the reason it was taken</h2>
+    <p class="lede">{{ trades_summary }}</p>
+  </div>
+  {{ trades_table }}
+</section>
+
+<section class="wrap section section--ruled">
+  <div class="section__head">
+    <p class="eyebrow">The rules</p>
+    <h2>Exactly what this portfolio does</h2>
+  </div>
+  <ul class="limits">
+    {{ rules_list }}
+  </ul>
+  <div class="prose">
+    <h3>Universe</h3>
+    <p>{{ universe_line }}</p>
+    <h3>Why long only</h3>
+    <p>The research tests every indicator long and short, because that is how
+       the rule is defined. This book trades the long leg only. Shorting incurs
+       a stock borrow fee that varies by name and by day, and this project does
+       not model it — so a live short book would report a return nobody could
+       actually have earned.</p>
+    <h3>What would falsify this</h3>
+    <p>If the portfolio finishes behind buy &amp; hold on a risk-adjusted basis
+       over a full year of forward recording, the honest conclusion is that the
+       Week 1 result was noise. That conclusion will be published here in the
+       same place as everything else.</p>
+  </div>
+  <div class="note">
+    <p><strong>Audit it.</strong> The complete order book is published as raw
+       data: <a href="{{ ledger_url }}">every fill</a>,
+       <a href="{{ equity_url }}">every daily mark</a>, and
+       <a href="{{ live_json_url }}">the derived figures</a> shown on this page.
+       Positions are never stored — they are replayed from the fills, so the
+       trade log is the only source of truth.</p>
+  </div>
+</section>

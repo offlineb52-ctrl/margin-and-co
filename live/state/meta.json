@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "strategy": "RSI(14) mean reversion, long only",
+  "rationale": "In the Week 1 study, RSI was the only one of the four indicators to post a positive out-of-sample Sharpe ratio after costs (0.33). It was also the only mean-reversion rule tested -- the other three are trend-following, and all three went negative net of costs. It still lost to buy & hold, which is why this portfolio publishes both side by side. It is being traded live because a rule that survived one honest test deserves a second one that cannot be re-run.",
+  "opened": "2026-08-23",
+  "inception": "2026-02-20",
+  "starting_capital": 100000.0,
+  "currency": "USD",
+  "universe": [
+    "AAPL",
+    "AMZN",
+    "COST",
+    "CSCO",
+    "CVX",
+    "GOOGL",
+    "HD",
+    "JNJ",
+    "JPM",
+    "KO",
+    "MCD",
+    "META",
+    "MSFT",
+    "NVDA",
+    "PEP",
+    "PG",
+    "UNH",
+    "V",
+    "WMT",
+    "XOM"
+  ],
+  "costs_bps_per_side": 8.0
+}
