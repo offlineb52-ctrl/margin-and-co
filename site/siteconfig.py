@@ -24,7 +24,7 @@ DESCRIPTION = (
     "applied. Published weekly, with a live paper portfolio."
 )
 
-REPO_URL = "https://github.com/your-username/margin-and-co"
+REPO_URL = "https://github.com/offlineb52-ctrl/margin-and-co"
 
 # If you deploy to a subdirectory rather than a domain root, set this to
 # e.g. "/margin-and-co/". For a custom domain, leave it as "/".
