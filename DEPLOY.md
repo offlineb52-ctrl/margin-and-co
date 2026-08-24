@@ -390,3 +390,43 @@ s.19 of the Financial Services and Markets Act 2000, and charging for the
 service is what makes "by way of business" straightforward to establish.
 Reporting what a disclosed rule did is research; telling a paying member what
 to buy is advice. Keep the wording on the correct side of that.
+
+### Setting up Resend (sign-in emails)
+
+Sign-in links cannot send until this is done. Until then the form says so
+rather than pretending.
+
+1. **Sign up** at [resend.com](https://resend.com). Free tier is 3,000 emails a
+   month, which is far beyond what this needs.
+
+2. **Add the domain.** Resend will show you DNS records to add in Cloudflare.
+
+   **The one thing that can break email on this domain:** a domain may only
+   have ONE SPF record. `marginco.co.uk` already has
+   `v=spf1 include:_spf.mx.cloudflare.net ~all`, added by Email Routing.
+   Adding a second SPF record makes *both* invalid and breaks inbound mail too.
+
+   Two ways round it:
+   - **Verify a subdomain** such as `send.marginco.co.uk`. It gets its own SPF
+     and the root record is untouched. Simplest, and what to do if unsure.
+     Then set `MAIL_FROM` to `Margin & Co. <hello@send.marginco.co.uk>`.
+   - **Verify the root** and merge the includes into the single existing
+     record, e.g.
+     `v=spf1 include:_spf.mx.cloudflare.net include:amazonses.com ~all`.
+     Use whatever include Resend actually shows you, not this from memory.
+
+   The DKIM records Resend gives you are separate and can be added as-is.
+
+3. **Create an API key** in Resend, with send permission only.
+
+4. **Add it to Cloudflare**: Workers & Pages → marginco → Settings →
+   Variables and secrets → Add → type **Secret** (encrypted, not plaintext),
+   name `RESEND_API_KEY`. Add `MAIL_FROM` too if you verified a subdomain.
+
+5. **Redeploy.** Cloudflare applies new variables on the next deployment only:
+   `git commit --allow-empty -m "Pick up Resend key" && git push`
+
+6. **Test** by requesting a link at `/login/` with your own address. If it
+   arrives, accounts work end to end. If the page still says email is not
+   switched on, the variable did not reach the deployment — check it is on the
+   Production environment.

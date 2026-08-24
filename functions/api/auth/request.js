@@ -13,7 +13,12 @@ import {
   normaliseEmail, createLoginToken, rateLimit, upsertMember, getMember,
 } from "../../_lib/auth.js";
 
-const SENDER = "Margin & Co. <hello@marginco.co.uk>";
+// Configurable, because which address you can send from depends on what you
+// verified in Resend. Verifying the root domain lets you send as
+// hello@marginco.co.uk; verifying a subdomain (which avoids merging SPF
+// records) means sending as something like hello@send.marginco.co.uk instead.
+// Set MAIL_FROM in Pages settings if the default is not what you verified.
+const DEFAULT_SENDER = "Margin & Co. <hello@marginco.co.uk>";
 
 /** Send the link. Returns true if the provider accepted it. */
 async function sendLoginEmail(env, email, link, isNew) {
@@ -43,7 +48,10 @@ async function sendLoginEmail(env, email, link, isNew) {
         authorization: `Bearer ${env.RESEND_API_KEY}`,
         "content-type": "application/json",
       },
-      body: JSON.stringify({ from: SENDER, to: [email], subject, text }),
+      body: JSON.stringify({
+        from: env.MAIL_FROM || DEFAULT_SENDER,
+        to: [email], subject, text,
+      }),
     });
     return { ok: response.ok, reason: response.ok ? null : `http_${response.status}` };
   } catch (err) {

@@ -1,43 +1,47 @@
 title: About
 eyebrow: About
 heading: Why I built this.
-lede: I made a trading bot that looked like it worked. Finding out why it didn't turned into a better project than the bot ever was.
+lede: I made a trading bot that looked like it worked. It didn't. Finding out why turned into a better project than the bot.
 description: About Margin & Co. — an independent research project testing whether retail trading indicators survive realistic trading costs.
 <!--/meta-->
 
 <div class="prose">
 
-<p>I built a trading bot. It used the four indicators everyone uses — EMA,
-VWAP, MACD and RSI — and when I backtested it, the results looked good.</p>
+<p>I built a trading bot. It used EMA, VWAP, MACD and RSI — the four
+indicators everyone uses. I backtested it and the results looked good.</p>
 
-<p>That was the problem. I hadn't done anything clever. I'd used four
-indicators that every retail trader already knows, on data anyone can
-download, and apparently beaten the market. If it were that easy, everyone
-would be doing it. So either I'd found something thousands of people missed,
-or I'd made a mistake somewhere.</p>
+<p>I didn't believe them. I hadn't done anything original. Four standard
+indicators, free data, a laptop. If that beat the market, a lot of people with
+more money and better tools would already be doing it.</p>
 
-<p>I'd made a mistake. Three, actually.</p>
+<p>So I checked properly. I'd made three mistakes.</p>
 
-<p>I was testing on the same data I'd used to pick the settings, so I was
-really just reporting the best result out of everything I'd tried. I wasn't
-subtracting what it costs to trade — the spread, the commission, the slippage
-— which for a strategy trading every few days adds up fast. And my backtest
-was letting signals earn the same day's return, which you can't do in real
-life, because a signal from Monday's closing price isn't knowable until Monday
-has closed.</p>
+<p>I was testing on the same data I used to pick the settings. Try enough
+combinations of moving average lengths and one of them looks great. That's not
+a discovery, it's just the best result out of everything I tried.</p>
 
-<p>Fixing all three took most of the performance away. One of the four
-indicators turned out not to be what I thought it was either: real VWAP is an
-intraday measure that resets every session, so on daily charts it can't
-actually be calculated. What retail traders call daily VWAP is something
-else.</p>
+<p>I wasn't subtracting what it costs to trade. Every trade pays the spread,
+the commission and the slippage. My bot traded every few days. Those costs add
+up faster than I expected — one of the rules I tested later paid away 78% of
+its value in costs.</p>
 
-<p>I found that more interesting than the bot. So this is the project now:
-take the indicators millions of people trade on, test them in a way that's
-hard to fool, and publish what's left every week. Including the weeks the
-answer is nothing.</p>
+<p>And my backtest was earning the same day's return off the same day's signal.
+You can't do that. A signal from Monday's close isn't knowable until Monday has
+closed, so the earliest you can trade it is Monday's close. That one mistake is
+worth about 20 points of Sharpe ratio. I only found it because I went looking.</p>
 
-<h2>How I try to keep myself honest</h2>
+<p>Fixing all three took nearly all the performance away.</p>
+
+<p>One of the four indicators turned out not to be what I thought either. Real
+VWAP is intraday — it resets every session. On a daily chart it can't be
+calculated at all. What people call daily VWAP is something else with the same
+name.</p>
+
+<p>That was more interesting than the bot. So this is the project now: take the
+indicators millions of people trade on, test them in a way that's hard to fool,
+and publish what's left every week. Including the weeks the answer is nothing.</p>
+
+<h2>Rules I've set myself</h2>
 
 </div>
 
@@ -45,11 +49,11 @@ answer is nothing.</p>
   <li><strong>Publish the bad weeks.</strong> A week where nothing worked is a
       result. It's also the week I'm most likely to be right about.</li>
   <li><strong>Decide the thresholds first.</strong> Survived, weakened and
-      failed are defined in code with fixed cut-offs, before I see the numbers.
-      If I could move them afterwards they wouldn't mean anything.</li>
+      failed are fixed in code before I see the numbers. If I could move them
+      afterwards they wouldn't mean anything.</li>
   <li><strong>Say what's wrong with it every time.</strong> Survivorship bias,
-      one cost assumption applied to every stock, no borrow costs on shorts.
-      These are in every report because they don't stop being true.</li>
+      one cost assumption for every stock, no borrow costs on shorts. They're
+      in every report because they don't stop being true.</li>
   <li><strong>Never edit a published number.</strong> If a later week
       contradicts an earlier one, both stay up and I write about the gap.</li>
   <li><strong>Publish the code and the data.</strong> Every figure comes from
@@ -59,35 +63,41 @@ answer is nothing.</p>
 
 <div class="prose">
 
+<h2>Where it's got to</h2>
+
+<p>The last run tested 3,308 combinations — every indicator against 849
+companies in the S&amp;P 500 and FTSE 350. The median score was 2.4 out of 10.
+Twelve scored 8 or above, and I don't trust those either: test 3,308 things and
+a handful will look good by accident. The only thing that would convince me is
+if the same ones survive next week, on data that didn't exist when I picked
+them.</p>
+
 <h2>The live portfolio</h2>
 
-<p>Testing on history only proves so much, because I could always run it again
-until I liked the answer. So there's also a
-<a href="../live/">paper portfolio</a> trading the one strategy that survived.
-Orders are published before they fill, and the whole order book is public. It
-can't be re-run, which is the point.</p>
+<p>Backtests only prove so much, because I can always run one again until I
+like the answer. So there's a <a href="../live/">paper portfolio</a> trading
+the one strategy that survived. Orders get published before they fill and the
+whole order book is public. I can't re-run it. That's the point.</p>
 
 <h2>Me</h2>
 
 <p>I'm a sixth-form student at TASIS England, applying to read economics and
 finance at university. I have the CFA Institute Investment Foundations
-certificate and a Wharton online finance certificate, and I've been writing
-Python trading systems for a while — which is how this started, and why the
-first thing it proved was that mine didn't work.</p>
+certificate and a Wharton online finance certificate. I've been writing Python
+trading systems for a while, which is how this started, and the first thing it
+proved was that mine didn't work.</p>
 
 <p>I'm not a professional and this isn't investment advice. It's a student
-project, run in public, with the workings shown.</p>
+project run in public with the workings shown.</p>
 
 <div class="note">
   <p><strong>Corrections welcome.</strong> If you can show me a number here is
      wrong, that's the most useful thing you could send me, and I'll publish
      the correction.</p>
-  <p>Two ways: email
-     <a href="mailto:hello@marginco.co.uk">hello@marginco.co.uk</a>, or
+  <p>Email <a href="mailto:hello@marginco.co.uk">hello@marginco.co.uk</a>, or
      <a href="https://github.com/offlineb52-ctrl/margin-and-co/issues">open an
-     issue on the repository</a> — the second is better for anything technical,
-     because the correction and my response end up public, next to the code
-     that produced the number.</p>
+     issue on the repository</a> if it's technical — that way the correction and
+     my reply are both public, next to the code that produced the number.</p>
 </div>
 
 </div>
