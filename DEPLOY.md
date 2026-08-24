@@ -301,3 +301,34 @@ traded rule are frozen in `live/state/meta.json` on purpose — swapping the rul
 underneath an existing equity curve makes the whole track record meaningless.
 If you want to trade something else, open a second book alongside it and let
 both run.
+
+---
+
+## The email list
+
+Signups are handled by a Cloudflare Pages Function (`functions/api/subscribe.js`)
+writing to a KV namespace bound as `SUBSCRIBERS`. No third-party mailing
+provider holds the list — which is exactly what the privacy policy promises,
+so if you ever move to one, update that page *before* transferring any data.
+
+**Reading the list.** Cloudflare dashboard → Storage & databases → Workers KV →
+`marginco-subscribers`. Keys are `sub:<email>`.
+
+**What is stored.** Email, timestamp, and a consent record. Deliberately no IP
+address, no user agent, no name. Data never collected cannot leak, and it is
+one fewer thing to disclose in a subject access request.
+
+**Unsubscribes.** Currently handled by email to `hello@marginco.co.uk` — delete
+the matching `sub:` key. That satisfies GDPR at this scale, but once the list
+is more than a few dozen people, add a one-click unsubscribe link; manual
+handling stops being credible.
+
+**Sending the emails.** Cloudflare does not send bulk mail. Export the keys and
+send through a provider when you are ready. Name that provider in the privacy
+policy first.
+
+**Bot protection.** A honeypot field plus server-side validation. There is no
+CAPTCHA because every option requires JavaScript, and running any would mean
+relaxing `script-src 'none'` — which currently makes cross-site scripting
+impossible. If spam signups ever become a real problem, add a Cloudflare rate
+limiting rule on `/api/subscribe` rather than reaching for a CAPTCHA.
