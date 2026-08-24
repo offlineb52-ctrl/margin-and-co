@@ -1,4 +1,15 @@
-# Deploying Margin & Co. to your own domain
+# Deploying Margin & Co.
+
+> **Live as of 24 August 2026.** The site is at
+> [marginco.co.uk](https://marginco.co.uk), hosted on Cloudflare Pages
+> (project `marginco`), built automatically from `main` in this repository.
+> The domain is registered at GoDaddy with nameservers pointed at Cloudflare.
+>
+> Pushing to `main` rebuilds and redeploys the site. Nothing below needs
+> repeating unless you are moving to a different domain or host — it is kept
+> as a record of how it was set up.
+
+## Original guide: deploying to your own domain
 
 The site in `site/dist/` is plain static files — HTML, CSS and PNGs, no server
 and no build toolchain. Any static host will serve it. This guide covers the
