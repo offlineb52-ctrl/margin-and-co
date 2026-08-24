@@ -1,0 +1,38 @@
+{
+  "tier": "free",
+  "week": 1,
+  "published": "2026-08-24",
+  "headline": "Nothing survived. The best of 4 tested combinations was VWAP on AAPL at 3.9 out of 10.",
+  "summary": "4 indicator-and-stock combinations were tested this week. Each was scored from 1 to 10 on whether it still made money on data it had never seen, after paying realistic trading costs. None scored 8 or above, so none survived convincingly. 4 of 4 finished with a positive Sharpe ratio after costs \u2014 but a positive Sharpe is a low bar, and none of them beat simply buying and holding the same stock. The median score was 3.7. A low median is the expected result rather than a broken test: most published indicator backtests do not subtract trading costs or check performance on unseen data, and doing both is what removes the apparent edge.",
+  "universe_size": 1,
+  "costs_bps": 8.0,
+  "charts": {
+    "decay": "decay_curve_week01.png"
+  },
+  "sections": {
+    "flagship": {
+      "indicator": "VWAP",
+      "ticker": "AAPL",
+      "score": 3.9,
+      "verdict": "Did not survive",
+      "out_sample_sharpe_net": 0.188874,
+      "in_sample_sharpe_gross": 0.537642,
+      "pct_windows_positive": 0.692308,
+      "max_drawdown_net": -0.478204,
+      "num_trades": 115
+    },
+    "combinations_tested": 4,
+    "archive": [
+      {
+        "week": 1,
+        "published": "2026-08-24",
+        "universe_size": 1,
+        "tickers": "AAPL",
+        "costs_bps": 8.0,
+        "notes": "AAPL pilot"
+      }
+    ],
+    "archive_weeks_shown": 4,
+    "upgrade_note": "The full ranked table across every stock and indicator tested, the raw data, and the complete archive are available to Pro members."
+  }
+}

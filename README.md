@@ -55,6 +55,82 @@ after costs — they lost money net of what it cost to trade them. RSI, the only
 mean-reversion rule of the four, was the only survivor, and it still lost
 decisively to doing nothing at all.
 
+## The Survival Score
+
+Each indicator/stock combination gets a score from 1 to 10, answering one
+question: **would anything have survived contact with unseen data and real
+trading costs?**
+
+The formula is a weighted composite. There is no fitted model and no constant
+chosen because it made the output look better — every number below is a
+judgement stated openly so it can be argued with, and the whole table can be
+recomputed from `scoring.py` if you disagree with one.
+
+```
+Survival Score = 0.60 × Performance
+               + 0.25 × Consistency
+               + 0.15 × Drawdown resilience
+```
+
+| Component | Weight | How it is scored |
+|---|---:|---|
+| **Performance** | 60% | Out-of-sample Sharpe, net of costs. −0.50 scores 0, +1.50 scores 10, linear between. |
+| **Consistency** | 25% | Share of walk-forward windows with a positive net Sharpe, × 10. |
+| **Drawdown resilience** | 15% | Worst out-of-sample decline. 0% scores 10, −50% scores 0. |
+
+The **+1.50 anchor** is deliberate: that is roughly what buy & hold returned on
+this universe over the study window. A rule scoring 10 on performance merely
+matched owning the market.
+
+### Two guard rails
+
+Without these, the composite would flatter strategies that deserve nothing:
+
+- **A losing strategy cannot score above 3.0.** Negative net Sharpe out-of-sample
+  means it lost money after costs; low drawdown should not lift that mid-scale.
+- **A strategy in the market under 5% of the time cannot score above 5.0.**
+  Its statistics rest on too few observations, and its drawdown score is an
+  artefact of sitting in cash.
+
+Capped scores are recorded as capped, so the reason is visible rather than
+silently baked in.
+
+### Reading the scale
+
+| Band | Meaning |
+|---|---|
+| 8–10 | Survived convincingly |
+| 6–8 | Positive after costs, still beaten by holding |
+| 4–6 | Marginal, most likely noise |
+| 1–4 | Did not survive — where the great majority land |
+
+If nearly everything scores below 4, that is not a broken scale. That is the finding.
+
+```bash
+python run_scores.py --week 2 --universe sample
+```
+
+Scores are written to a SQLite archive (`data/archive.db`) so score *history*
+is queryable — the trend for a rule over months, not just this week's snapshot.
+A week already recorded will not be silently rewritten.
+
+## Report tiers
+
+Two functions, sharing nothing but their inputs:
+
+- `generate_free_report()` — one flagship finding, the decay curve, a plain-English
+  summary, and the last four weeks of archive.
+- `generate_pro_report()` — the full ranked table across every combination tested,
+  raw data as CSV, full methodology notes, and the complete archive.
+
+The separation is structural, not cosmetic: the free report never receives the
+full table, so no template mistake can expose it. The website gates on the
+report's `tier` field, not on its content.
+
+The free tier carries the week's actual **conclusion**. A research project that
+hides whether its own findings were negative is not a research project — Pro
+buys the working, the breadth and the history, not the answer.
+
 ## The live paper portfolio
 
 Testing on history only proves so much, so the one surviving strategy is also

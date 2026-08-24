@@ -1,0 +1,167 @@
+{
+  "tier": "pro",
+  "week": 1,
+  "published": "2026-08-24",
+  "headline": "Nothing survived. The best of 4 tested combinations was VWAP on AAPL at 3.9 out of 10.",
+  "summary": "4 indicator-and-stock combinations were tested this week. Each was scored from 1 to 10 on whether it still made money on data it had never seen, after paying realistic trading costs. None scored 8 or above, so none survived convincingly. 4 of 4 finished with a positive Sharpe ratio after costs \u2014 but a positive Sharpe is a low bar, and none of them beat simply buying and holding the same stock. The median score was 3.7. A low median is the expected result rather than a broken test: most published indicator backtests do not subtract trading costs or check performance on unseen data, and doing both is what removes the apparent edge.",
+  "universe_size": 1,
+  "costs_bps": 8.0,
+  "charts": {
+    "decay": "decay_curve_week01.png"
+  },
+  "sections": {
+    "flagship": {
+      "indicator": "VWAP",
+      "ticker": "AAPL",
+      "score": 3.9,
+      "verdict": "Did not survive",
+      "out_sample_sharpe_net": 0.188874,
+      "in_sample_sharpe_gross": 0.537642,
+      "pct_windows_positive": 0.692308,
+      "max_drawdown_net": -0.478204,
+      "num_trades": 115
+    },
+    "table": [
+      {
+        "indicator": "VWAP",
+        "ticker": "AAPL",
+        "score": 3.9,
+        "verdict": "Did not survive",
+        "performance": 3.44,
+        "consistency": 6.92,
+        "drawdown": 0.44,
+        "raw_score": 3.86,
+        "capped_by": null,
+        "in_sample_sharpe_gross": 0.5376424776940144,
+        "out_sample_sharpe_gross": 0.32088673047488664,
+        "out_sample_sharpe_net": 0.18887382050568868,
+        "max_drawdown_net": -0.4782039904575731,
+        "pct_windows_positive": 0.6923076923076923,
+        "n_windows": 13,
+        "num_trades": 115,
+        "time_in_market": 1.0,
+        "cost_paid": 0.18480000000000002
+      },
+      {
+        "indicator": "RSI",
+        "ticker": "AAPL",
+        "score": 3.9,
+        "verdict": "Did not survive",
+        "performance": 3.25,
+        "consistency": 4.62,
+        "drawdown": 5.4,
+        "raw_score": 3.91,
+        "capped_by": null,
+        "in_sample_sharpe_gross": -0.5932581727903685,
+        "out_sample_sharpe_gross": 0.18643606980743604,
+        "out_sample_sharpe_net": 0.14969068235031263,
+        "max_drawdown_net": -0.22988965969439934,
+        "pct_windows_positive": 0.46153846153846156,
+        "n_windows": 13,
+        "num_trades": 38,
+        "time_in_market": 0.4438247011952191,
+        "cost_paid": 0.033600000000000005
+      },
+      {
+        "indicator": "EMA",
+        "ticker": "AAPL",
+        "score": 3.5,
+        "verdict": "Did not survive",
+        "performance": 2.82,
+        "consistency": 5.38,
+        "drawdown": 3.17,
+        "raw_score": 3.51,
+        "capped_by": null,
+        "in_sample_sharpe_gross": 0.41661031275962884,
+        "out_sample_sharpe_gross": 0.08893613144151827,
+        "out_sample_sharpe_net": 0.06318233091900664,
+        "max_drawdown_net": -0.3414828159255562,
+        "pct_windows_positive": 0.5384615384615384,
+        "n_windows": 13,
+        "num_trades": 22,
+        "time_in_market": 1.0,
+        "cost_paid": 0.036000000000000004
+      },
+      {
+        "indicator": "MACD",
+        "ticker": "AAPL",
+        "score": 3.3,
+        "verdict": "Did not survive",
+        "performance": 2.87,
+        "consistency": 6.15,
+        "drawdown": 0.0,
+        "raw_score": 3.26,
+        "capped_by": null,
+        "in_sample_sharpe_gross": 0.4173932246521657,
+        "out_sample_sharpe_gross": 0.1843366938344637,
+        "out_sample_sharpe_net": 0.07389141578229023,
+        "max_drawdown_net": -0.5166301075567545,
+        "pct_windows_positive": 0.6153846153846154,
+        "n_windows": 13,
+        "num_trades": 96,
+        "time_in_market": 1.0,
+        "cost_paid": 0.15439999999999998
+      }
+    ],
+    "combinations_tested": 4,
+    "universe": [
+      "AAPL"
+    ],
+    "archive": [
+      {
+        "week": 1,
+        "published": "2026-08-24",
+        "universe_size": 1,
+        "tickers": "AAPL",
+        "costs_bps": 8.0,
+        "notes": "AAPL pilot"
+      }
+    ],
+    "score_history": [
+      {
+        "indicator": "RSI",
+        "ticker": "AAPL",
+        "weeks_tracked": 1,
+        "first_week": 1,
+        "last_week": 1,
+        "mean_score": 3.9,
+        "score_range": 0.0
+      },
+      {
+        "indicator": "VWAP",
+        "ticker": "AAPL",
+        "weeks_tracked": 1,
+        "first_week": 1,
+        "last_week": 1,
+        "mean_score": 3.9,
+        "score_range": 0.0
+      },
+      {
+        "indicator": "EMA",
+        "ticker": "AAPL",
+        "weeks_tracked": 1,
+        "first_week": 1,
+        "last_week": 1,
+        "mean_score": 3.5,
+        "score_range": 0.0
+      },
+      {
+        "indicator": "MACD",
+        "ticker": "AAPL",
+        "weeks_tracked": 1,
+        "first_week": 1,
+        "last_week": 1,
+        "mean_score": 3.3,
+        "score_range": 0.0
+      }
+    ],
+    "methodology": [
+      "Signals are computed on the full price history, then sliced into train and test. No parameter is chosen using test-period data \u2014 the test half is measured once, never searched.",
+      "Positions are shifted forward one bar before returns are applied. A signal from Monday's close can only be traded at Monday's close, so the first return it can earn is Monday to Tuesday. Omitting this is the most common backtest error and is worth one to three points of Sharpe.",
+      "Costs are charged on turnover: |change in position| \u00d7 the per-side rate. A long-to-short flip pays twice.",
+      "Walk-forward windows train on three years and test on the following year, rolling forward annually. The consistency component uses the share of those windows that were positive, not their mean \u2014 a rule that earned everything in one year should not look steady.",
+      "The Survival Score is a weighted composite: 60% out-of-sample net Sharpe, 25% walk-forward consistency, 15% drawdown resilience, with hard caps for strategies that lost money or barely traded. Every constant is documented in scoring.py and can be changed and recomputed.",
+      "Universe uses current index membership, so companies delisted along the way are absent. This flatters absolute returns; it affects the in-sample versus out-of-sample comparison far less, which is why that comparison is the headline rather than the absolute figure."
+    ]
+  }
+}

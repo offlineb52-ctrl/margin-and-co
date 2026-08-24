@@ -22,3 +22,8 @@ site/dist/
 
 # Local upload artefacts
 *.zip
+
+# The score archive is a queryable log, rebuildable from the published JSON.
+# Committing a binary that changes every week would bloat the history; the
+# published reports remain the record of what was said and when.
+data/archive.db
