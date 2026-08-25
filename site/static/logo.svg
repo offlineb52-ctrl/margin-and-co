@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" role="img"
+     aria-label="Margin &amp; Co.">
+  <title>Margin &amp; Co.</title>
+  <!--
+    The wordmark, as vector rather than a raster export.
+
+    Small caps in a transitional serif, generous letter-spacing, and a
+    slightly larger ampersand — the proportions of the supplied artwork.
+    Kept as text rather than outlines so it stays selectable, searchable and
+    a few hundred bytes; `currentColor` lets one file serve both themes
+    instead of shipping a light and a dark PNG.
+  -->
+  <text x="360" y="118" text-anchor="middle" fill="currentColor"
+        font-family="'Source Serif 4','Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif"
+        font-size="86" font-weight="500" letter-spacing="1.5"
+        font-variant="small-caps">Margin<tspan font-size="78" dx="10" dy="0"> &amp; </tspan><tspan dx="-2">Co.</tspan></text>
+</svg>
