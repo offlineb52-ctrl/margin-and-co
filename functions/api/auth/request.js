@@ -53,9 +53,25 @@ async function sendLoginEmail(env, email, link, isNew) {
         to: [email], subject, text,
       }),
     });
-    return { ok: response.ok, reason: response.ok ? null : `http_${response.status}` };
+
+    if (response.ok) return { ok: true, reason: null };
+
+    // Read the provider's own error message. Without this, a rejected send
+    // is indistinguishable from a delivered one, and the only symptom is an
+    // email that never arrives.
+    let detail = "";
+    try {
+      const body = await response.json();
+      detail = body?.message || body?.error?.message || JSON.stringify(body);
+    } catch {
+      detail = await response.text().catch(() => "");
+    }
+
+    console.error("resend send failed", response.status, detail);
+    return { ok: false, reason: `http_${response.status}`, detail };
   } catch (err) {
-    return { ok: false, reason: "network" };
+    console.error("resend network error", err?.message);
+    return { ok: false, reason: "network", detail: err?.message || "" };
   }
 }
 
@@ -133,14 +149,35 @@ export async function onRequestPost({ request, env }) {
 
   const sent = await sendLoginEmail(env, email, link, !existing);
 
-  if (!sent.ok && sent.reason === "not_configured") {
+  if (!sent.ok) {
+    // Never claim an email is on its way when the provider refused it. The
+    // first version of this handler only special-cased a missing API key and
+    // showed "check your inbox" for every other failure -- so a rejected send
+    // looked identical to a successful one, and the only clue was an email
+    // that never arrived.
+    if (sent.reason === "not_configured") {
+      return page({
+        title: "Email not configured", eyebrow: "Sign in",
+        heading: "Sign-in email isn't switched on yet.",
+        body: `<p>The account was created, but no email provider is configured,
+               so the link could not be sent. This is a setup step the site
+               owner still has to complete — see <code>DEPLOY.md</code>.</p>`,
+        status: 503,
+      });
+    }
+
     return page({
-      title: "Email not configured", eyebrow: "Sign in",
-      heading: "Sign-in email isn't switched on yet.",
-      body: `<p>The account was created, but no email provider is configured,
-             so the link could not be sent. This is a setup step the site owner
-             still has to complete — see <code>DEPLOY.md</code>.</p>`,
-      status: 503,
+      title: "Couldn't send that", eyebrow: "Sign in",
+      heading: "I couldn't send the link.",
+      body: `<p>The email provider refused the message, so nothing is on its
+             way — telling you to check your inbox would have been a lie.</p>
+             <p>This is a fault at my end, not yours. Please try again in a
+             moment, or email
+             <a href="mailto:hello@marginco.co.uk">hello@marginco.co.uk</a>.</p>
+             <p class="meta">Reference: <code>${esc(sent.reason)}</code>${
+               sent.detail ? ` — <code>${esc(String(sent.detail).slice(0, 200))}</code>` : ""
+             }</p>`,
+      status: 502,
     });
   }
 
