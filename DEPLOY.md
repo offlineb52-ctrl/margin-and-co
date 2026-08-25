@@ -464,3 +464,39 @@ rather than pretending.
    arrives, accounts work end to end. If the page still says email is not
    switched on, the variable did not reach the deployment — check it is on the
    Production environment.
+
+### Two-factor authentication
+
+TOTP (RFC 6238), verified against the RFC 4226 test vectors — all ten counters
+match. No third-party library and no external service.
+
+**Enrolment is two steps on purpose.** `/api/auth/2fa/setup` generates a secret
+and stores it as *pending*; `/api/auth/2fa/enable` requires a working code
+before it becomes active. Activating on generation alone is how people lock
+themselves out of their own account after mistyping a secret.
+
+**No QR code.** Generating one normally means sending the `otpauth://` URI to
+an image service — handing the entire second factor to a third party and into
+their logs. Drawing one in-browser needs JavaScript, which this site does not
+ship. Enrolment shows the secret as text; every authenticator accepts manual
+entry, and the secret never leaves the page.
+
+**Replay protection.** The counter of each accepted code is recorded, and a
+counter at or below the last accepted one is refused. Without this a code is
+valid for its whole 30-second window and can be reused by anyone who sees it.
+
+**Login becomes two-stage.** A verified email link on a 2FA account issues a
+*pending* session — a real record, not a cookie flag, so a client cannot
+promote itself. It expires in 10 minutes and the members middleware refuses it.
+Only `/api/auth/2fa/challenge` can clear the flag.
+
+**Disabling needs a current code**, not just a live session. Otherwise a stolen
+session could remove the second factor, and it would only ever have been
+protecting the login form.
+
+**Recovery codes** are eight single-use codes, stored hashed and shown exactly
+once. The plaintext is cleared the moment it is displayed. Alphabet excludes
+l/1/o/0/i because these get written down.
+
+Rate limits: 10 attempts per 10 minutes on the challenge, on setup, and on
+disable. A six-digit code is a million possibilities — trivial without a limit.

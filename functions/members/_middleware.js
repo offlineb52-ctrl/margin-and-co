@@ -30,6 +30,23 @@ export async function onRequest(context) {
     });
   }
 
+  // A half-authenticated session must not reach members content. This is
+  // checked server-side against the stored session, not against anything the
+  // client holds, so the flag cannot be edited away in a cookie.
+  if (session.pending_2fa) {
+    return page({
+      title: "Two-factor required",
+      eyebrow: "Sign in",
+      heading: "One more step.",
+      status: 401,
+      body: `<p>Your email link checked out, but this account has two-factor
+             authentication switched on. Enter the code from your
+             authenticator to finish signing in.</p>`,
+      actions: `<p class="btn-row"><a class="btn btn--solid"
+                   href="/api/auth/2fa/challenge">Enter my code</a></p>`,
+    });
+  }
+
   // Make the signed-in member available to the page that runs next.
   data.member = session;
 

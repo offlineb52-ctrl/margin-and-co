@@ -8,7 +8,7 @@
 
 import { page, redirect } from "../../_lib/page.js";
 import {
-  consumeLoginToken, createSession, sessionCookie, upsertMember,
+  consumeLoginToken, createSession, sessionCookie, upsertMember, getMember,
 } from "../../_lib/auth.js";
 
 function invalid() {
@@ -33,8 +33,19 @@ export async function onRequestGet({ request, env }) {
   if (!email) return invalid();
 
   await upsertMember(env, email, { last_login_at: new Date().toISOString() });
-  const sessionId = await createSession(env, email);
 
-  // Straight to the members area, with the session cookie attached.
-  return redirect("/members/", { "set-cookie": sessionCookie(sessionId) });
+  // If the account has a second factor, the link alone is not enough. Issue a
+  // PENDING session and send them to the challenge -- the members middleware
+  // refuses anything else while that flag is set.
+  const member = await getMember(env, email);
+  const needsSecondFactor = Boolean(member?.totp_secret);
+
+  const sessionId = await createSession(env, email, {
+    pendingTwoFactor: needsSecondFactor,
+  });
+
+  return redirect(
+    needsSecondFactor ? "/api/auth/2fa/challenge" : "/members/",
+    { "set-cookie": sessionCookie(sessionId) }
+  );
 }

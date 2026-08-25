@@ -147,6 +147,7 @@ export async function onRequestGet({ request, data }) {
     signedIn: true,
     actions: `
       <form method="post" action="/api/auth/logout" class="btn-row">
+        <a class="btn" href="/members/security/">Security &amp; 2FA</a>
         <a class="btn" href="/live/">Public live page</a>
         <button class="btn" type="submit">Sign out</button>
       </form>`,

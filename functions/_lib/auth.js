@@ -27,6 +27,7 @@
 const TOKEN_BYTES = 32;                      // 256 bits of entropy
 const LOGIN_TOKEN_TTL_SECONDS = 15 * 60;     // magic links expire fast
 const SESSION_TTL_SECONDS = 30 * 24 * 60 * 60;
+const PENDING_TTL_SECONDS = 10 * 60;   // a half-authenticated session
 const SESSION_COOKIE = "mc_session";
 
 /** Cryptographically secure random identifier, URL-safe. */
@@ -113,13 +114,39 @@ export async function consumeLoginToken(env, token) {
 // Sessions
 // --------------------------------------------------------------------------
 
-export async function createSession(env, email) {
+/**
+ * Create a session.
+ *
+ * `pendingTwoFactor` marks a session that has proved the email link but not
+ * yet the second factor. It is a real session record rather than a flag in a
+ * cookie, because the client must not be able to promote itself by editing
+ * what it holds. The middleware refuses members content while it is set, and
+ * only the 2FA challenge can clear it.
+ *
+ * Pending sessions are short-lived: a half-authenticated session left open
+ * for thirty days is a worse thing to leave lying around than a login form.
+ */
+export async function createSession(env, email, { pendingTwoFactor = false } = {}) {
   const sessionId = randomToken();
   await env.AUTH.put(`session:${await hashToken(sessionId)}`, JSON.stringify({
     email,
     created_at: new Date().toISOString(),
-  }), { expirationTtl: SESSION_TTL_SECONDS });
+    pending_2fa: pendingTwoFactor,
+  }), { expirationTtl: pendingTwoFactor ? PENDING_TTL_SECONDS : SESSION_TTL_SECONDS });
   return sessionId;
+}
+
+/** Promote a pending session once the second factor has been supplied. */
+export async function promoteSession(env, request) {
+  const sessionId = readCookie(request, SESSION_COOKIE);
+  if (!sessionId) return false;
+  const key = `session:${await hashToken(sessionId)}`;
+  const session = await env.AUTH.get(key, { type: "json" });
+  if (!session) return false;
+
+  await env.AUTH.put(key, JSON.stringify({ ...session, pending_2fa: false }),
+                     { expirationTtl: SESSION_TTL_SECONDS });
+  return true;
 }
 
 export async function readSession(env, request) {
