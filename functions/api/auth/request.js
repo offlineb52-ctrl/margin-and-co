@@ -59,12 +59,26 @@ async function sendLoginEmail(env, email, link, isNew) {
     // Read the provider's own error message. Without this, a rejected send
     // is indistinguishable from a delivered one, and the only symptom is an
     // email that never arrives.
+    // Read the body ONCE, as text, then try to parse it.
+    //
+    // The previous version called response.json() and fell back to
+    // response.text() in a catch. A Response body is a stream that can only
+    // be consumed once, so the fallback threw "body has already been read"
+    // and took the whole Worker down with it -- a 502 instead of an error
+    // page. Worse, it only happened on the failure path, so a healthy-looking
+    // account got a 200 while a new one got a 502, which quietly turned the
+    // sign-in form into a membership oracle.
     let detail = "";
     try {
-      const body = await response.json();
-      detail = body?.message || body?.error?.message || JSON.stringify(body);
+      const raw = await response.text();
+      try {
+        const body = JSON.parse(raw);
+        detail = body?.message || body?.error?.message || raw;
+      } catch {
+        detail = raw;
+      }
     } catch {
-      detail = await response.text().catch(() => "");
+      detail = "";
     }
 
     console.error("resend send failed", response.status, detail);
