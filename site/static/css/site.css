@@ -221,8 +221,12 @@ hr { border: 0; border-top: 1px solid var(--rule); margin: 3rem 0; }
 .wordmark:hover { text-decoration: none; color: var(--accent); }
 .wordmark span { color: var(--accent); }
 
-.site-nav { display: flex; gap: 1.75rem; font-size: .875rem; font-weight: 500; }
-.site-nav a { color: var(--ink-muted); }
+/* `flex-wrap` lets the row reflow to a second line on narrow screens, but
+   each link must stay on one line: without nowrap a two-word item like
+   "Score a stock" breaks mid-label and stacks one word per line. */
+.site-nav { display: flex; flex-wrap: wrap; gap: 1rem 1.75rem;
+            font-size: .875rem; font-weight: 500; }
+.site-nav a { color: var(--ink-muted); white-space: nowrap; }
 .site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--ink); text-decoration: none; }
 .site-nav a[aria-current="page"] { box-shadow: inset 0 -2px 0 var(--accent); }
 
