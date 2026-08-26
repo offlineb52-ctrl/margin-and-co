@@ -841,11 +841,16 @@ class Builder:
         meta, body = raw.split("<!--/meta-->", 1)
         fields = dict(re.findall(r"(\w+):\s*(.+)", meta))
 
+        # The body is rendered first, on its own. render() inserts a value
+        # verbatim rather than re-scanning it, so a {{ repo_url }} written
+        # inside a content file would otherwise survive into the published
+        # page as literal braces.
         content = render(load_template("page.html"),
                          eyebrow=fields.get("eyebrow", ""),
                          heading=fields.get("heading", name.title()),
                          lede=fields.get("lede", ""),
-                         body=body.strip())
+                         body=render(body.strip(),
+                                     repo_url=site_config.REPO_URL))
         return self.shell(content, path=f"{name}/",
                           title=fields.get("title", name.title()),
                           description=fields.get("description", site_config.DESCRIPTION),
