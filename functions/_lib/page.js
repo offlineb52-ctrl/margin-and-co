@@ -79,7 +79,7 @@ export function page({
 </main>
 <footer class="site-footer">
   <div class="wrap site-footer__base">
-    <span>&copy; ${new Date().getFullYear()} Adam Benghalia. Research, not investment advice.
+    <span>&copy; ${new Date().getFullYear()} Margin &amp; Co. Research, not investment advice.
       &middot; <a href="/terms/">Terms</a> &middot; <a href="/privacy/">Privacy</a></span>
   </div>
 </footer>

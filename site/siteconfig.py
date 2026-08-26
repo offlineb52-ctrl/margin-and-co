@@ -14,7 +14,7 @@ there is no second place to forget.
 DOMAIN = "https://marginco.co.uk"
 
 SITE_NAME = "Margin & Co."
-AUTHOR = "Adam Benghalia"
+AUTHOR = "Margin & Co."
 TAGLINE = "Testing whether popular trading indicators survive realistic trading costs."
 
 DESCRIPTION = (
