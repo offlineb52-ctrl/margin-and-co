@@ -45,8 +45,20 @@ import siteconfig as site_config  # noqa: E402
 # inserted, so `siteconfig` above still resolves before the root's `config`.
 sys.path.append(str(PROJECT_ROOT))
 
-import archive  # noqa: E402
 from reports import lookup  # noqa: E402
+
+# The archive is optional at build time.
+#
+# Cloudflare runs `python site/build.py` with no dependency install, so the
+# build image has the standard library and nothing else. `archive` imports
+# pandas, so on that image this import fails -- and a bare `import archive` at
+# module scope would abort the whole site build. A local build has pandas and
+# takes the branch that writes the Pro lookup files; the Cloudflare build
+# quietly skips them, exactly as it already skips the Pro report.
+try:
+    import archive  # noqa: E402
+except ImportError:                                     # pragma: no cover
+    archive = None
 
 TEMPLATE_DIR = SITE_DIR / "templates"
 CONTENT_DIR = SITE_DIR / "content"
@@ -999,7 +1011,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     # Pro lookup history needs the archive, which is gitignored, so this runs
     # only in a local build -- exactly like the Pro report above. A Cloudflare
     # build produces a site without it.
-    if archive.DB_PATH.exists():
+    if archive is not None and archive.DB_PATH.exists():
         try:
             result = lookup.export_pro(DIST / "members" / "data" / "scores")
             print(f"  members/data/scores/ ({result['tickers']} tickers, gated)")

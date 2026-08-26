@@ -36,10 +36,15 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-import pandas as pd
-
-import archive
-from reports.data import _clean
+# pandas, numpy and the archive are imported INSIDE the functions that need
+# them, not here.
+#
+# Cloudflare builds the site by running `python site/build.py` with no
+# dependency install step, so the build image has only the standard library.
+# The build-time path -- explode() -- needs nothing more than json, and must
+# keep it that way: importing pandas at module scope makes `import lookup`
+# fail on the build image and takes the whole site deploy down with it, which
+# is exactly what happened once.
 
 SCHEMA_VERSION = 1
 
@@ -59,7 +64,9 @@ PRO_FIELDS = [
 ]
 
 
-def _pick(row: pd.Series, fields: List[str]) -> Dict[str, Any]:
+def _pick(row, fields: List[str]) -> Dict[str, Any]:
+    """Pull the named fields off an archive row, JSON-safe."""
+    from reports.data import _clean
     return _clean({f: row[f] for f in fields if f in row.index})
 
 
@@ -74,6 +81,9 @@ def export_public(outfile: Path, week: Optional[int] = None,
     This is the only score data that reaches the public repository, so it is
     also the only thing the deployed tool can serve to a free visitor.
     """
+    import archive
+    from reports.data import _clean
+
     week = week or archive.latest_week(path=path)
     if week is None:
         raise ValueError("no weeks recorded -- run run_scores.py first")
@@ -156,6 +166,9 @@ def export_pro(outdir: Path, week: Optional[int] = None,
     to the members-only build output, exactly like the Pro report: it is
     generated locally and deployed, and never passes through git.
     """
+    import archive
+    from reports.data import _clean
+
     week = week or archive.latest_week(path=path)
     if week is None:
         raise ValueError("no weeks recorded")
