@@ -345,6 +345,15 @@ tr.is-benchmark td:first-child { font-style: normal; }
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 
+/* A row header carries the same weight as the first cell in the tables the
+   build emits, so a `th scope="row"` table looks identical to a `td` one.
+   Row headers are the correct markup; this keeps them from looking wrong. */
+tbody th { padding: .82rem 1rem; text-align: left; font-weight: 600;
+           color: var(--ink); white-space: nowrap;
+           border-bottom: 1px solid var(--rule); }
+tbody tr:last-child th { border-bottom: 0; }
+tbody tr:hover th { background: var(--surface-sunk); }
+
 .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
 tbody td { white-space: nowrap; }
 .num--pos { color: var(--positive); font-weight: 600; }
@@ -539,4 +548,33 @@ pre code { background: none; border: 0; padding: 0; }
 .subscribe__trap {
   position: absolute; left: -9999px; width: 1px; height: 1px;
   overflow: hidden;
+}
+
+
+/* --------------------------------------------------------------------------
+   13. Lookup tool
+   -------------------------------------------------------------------------- */
+
+.lookup { display: flex; flex-wrap: wrap; align-items: flex-end; gap: .75rem;
+          margin-block: 1.75rem 0.75rem; }
+.lookup label {
+  flex-basis: 100%; font-size: var(--step-1); font-weight: 600;
+  letter-spacing: .045em; text-transform: uppercase; color: var(--ink-muted);
+}
+.lookup input {
+  flex: 0 1 11rem; padding: .7rem .85rem; font: inherit; font-size: 1rem;
+  text-transform: uppercase; letter-spacing: .06em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink); background: var(--surface);
+  border: 1px solid var(--rule-strong); border-radius: 2px;
+}
+.lookup input::placeholder { color: var(--ink-muted); opacity: .6;
+                             letter-spacing: .06em; }
+.lookup input:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 1px;
+}
+.lookup button { flex: 0 0 auto; }
+
+@media (max-width: 26rem) {
+  .lookup input, .lookup button { flex: 1 1 100%; }
 }

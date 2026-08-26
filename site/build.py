@@ -41,6 +41,13 @@ sys.path.insert(0, str(SITE_DIR))
 
 import siteconfig as site_config  # noqa: E402
 
+# The research package lives at the project root. Appended rather than
+# inserted, so `siteconfig` above still resolves before the root's `config`.
+sys.path.append(str(PROJECT_ROOT))
+
+import archive  # noqa: E402
+from reports import lookup  # noqa: E402
+
 TEMPLATE_DIR = SITE_DIR / "templates"
 CONTENT_DIR = SITE_DIR / "content"
 STATIC_DIR = SITE_DIR / "static"
@@ -541,6 +548,7 @@ class Builder:
             content=content,
             head_extra=head_extra,
             nav_home=current if nav == "home" else "",
+            nav_tool=current if nav == "tool" else "",
             nav_live=current if nav == "live" else "",
             nav_join=current if nav == "join" else "",
             nav_reports=current if nav == "reports" else "",
@@ -969,6 +977,35 @@ def main(argv: Optional[List[str]] = None) -> int:
             shutil.copy2(pro_csv[-1], members_data / pro_csv[-1].name)
         print(f"  members/data/ (latest Pro report + CSV, gated)")
 
+    # ----------------------------------------------------------------
+    # Lookup tool data.
+    #
+    # The free dataset is one committed file, exploded here into one small
+    # file per ticker so a lookup costs a single small fetch. It lands under
+    # /internal/, which functions/internal/_middleware.js refuses to serve:
+    # free lookups are metered, and a file a browser can fetch directly
+    # cannot be metered. The tool Function reads it through the ASSETS
+    # binding, which bypasses that middleware.
+    # ----------------------------------------------------------------
+    public_scores = PROJECT_ROOT / "data" / "public_scores.json"
+    if public_scores.exists():
+        result = lookup.explode(public_scores, DIST / "internal" / "scores")
+        print(f"  internal/scores/ ({result['tickers']} tickers, "
+              f"week {result['week']}, metered)")
+    else:
+        print("  internal/scores/ SKIPPED -- data/public_scores.json missing; "
+              "regenerate it with `python run_scores.py --export-lookup`")
+
+    # Pro lookup history needs the archive, which is gitignored, so this runs
+    # only in a local build -- exactly like the Pro report above. A Cloudflare
+    # build produces a site without it.
+    if archive.DB_PATH.exists():
+        try:
+            result = lookup.export_pro(DIST / "members" / "data" / "scores")
+            print(f"  members/data/scores/ ({result['tickers']} tickers, gated)")
+        except ValueError as exc:
+            print(f"  members/data/scores/ SKIPPED -- {exc}")
+
     # Free report: public by design. The week's conclusion belongs in the open.
     free_files = sorted(REPORT_SOURCE.glob("week*_free.json"))
     if free_files:
@@ -1011,7 +1048,11 @@ def main(argv: Optional[List[str]] = None) -> int:
     (DIST / "robots.txt").write_text(
         f"User-agent: *\nAllow: /\n\nSitemap: {builder.domain}{builder.root}sitemap.xml\n",
         encoding="utf-8")
-    write_sitemap(builder.pages, builder.domain, DIST / "sitemap.xml")
+    # /tool/ is rendered by a Function, not written to dist, so the crawl of
+    # built pages never sees it. It is the site's most useful public page, so
+    # it is added by hand rather than left out of the sitemap.
+    sitemap_pages = builder.pages + [f"{builder.root}tool/"]
+    write_sitemap(sitemap_pages, builder.domain, DIST / "sitemap.xml")
 
     # GitHub Pages reads CNAME to attach a custom domain. Cloudflare Pages and
     # Netlify ignore the file, so writing it always is harmless.

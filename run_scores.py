@@ -19,11 +19,12 @@ from typing import List
 
 import archive
 import scoring
-from config import DEFAULT_COSTS, FTSE350_SAMPLE, SMOKE_TEST_TICKERS, SP500_SAMPLE
+from config import (DEFAULT_COSTS, FTSE350_SAMPLE, PROJECT_ROOT,
+                    SMOKE_TEST_TICKERS, SP500_SAMPLE)
 from data import universe as universe_lists
 from data.loader import load_universe
 from indicators import INDICATORS
-from reports import tiers
+from reports import lookup, tiers
 
 UNIVERSES = {
     "smoke": lambda: SMOKE_TEST_TICKERS,
@@ -40,6 +41,10 @@ def main(argv: List[str] | None = None) -> int:
     parser.add_argument("--overwrite", action="store_true",
                         help="replace an already-recorded week (changes history)")
     parser.add_argument("--notes", default="")
+    parser.add_argument(
+        "--export-lookup", action="store_true",
+        help="also refresh data/public_scores.json, the committed "
+             "dataset the self-serve tool serves to free visitors")
     args = parser.parse_args(argv)
 
     tickers = UNIVERSES[args.universe]()
@@ -89,6 +94,16 @@ def main(argv: List[str] | None = None) -> int:
     for report in (free, pro):
         for kind, path in tiers.write_report(report).items():
             print(f"      {report.tier:4} {kind}: {path.name}")
+
+    if args.export_lookup:
+        # The site is rebuilt by Cloudflare from the repository, which has no
+        # copy of the archive, so the tool can only serve what is committed.
+        # Refreshing this file is what makes a new week visible in the tool.
+        out = PROJECT_ROOT / "data" / "public_scores.json"
+        summary = lookup.export_public(out, week=args.week)
+        print(f"\n[5/5] Lookup dataset: {summary['tickers']} tickers, "
+              f"{summary['bytes'] / 1024:.0f} KB -> {out.name}")
+        print("      commit this file, or the tool keeps serving last week.")
 
     print(f"\nHeadline: {free.headline}")
     return 0

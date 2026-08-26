@@ -17,6 +17,7 @@ PY=".venv/bin/python"
 
 echo "==> Sanity checks"
 "$PY" -m tests.test_indicators | tail -2
+"$PY" -m tests.test_lookup | tail -2
 
 echo
 echo "==> Running week $WEEK"

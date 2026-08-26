@@ -38,6 +38,7 @@ export function nav(signedIn = false) {
   return `
     <nav class="site-nav" aria-label="Primary">
       <a href="/">Latest</a>
+      <a href="/tool/">Score a stock</a>
       <a href="/live/">Live</a>
       <a href="/reports/">Archive</a>
       <a href="/methodology/">Methodology</a>
@@ -50,6 +51,11 @@ export function nav(signedIn = false) {
 export function page({
   title, heading, eyebrow = "", body, status = 200,
   headers = {}, signedIn = false, actions = "",
+  // Worker-rendered pages are members-only by default, hence noindex. The
+  // lookup tool is the exception: it is public, and it is the page the site
+  // most wants found. Pass robots: "index, follow" for those.
+  robots = "noindex, nofollow",
+  description = "",
 }) {
   const html = `<!doctype html>
 <html lang="en-GB">
@@ -57,7 +63,8 @@ export function page({
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)} — Margin &amp; Co.</title>
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="${esc(robots)}">
+${description ? `<meta name="description" content="${esc(description)}">` : ""}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
