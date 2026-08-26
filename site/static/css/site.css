@@ -582,3 +582,32 @@ pre code { background: none; border: 0; padding: 0; }
 @media (max-width: 26rem) {
   .lookup input, .lookup button { flex: 1 1 100%; }
 }
+
+/* Score sparklines in the Pro history table. Drawn as inline SVG because the
+   site ships no JavaScript; colours come from the theme so the line reads in
+   both the light and dark palettes. */
+.spark { display: block; overflow: visible; }
+.spark__line { stroke: var(--accent); stroke-width: 1.5;
+               stroke-linecap: round; stroke-linejoin: round; }
+.spark__base { stroke: var(--rule); stroke-width: 1; }
+.spark__last { fill: var(--accent); }
+
+/* A sparkline cell is a picture, not a number: it should not be pushed right
+   with the figures, and it needs room to breathe. */
+tbody td:has(.spark) { text-align: left; padding-block: .5rem; }
+
+/* A disclosure for the secondary sign-in route. `<details>` is used rather
+   than a toggle script because the site ships no JavaScript: the browser
+   opens and closes this on its own, and it still works with none. */
+.reveal { margin-block: 1.5rem; border-top: 1px solid var(--rule);
+          padding-top: 1.25rem; }
+.reveal > summary {
+  cursor: pointer; font-size: .875rem; font-weight: 500;
+  color: var(--ink-muted); list-style: none;
+}
+.reveal > summary::-webkit-details-marker { display: none; }
+.reveal > summary::before { content: "+ "; color: var(--accent); font-weight: 600; }
+.reveal[open] > summary::before { content: "− "; }
+.reveal > summary:hover { color: var(--ink); }
+.reveal > summary:focus-visible { outline: 2px solid var(--accent);
+                                  outline-offset: 3px; }

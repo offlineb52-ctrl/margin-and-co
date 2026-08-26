@@ -1,8 +1,8 @@
 title: Sign in
 eyebrow: Members
 heading: Sign in.
-lede: Enter your email address and a single-use link will arrive. No password — there isn't one to forget, reuse, or have stolen.
-description: Sign in to Margin & Co. with a single-use email link.
+lede: Enter your email address and a single-use link will arrive. No password needed — though you can set one if you prefer.
+description: Sign in to Margin & Co. with a single-use email link, or with a password if you have set one.
 <!--/meta-->
 
 <form class="subscribe" method="post" action="/api/auth/request">
@@ -20,6 +20,38 @@ description: Sign in to Margin & Co. with a single-use email link.
   </div>
 </form>
 
+<details class="reveal" id="password">
+  <summary>Sign in with a password instead</summary>
+
+  <p class="meta">Only works if you have set one from your account's security
+     settings. Accounts here have no password unless you add one.</p>
+
+  <form class="subscribe" method="post" action="/api/auth/password/signin">
+    <div class="subscribe__trap" aria-hidden="true">
+      <label for="pw-website">Leave this field empty</label>
+      <input type="text" id="pw-website" name="website" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="subscribe__row">
+      <label class="subscribe__label" for="pw-email">Email address</label>
+      <input class="subscribe__input" type="email" id="pw-email" name="email"
+             required maxlength="254" autocomplete="email"
+             placeholder="you@example.com">
+    </div>
+
+    <div class="subscribe__row">
+      <label class="subscribe__label" for="pw-password">Password</label>
+      <input class="subscribe__input" type="password" id="pw-password"
+             name="password" required maxlength="128"
+             autocomplete="current-password">
+      <button class="btn btn--solid" type="submit">Sign in</button>
+    </div>
+  </form>
+
+  <p class="meta">Forgotten it? Use the emailed link above — it always works,
+     then set a new password from your security settings.</p>
+</details>
+
 <div class="prose">
 
 <div class="note">
@@ -31,6 +63,10 @@ description: Sign in to Margin & Co. with a single-use email link.
 
 <p>Links last fifteen minutes and work once. If one expires, just ask for
    another — it costs nothing and there is no lockout.</p>
+
+<p>A password is optional here, and it is off until you turn it on. The link
+   above works whether or not you have one, so a forgotten password never
+   locks you out of your own account.</p>
 
 <p>Not a member yet? <a href="../join/">Create an account</a> — it is free.</p>
 

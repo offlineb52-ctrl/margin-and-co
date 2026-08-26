@@ -256,6 +256,110 @@ function componentTable(data) {
     </div>`;
 }
 
+/**
+ * A score's path over the weeks, drawn as inline SVG.
+ *
+ * SVG rather than a chart library because the page runs under
+ * `script-src 'none'` -- there is no JavaScript to draw with, and this needs
+ * none. The axis is fixed to the full 0-10 range rather than scaled to the
+ * data: auto-scaling would make a drift from 3.4 to 3.6 look like a cliff,
+ * which is exactly the kind of flattering distortion this project exists to
+ * avoid.
+ */
+function sparkline(series) {
+  const points = series.filter((p) => typeof p.score === "number");
+  if (points.length < 2) return "";
+
+  const W = 168, H = 40, PAD = 3;
+  const step = (W - PAD * 2) / (points.length - 1);
+  const y = (score) => H - PAD - (score / 10) * (H - PAD * 2);
+
+  const path = points
+    .map((p, i) => `${i === 0 ? "M" : "L"}${(PAD + i * step).toFixed(1)},${y(p.score).toFixed(1)}`)
+    .join(" ");
+  const last = points[points.length - 1];
+  const first = points[0];
+  const direction = last.score > first.score ? "rose"
+                  : last.score < first.score ? "fell" : "held";
+
+  return `
+    <svg class="spark" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}"
+         role="img" aria-label="Score ${direction} from ${first.score.toFixed(1)}
+         to ${last.score.toFixed(1)} over ${points.length} weeks, on a 0 to 10 axis.">
+      <line x1="${PAD}" y1="${y(0).toFixed(1)}" x2="${W - PAD}" y2="${y(0).toFixed(1)}"
+            class="spark__base"/>
+      <path d="${path}" class="spark__line" fill="none"/>
+      <circle cx="${(PAD + (points.length - 1) * step).toFixed(1)}"
+              cy="${y(last.score).toFixed(1)}" r="2.5" class="spark__last"/>
+    </svg>`;
+}
+
+/** The Pro block: what the score has done, not just where it stands. */
+function historySection(ticker, pro) {
+  const order = ["EMA", "VWAP", "MACD", "RSI"];
+  const history = pro.history || {};
+  const names = Object.keys(history)
+    .filter((k) => (history[k] || []).length)
+    .sort((a, b) => order.indexOf(a) - order.indexOf(b));
+
+  if (!names.length) {
+    return `
+      <h2>Score history</h2>
+      <p>Nothing to plot yet — a trend needs more than one published week.
+         This fills in as the weeks accumulate.</p>`;
+  }
+
+  const weeks = Math.max(...names.map((n) => history[n].length));
+  if (weeks < 2) {
+    return `
+      <h2>Score history</h2>
+      <p>Only one week is on record so far, so there is no trend to show yet.
+         Whether a score drifts is the question worth asking, and it needs at
+         least two.</p>`;
+  }
+
+  const rows = names.map((name) => {
+    const series = history[name];
+    const first = series[0];
+    const last = series[series.length - 1];
+    const change = (typeof last.score === "number"
+                    && typeof first.score === "number")
+      ? last.score - first.score : null;
+    const changeText = change === null ? "—"
+      : change === 0 ? "no change"
+      : `${change > 0 ? "+" : ""}${change.toFixed(1)}`;
+    return `
+      <tr>
+        <th scope="row">${esc(name)}</th>
+        <td>${sparkline(series)}</td>
+        <td class="num">${fmt(first.score, 1)}</td>
+        <td class="num">${fmt(last.score, 1)}</td>
+        <td class="num">${esc(changeText)}</td>
+      </tr>`;
+  }).join("");
+
+  return `
+    <h2>Score history</h2>
+    <p>Where a score is going matters more than where it stands. Every line is
+       drawn on the same fixed 0–10 axis, so a small drift looks small.</p>
+    <div class="table-scroll">
+      <table>
+        <caption class="visually-hidden">Survival Score history for
+          ${esc(ticker)} across ${weeks} published weeks.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Indicator</th>
+            <th scope="col">Trend<br><span class="meta">0–10 axis</span></th>
+            <th scope="col">First</th>
+            <th scope="col">Latest</th>
+            <th scope="col">Change</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
 const DISCLAIMER = `
   <div class="note note--flag">
     <p><strong>This is not a recommendation.</strong> A Survival Score says
@@ -416,18 +520,34 @@ export async function onRequestGet(context) {
           ${fmt(best.score, 1)} out of 10.` : ""} That is the usual answer,
           and it is the point of publishing it.</p>`;
 
-  const proBlock = quota.tier === "pro"
-    ? `<h2>Pro</h2>
-       <p class="btn-row">
-         <a class="btn" href="/members/pro/">Full ranked table</a>
-         <a class="btn" href="/members/data/scores/${esc(ticker)}.json">Raw data</a>
-       </p>`
-    : `<div class="note">
-         <p><strong>Pro adds the history.</strong> Whether ${esc(data.ticker)}'s
-            score is drifting week to week matters more than where it stands
-            today, and one week cannot show it.
-            <a href="/members/">What Pro includes</a>.</p>
-       </div>`;
+  // Pro members get the score's path over time and the full working as a CSV.
+  // The gated file is read through ASSETS, which bypasses the /members/ gate,
+  // so access is decided here by the member record rather than by the path.
+  let proBlock;
+  if (quota.tier === "pro") {
+    const pro = await readInternal(env, url,
+                                   `/members/data/scores/${ticker}.json`);
+    proBlock = `
+      ${pro ? historySection(data.ticker, pro) : ""}
+      <h2>The working</h2>
+      <p>The full numbers behind these scores, including gross Sharpe, the
+         caps applied and every recorded week, as a CSV you can check
+         yourself.</p>
+      <p class="btn-row">
+        <a class="btn btn--solid" href="/tool/export?ticker=${encodeURIComponent(ticker)}"
+          >Download ${esc(ticker)} as CSV</a>
+        <a class="btn" href="/members/pro/">Full ranked table</a>
+      </p>`;
+  } else {
+    proBlock = `
+      <div class="note">
+        <p><strong>Pro adds the history.</strong> Whether ${esc(data.ticker)}'s
+           score is drifting week to week matters more than where it stands
+           today, and one week cannot show it. Pro also exports the full
+           working as a CSV, so you can check the arithmetic rather than take
+           it on trust. <a href="/members/">What Pro includes</a>.</p>
+      </div>`;
+  }
 
   return page({
     title: `${ticker} Survival Score`,

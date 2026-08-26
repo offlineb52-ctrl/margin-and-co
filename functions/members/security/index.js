@@ -11,6 +11,7 @@
 import { page, esc } from "../../_lib/page.js";
 import { getMember, upsertMember } from "../../_lib/auth.js";
 import { formatSecret, otpauthUri } from "../../_lib/totp.js";
+import { passwordsAvailable } from "../../_lib/password.js";
 
 export async function onRequestGet({ request, env, data }) {
   const email = data?.member?.email || "";
@@ -121,6 +122,101 @@ export async function onRequestGet({ request, env, data }) {
           <button class="btn btn--solid" type="submit">Set up two-factor</button>
         </p>
       </form>`;
+  }
+
+  // ----------------------------------------------------------------
+  // Password: optional, and off unless the member turns it on.
+  // ----------------------------------------------------------------
+  if (passwordsAvailable(env)) {
+    const hasPassword = Boolean(member?.password_hash);
+    const setAt = member?.password_set_at;
+
+    body += `
+      <h2>Password</h2>
+      <p>Accounts here sign in with an emailed link and need no password. You
+         can add one if you would rather type a password than wait for an
+         email. Both then work, and the link keeps working either way — so a
+         forgotten password cannot lock you out.</p>`;
+
+    if (hasPassword) {
+      body += `
+        <div class="note">
+          <p><strong>A password is set on this account.</strong>${setAt
+            ? ` Last changed ${esc(String(setAt).slice(0, 10))}.` : ""}</p>
+        </div>
+
+        <h3>Change it</h3>
+        <form class="subscribe" method="post" action="/api/auth/password/set">
+          <input type="hidden" name="action" value="set">
+          <div class="subscribe__row">
+            <label class="subscribe__label" for="current">Current password</label>
+            <input class="subscribe__input" type="password" id="current"
+                   name="current" required maxlength="128"
+                   autocomplete="current-password">
+          </div>
+          <div class="subscribe__row">
+            <label class="subscribe__label" for="new-password">New password</label>
+            <input class="subscribe__input" type="password" id="new-password"
+                   name="password" required minlength="12" maxlength="128"
+                   autocomplete="new-password">
+          </div>
+          <div class="subscribe__row">
+            <label class="subscribe__label" for="confirm">Confirm new password</label>
+            <input class="subscribe__input" type="password" id="confirm"
+                   name="confirm" required minlength="12" maxlength="128"
+                   autocomplete="new-password">
+            <button class="btn btn--solid" type="submit">Change password</button>
+          </div>
+        </form>
+
+        <h3>Remove it</h3>
+        <p>Removing the password returns this account to emailed links only.
+           Nothing is lost, and there is then no password on the account for
+           anyone to guess.</p>
+        <form class="subscribe" method="post" action="/api/auth/password/set">
+          <input type="hidden" name="action" value="remove">
+          <div class="subscribe__row">
+            <label class="subscribe__label" for="remove-current">Current password</label>
+            <input class="subscribe__input" type="password" id="remove-current"
+                   name="current" required maxlength="128"
+                   autocomplete="current-password">
+            <button class="btn" type="submit">Remove password</button>
+          </div>
+        </form>`;
+    } else {
+      body += `
+        <form class="subscribe" method="post" action="/api/auth/password/set">
+          <input type="hidden" name="action" value="set">
+          <div class="subscribe__row">
+            <label class="subscribe__label" for="new-password">New password</label>
+            <input class="subscribe__input" type="password" id="new-password"
+                   name="password" required minlength="12" maxlength="128"
+                   autocomplete="new-password">
+          </div>
+          <div class="subscribe__row">
+            <label class="subscribe__label" for="confirm">Confirm password</label>
+            <input class="subscribe__input" type="password" id="confirm"
+                   name="confirm" required minlength="12" maxlength="128"
+                   autocomplete="new-password">
+            <button class="btn btn--solid" type="submit">Set a password</button>
+          </div>
+        </form>
+
+        <p class="meta">At least 12 characters. Length matters far more than
+           punctuation — three or four unrelated words beat a short jumble of
+           symbols, and are easier to remember.</p>`;
+    }
+
+    body += `
+      <div class="note">
+        <p><strong>How it is stored.</strong> Never in readable form. Your
+           password is combined with a secret key held outside the account
+           store, then put through 25,000 rounds of PBKDF2 with a random salt
+           unique to you. The round count is limited by what this site's
+           hosting plan allows for a single request; the separate secret key
+           is what makes a copy of the account store useless on its own.
+           <a href="/privacy/">The privacy policy</a> says what is kept.</p>
+      </div>`;
   }
 
   // Recovery codes are held in the clear only long enough to display them

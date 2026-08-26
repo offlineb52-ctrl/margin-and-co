@@ -367,6 +367,25 @@ join date, last login. Nothing else.
 
 **KV namespace** `marginco-auth`, bound as `AUTH` on the Pages project.
 
+**Environment variable** `PASSWORD_PEPPER` — needed only for optional
+password sign-in. Until it is set, password sign-in answers 503 and the
+password section does not appear in a member's security settings; emailed
+links are unaffected, so the site works fine without it.
+
+Generate a value and add it under **Pages → Settings → Variables and secrets**
+as an encrypted **Secret** (never a plaintext variable):
+
+```
+openssl rand -base64 32
+```
+
+Two things about this key. It must live in Cloudflare's secret store and NOT
+in the `AUTH` KV namespace — the whole point is that a copy of the account
+store is useless without it, which stops being true the moment they sit
+together. And **it cannot be rotated without invalidating every password**:
+change it and existing passwords stop verifying, and each member would have to
+sign in with an emailed link and set a new one. Keep a copy somewhere safe.
+
 **Environment variable** `RESEND_API_KEY` — needed to send sign-in emails.
 Cloudflare Email Routing can receive mail but cannot send it, so an outbound
 provider is required. [Resend](https://resend.com) has a free tier of 3,000

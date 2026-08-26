@@ -51,9 +51,15 @@ interests.</p>
 <h3>If you create a members account</h3>
 
 <p>Your email address, the date the account was created, and your membership
-tier. Sign-in is passwordless: you enter your email, a single-use link is sent
-to it, and following that link signs you in. No password is ever created, so
-none can be stored or stolen.</p>
+tier. Sign-in is passwordless by default: you enter your email, a single-use
+link is sent to it, and following that link signs you in.</p>
+
+<p>You may optionally set a password, and nothing happens until you choose to.
+If you do, what is stored is never the password itself. It is combined with a
+secret key held outside the account store, then put through 25,000 rounds of
+PBKDF2 with a random salt unique to you, and only that result is kept. The
+password cannot be read back out of it, by anyone, including me. Removing the
+password from your security settings deletes it.</p>
 
 <p>If you switch on two-factor authentication, a secret used to verify your
 authenticator app's six-digit codes is stored alongside the account. It is
@@ -128,11 +134,19 @@ Office</a>. I would rather you told me first so I can fix it.</p>
 <h2>Security</h2>
 
 <p>The site is served over HTTPS only, with HSTS, a strict Content Security
-Policy that forbids JavaScript entirely, and clickjacking protections. No
-passwords are stored, because sign-in is passwordless by design — there is no
-password database to breach. Sign-in links and session identifiers are stored
-hashed, so the stored copy cannot be used to sign in as you. There is no
-payment processing on this site.</p>
+Policy that forbids JavaScript entirely, and clickjacking protections. Sign-in
+links and session identifiers are stored hashed, so the stored copy cannot be
+used to sign in as you. There is no payment processing on this site.</p>
+
+<p>Accounts are passwordless unless you choose otherwise, so for most accounts
+there is no password to steal. Where one has been set, it is salted, stretched
+and combined with a key kept outside the account store, so a copy of that store
+would not be enough to work out anyone's password. Password sign-in attempts
+are rate limited, which is what stops a stolen address being guessed against
+at speed. In the interest of being straight about it: the number of hashing
+rounds is lower than the current OWASP recommendation, because this site runs
+on a hosting plan that caps how long a single request may compute for. The
+separate secret key is what carries that weight instead.</p>
 
 <p>No system is perfectly secure. If you find a vulnerability, please email
 <a href="mailto:hello@marginco.co.uk">hello@marginco.co.uk</a> — you will get
