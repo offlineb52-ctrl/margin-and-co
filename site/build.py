@@ -1095,7 +1095,14 @@ def main(argv: Optional[List[str]] = None) -> int:
         # Unhashed, and referenced by the Function's pages. Must revalidate.
         "/css/site.css\n  Cache-Control: public, max-age=300\n"
         # Week-scoped filenames, genuinely immutable once published.
-        "/reports/week-*/*.png\n  Cache-Control: public, max-age=31536000, immutable\n"
+        #
+        # A named placeholder, not a second wildcard: Cloudflare allows one
+        # wildcard per rule and SKIPS any rule with two, silently. The old
+        # `/reports/week-*/*.png` was therefore never applied, and every
+        # published chart fell through to the catch-all with no cache headers
+        # at all. `:week` matches one path segment, which is exactly the
+        # week-01, week-02 directory it needs to match.
+        "/reports/:week/*.png\n  Cache-Control: public, max-age=31536000, immutable\n"
         # The live portfolio chart is REGENERATED DAILY under the same name.
         # Caching it immutably would freeze the published track record.
         "/live/*.png\n  Cache-Control: public, max-age=300\n"
