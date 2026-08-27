@@ -265,6 +265,34 @@ def _week_in_review(scores: pd.DataFrame,
         "median_score_change": round(review["median_score"] - prev_median, 2),
     }
 
+    # How far apart the two runs actually are.
+    #
+    # A repeat rate only means something if the second test saw meaningfully
+    # new data. Two runs three days apart share almost their whole window, so
+    # "10 of 12 survived again" is close to arithmetic rather than evidence.
+    # Reporting the repeat rate without this is the sort of number that reads
+    # as confirmation and is not.
+    gap_days = None
+    try:
+        prev_published = str(previous["published"].iloc[0])
+        now_published = str(scores["published"].iloc[0]) if "published" in scores.columns else None
+        if now_published:
+            gap_days = (dt.date.fromisoformat(now_published)
+                        - dt.date.fromisoformat(prev_published)).days
+    except Exception:
+        gap_days = None
+    review["change"]["days_since_last_run"] = gap_days
+
+    overlap_caveat = ""
+    if gap_days is not None and gap_days < 7:
+        overlap_caveat = (
+            f" These two runs are only {gap_days} day"
+            f"{'' if gap_days == 1 else 's'} apart, so they were scored on "
+            f"almost the same data. A combination repeating across windows "
+            f"that overlap this heavily is close to arithmetic rather than "
+            f"evidence, and this comparison should not be read as one until "
+            f"the runs are a full week apart.")
+
     if not prev_pairs:
         note = ("Nothing survived last week, so there was nothing that could "
                 "repeat.")
@@ -278,7 +306,7 @@ def _week_in_review(scores: pd.DataFrame,
                 f"survived again. Repeating twice is weak evidence, not "
                 f"strong: with this many combinations tested, some will "
                 f"repeat by chance alone.")
-    review["change_note"] = note
+    review["change_note"] = note + overlap_caveat
     return review
 
 

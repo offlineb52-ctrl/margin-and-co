@@ -1,0 +1,197 @@
+{
+  "tier": "free",
+  "week": 3,
+  "published": "2026-08-27",
+  "headline": "10 of 3,308 combinations survived. The best was VWAP on MNTN.L at 9.2.",
+  "summary": "3,308 indicator-and-stock combinations were tested this week. Each was scored from 1 to 10 on whether it still made money on data it had never seen, after paying realistic trading costs. 10 scored 8 or above, meaning they survived convincingly. 1,294 of 3,308 finished with a positive Sharpe ratio after costs, though a positive Sharpe is a low bar and says nothing about whether the rule beat simply owning the stock. The median score was 2.4. A low median is the expected result rather than a broken test: most published indicator backtests do not subtract trading costs or check performance on unseen data, and doing both is what removes the apparent edge. Treat the 10 survivors with suspicion rather than excitement. Testing 3,308 combinations and reporting the best of them is precisely how a search produces results that do not repeat \u2014 at 0.3% of everything tested, this is close to what pure chance would throw up. A combination is only interesting if it survives again next week, on data that did not exist when it was selected.",
+  "universe_size": 827,
+  "costs_bps": 8.0,
+  "charts": {
+    "decay": "decay_curve_week03.png"
+  },
+  "sections": {
+    "flagship": {
+      "indicator": "VWAP",
+      "ticker": "MNTN.L",
+      "score": 9.2,
+      "verdict": "Survived",
+      "out_sample_sharpe_net": 1.663628,
+      "in_sample_sharpe_gross": 1.571431,
+      "pct_windows_positive": 1.0,
+      "max_drawdown_net": -0.282307,
+      "num_trades": 39
+    },
+    "combinations_tested": 3308,
+    "week_in_review": {
+      "combinations_tested": 3308,
+      "survivors": 10,
+      "median_score": 2.4,
+      "positive_after_costs": 1294,
+      "by_indicator": {
+        "EMA": {
+          "median_score": 2.1,
+          "survivors": 0
+        },
+        "MACD": {
+          "median_score": 2.2,
+          "survivors": 4
+        },
+        "RSI": {
+          "median_score": 3.8,
+          "survivors": 4
+        },
+        "VWAP": {
+          "median_score": 1.7,
+          "survivors": 2
+        }
+      },
+      "change": {
+        "survivors_last_week": 12,
+        "survivors_this_week": 10,
+        "repeated": [
+          {
+            "indicator": "MACD",
+            "ticker": "DATA.L"
+          },
+          {
+            "indicator": "MACD",
+            "ticker": "MNTN.L"
+          },
+          {
+            "indicator": "MACD",
+            "ticker": "SSIT.L"
+          },
+          {
+            "indicator": "MACD",
+            "ticker": "WIX.L"
+          },
+          {
+            "indicator": "RSI",
+            "ticker": "ABNB"
+          },
+          {
+            "indicator": "RSI",
+            "ticker": "INVH"
+          },
+          {
+            "indicator": "RSI",
+            "ticker": "MUT.L"
+          },
+          {
+            "indicator": "RSI",
+            "ticker": "UBER"
+          },
+          {
+            "indicator": "VWAP",
+            "ticker": "MNTN.L"
+          },
+          {
+            "indicator": "VWAP",
+            "ticker": "SSIT.L"
+          }
+        ],
+        "repeat_count": 10,
+        "median_score_last_week": 2.4,
+        "median_score_change": 0.0,
+        "days_since_last_run": 3
+      },
+      "change_note": "10 of last week's 12 survivors survived again. Repeating twice is weak evidence, not strong: with this many combinations tested, some will repeat by chance alone. These two runs are only 3 days apart, so they were scored on almost the same data. A combination repeating across windows that overlap this heavily is close to arithmetic rather than evidence, and this comparison should not be read as one until the runs are a full week apart."
+    },
+    "week_ahead": {
+      "claims_to_recheck": [
+        {
+          "indicator": "VWAP",
+          "ticker": "MNTN.L",
+          "score": 9.2,
+          "out_sample_sharpe_net": 1.664
+        },
+        {
+          "indicator": "RSI",
+          "ticker": "INVH",
+          "score": 9.2,
+          "out_sample_sharpe_net": 1.628
+        },
+        {
+          "indicator": "RSI",
+          "ticker": "MUT.L",
+          "score": 8.8,
+          "out_sample_sharpe_net": 1.319
+        },
+        {
+          "indicator": "MACD",
+          "ticker": "WIX.L",
+          "score": 8.7,
+          "out_sample_sharpe_net": 1.177
+        },
+        {
+          "indicator": "MACD",
+          "ticker": "DATA.L",
+          "score": 8.4,
+          "out_sample_sharpe_net": 1.702
+        },
+        {
+          "indicator": "RSI",
+          "ticker": "ABNB",
+          "score": 8.4,
+          "out_sample_sharpe_net": 1.449
+        },
+        {
+          "indicator": "MACD",
+          "ticker": "SSIT.L",
+          "score": 8.4,
+          "out_sample_sharpe_net": 1.293
+        },
+        {
+          "indicator": "MACD",
+          "ticker": "MNTN.L",
+          "score": 8.4,
+          "out_sample_sharpe_net": 1.258
+        },
+        {
+          "indicator": "RSI",
+          "ticker": "UBER",
+          "score": 8.3,
+          "out_sample_sharpe_net": 1.508
+        },
+        {
+          "indicator": "VWAP",
+          "ticker": "SSIT.L",
+          "score": 8.0,
+          "out_sample_sharpe_net": 1.277
+        }
+      ],
+      "claims_total": 10,
+      "test": "Every one of these is re-scored next week on a window that includes days which did not exist when the score was assigned. No result is re-used and nothing is carried over.",
+      "what_would_be_wrong": "If these were real, most should still clear 8 next week. If they were noise, most should fall away. Either outcome is published, and the second is the more likely one: test thousands of combinations and a handful will look good by accident.",
+      "not_a_forecast": "This is a list of claims being checked, not a list of stocks to buy. Nothing here is a prediction about any company, and a high Survival Score is a statement about a rule's past behaviour after costs, not about what a share price will do next."
+    },
+    "archive": [
+      {
+        "week": 3,
+        "published": "2026-08-27",
+        "universe_size": 849,
+        "tickers": "A,AAF.L,AAL.L,AAPL,AAS.L,ABBV,ABDN.L,ABF.L,ABNB,ABT,ACGL,ACN,ADBE,ADI,ADM,ADM.L,ADP,ADSK,AEE,AEP,AEP.L,AES,AFL,AGT.L,AIE.L,AIG,AIZ,AJB.L,AJG,AKAM,ALB,ALFA.L,ALGN,ALL,ALLE,ALW.L,AMAT,AMCR,AMD,AME,AMGN,AML.L,AMP,AMT,AMZN,ANET,ANTO.L,AO.L,AON,AOS,APA,APD,APH,APN.L,APO,APP,APTV,ARE,ARES,ASHM.L,ASL.L,ATG.L,ATO,ATR.L,ATT.L,ATYM.L,AUTO.L,AV.L,AVGO,AVON.L,AVY,AWK,AXON,AXP,AZN.L,AZO,BA,BA.L,BAB.L,BAC,BAG.L,BALL,BARC.L,BATS.L,BAX,BBOX.L,BBY,BBY.L,BCG.L,BDX,BEN,BEZ.L,BF-B,BG,BGEO.L,BGFD.L,BHMG.L,BIIB,BKG.L,BKNG,BKR,BLDR,BLK,BLND.L,BME.L,BMY,BMY.L,BNKR.L,BNY,BNZL.L,BOWL.L,BOY.L,BP.L,BPCR.L,BPT.L,BR,BRBY.L,BREE.L,BRGE.L,BRK-B,BRO,BRSC.L,BRWM.L,BSX,BT-A.L,BTRW.L,BUT.L,BWY.L,BX,BXP,BYG.L,BYIT.L,C,CAH,CARR,CASY,CAT,CB,CBG.L,CBOE,CBRE,CCC.L,CCEP.L,CCH.L,CCI,CCL,CDNS,CDW,CEG,CF,CFG,CGT.L,CHD,CHG.L,CHRW,CHTR,CI,CIEN,CINF,CKN.L,CL,CLDN.L,CLX,CMCSA,CMCX.L,CME,CMG,CMI,CMS,CNA.L,CNC,CNP,COA.L,COF,COHR,COIN,COO,COP,COR,CORD.L,COST,COST.L,CPAY,CPG.L,CPRT,CPT,CRDA.L,CRH,CRL,CRM,CRWD,CSCO,CSGP,CSN.L,CSX,CTAS,CTEC.L,CTSH,CTVA,CTY.L,CURY.L,CVNA,CVS,CVSG.L,CVX,CWK.L,CWR.L,D,DAL,DASH,DATA.L,DCC.L,DD,DDOG,DE,DECK,DELL,DG,DGE.L,DGX,DHI,DHR,DIS,DLN.L,DLR,DLTR,DNLM.L,DOC,DOCS.L,DOM.L,DOV,DOW,DPLM.L,DPZ,DRI,DRX.L,DSCV.L,DTE,DUK,DVA,DVN,DXCM,EBAY,ECHO,ECL,ED,EDIN.L,EDV.L,EFX,EG,EIX,EL,ELM.L,ELV,EME,EMG.L,EMR,ENOG.L,ENT.L,EOG,EQIX,EQT,ERIE,ES,ESCT.L,ESS,ETN,ETR,EVRG,EW,EWG.L,EWI.L,EXC,EXE,EXPD,EXPE,EXPN.L,EXR,EZJ.L,F,FAN.L,FANG,FAST,FCH.L,FCIT.L,FCSS.L,FCX,FDS,FDX,FDXF,FE,FEML.L,FERG,FEV.L,FFIV,FGEN.L,FGP.L,FGT.L,FICO,FIS,FISV,FITB,FIX,FLEX,FOUR.L,FOX,FOXA,FRAS.L,FRES.L,FRT,FSG.L,FSLR,FSV.L,FTNT,FTV,GAMA.L,GAW.L,GBG.L,GCP.L,GD,GDDY,GDWN.L,GE,GEHC,GEN,GEN.L,GEV,GFRD.L,GFTU.L,GILD,GIS,GL,GLEN.L,GLW,GM,GNC.L,GNRC,GNS.L,GOOG,GOOGL,GPC,GPE.L,GPN,GRG.L,GRI.L,GRMN,GROW.L,GS,GSCT.L,GSK.L,GWW,HAL,HANA.L,HAS,HAS.L,HBAN,HBR.L,HCA,HD,HFD.L,HFEL.L,HFG.L,HGT.L,HICL.L,HIG,HII,HIK.L,HILS.L,HLMA.L,HLN.L,HLT,HMSO.L,HOC.L,HON,HONA,HOOD,HPE,HPQ,HRI.L,HRL,HSBA.L,HSIC,HSL.L,HST,HSX.L,HSY,HTG.L,HTWS.L,HUBB,HUM,HVPE.L,HWDN.L,HWG.L,HWM,IAD.L,IAG.L,IBKR,IBM,ICE,ICG.L,ICGT.L,IDXX,IEX,IFF,IGG.L,IHG.L,IHP.L,III.L,IMB.L,IMI.L,INCH.L,INCY,INF.L,INPP.L,INTC,INTU,INVH,INVP.L,IP,IPO.L,IQV,IR,IRM,ISRG,IT,ITH.L,ITRK.L,ITV.L,ITW,IVZ,IWG.L,J,JAM.L,JBHT,JBL,JCH.L,JCI,JD.L,JDW.L,JEDT.L,JEGI.L,JEMI.L,JFJ.L,JGGI.L,JKHY,JMAT.L,JMGI.L,JNJ,JPM,JSG.L,JUP.L,KDP,KEY,KEYS,KGF.L,KHC,KIE.L,KIM,KKR,KLAC,KLR.L,KMB,KMI,KNOS.L,KO,KR,KVUE,L,LAND.L,LDOS,LEN,LGEN.L,LH,LHX,LII,LIN,LITE,LLOY.L,LLY,LMP.L,LMT,LNT,LRCX,LRE.L,LSEG.L,LULU,LUV,LVS,LWDB.L,LYB,LYV,MA,MAA,MAB.L,MAR,MAS,MCD,MCHP,MCK,MCO,MDLZ,MDT,MEGP.L,MET,META,MGAM.L,MGM,MGNS.L,MKC,MKS.L,MLM,MMM,MNDI.L,MNG.L,MNKS.L,MNST,MNTN.L,MO,MONY.L,MOON.L,MOS,MPC,MPWR,MRC.L,MRCH.L,MRK,MRNA,MRO.L,MRSH,MRVL,MS,MSCI,MSFT,MSI,MTB,MTD,MTLN.L,MTO.L,MTRO.L,MU,MUT.L,MYI.L,NAIT.L,NAS.L,NBPE.L,NCC.L,NCLH,NDAQ,NDSN,NEE,NEM,NFLX,NG.L,NI,NKE,NOC,NOW,NRG,NSC,NTAP,NTRS,NUE,NVDA,NVR,NWG.L,NWS,NWSA,NXPI,NXT.L,O,OCDO.L,OCI.L,ODFL,OKE,OMC,ON,ONT.L,ORCL,ORLY,OSB.L,OTIS,OXB.L,OXIG.L,OXY,PAF.L,PAG.L,PAGE.L,PANW,PAYX,PCAR,PCG,PCGH.L,PCT.L,PEG,PEP,PETS.L,PEY.L,PFD.L,PFE,PFG,PG,PGR,PH,PHI.L,PHM,PHP.L,PIN.L,PINT.L,PKG,PLD,PLTR,PLUS.L,PM,PNC,PNL.L,PNN.L,PNR,PNW,PODD,POLN.L,PPET.L,PPG,PPH.L,PPL,PRN.L,PRU,PRU.L,PSA,PSH.L,PSKY,PSN.L,PSON.L,PSX,PTC,PTEC.L,PWR,PYPL,Q,QCOM,QLT.L,QQ.L,RAT.L,RCL,RCP.L,RDDT,REG,REGN,REL.L,RF,RHIM.L,RICA.L,RIO.L,RJF,RKT.L,RL,RMD,RMV.L,RNK.L,ROK,ROL,ROP,ROR.L,ROSE.L,ROST,RPI.L,RR.L,RSG,RSW.L,RTO.L,RTW.L,RTX,RVTY,SAFE.L,SAGA.L,SAIN.L,SBAC,SBRY.L,SBUX,SCHW,SCT.L,SDLF.L,SDP.L,SDR.L,SEIT.L,SEQI.L,SGE.L,SGRO.L,SHAW.L,SHC.L,SHEL.L,SHW,SJM,SLB,SMCI,SMIN.L,SMT.L,SMWH.L,SN.L,SNA,SNDK,SNPS,SNR.L,SO,SOI.L,SOLV,SPG,SPGI,SPI.L,SPX.L,SRE,SRE.L,SRP.L,SSE.L,SSIT.L,SSPG.L,STAN.L,STE,STJ.L,STLD,STT,STX,STZ,SUPR.L,SVS.L,SVT.L,SW,SWK,SWKS,SYF,SYK,SYNC.L,SYY,T,TAP,TATE.L,TBCG.L,TCAP.L,TDG,TDY,TECH,TEL,TEM.L,TEP.L,TER,TFC,TFIF.L,TGT,THG.L,THRL.L,TJX,TKO,TMO,TMPL.L,TMUS,TPK.L,TPL,TPR,TRGP,TRIG.L,TRMB,TRN.L,TROW,TRST.L,TRV,TRY.L,TSCO,TSCO.L,TSLA,TSN,TT,TTD,TTWO,TW.L,TXN,TXT,TYL,UAL,UBER,UDR,UEM.L,UHS,UKW.L,ULTA,ULVR.L,UNH,UNP,UPS,URI,USA.L,USB,UTG.L,UU.L,V,VCT.L,VEEV,VEIL.L,VICI,VLO,VLTO,VMC,VMRK,VOD.L,VOF.L,VRSK,VRSN,VRT,VRTX,VST,VSVS.L,VTR,VTRS,VTY.L,VZ,WAB,WAT,WBD,WDAY,WDC,WEC,WEIR.L,WELL,WFC,WIX.L,WIZZ.L,WKP.L,WM,WMB,WMT,WOSG.L,WPP.L,WRB,WSM,WST,WTB.L,WTW,WWH.L,WY,WYNN,XEL,XOM,XPP.L,XPS.L,XYL,XYZ,YUM,ZBH,ZBRA,ZIG.L,ZTS",
+        "costs_bps": 8.0,
+        "notes": ""
+      },
+      {
+        "week": 2,
+        "published": "2026-08-24",
+        "universe_size": 849,
+        "tickers": "A,AAF.L,AAL.L,AAPL,AAS.L,ABBV,ABDN.L,ABF.L,ABNB,ABT,ACGL,ACN,ADBE,ADI,ADM,ADM.L,ADP,ADSK,AEE,AEP,AEP.L,AES,AFL,AGT.L,AIE.L,AIG,AIZ,AJB.L,AJG,AKAM,ALB,ALFA.L,ALGN,ALL,ALLE,ALW.L,AMAT,AMCR,AMD,AME,AMGN,AML.L,AMP,AMT,AMZN,ANET,ANTO.L,AO.L,AON,AOS,APA,APD,APH,APN.L,APO,APP,APTV,ARE,ARES,ASHM.L,ASL.L,ATG.L,ATO,ATR.L,ATT.L,ATYM.L,AUTO.L,AV.L,AVGO,AVON.L,AVY,AWK,AXON,AXP,AZN.L,AZO,BA,BA.L,BAB.L,BAC,BAG.L,BALL,BARC.L,BATS.L,BAX,BBOX.L,BBY,BBY.L,BCG.L,BDX,BEN,BEZ.L,BF-B,BG,BGEO.L,BGFD.L,BHMG.L,BIIB,BKG.L,BKNG,BKR,BLDR,BLK,BLND.L,BME.L,BMY,BMY.L,BNKR.L,BNY,BNZL.L,BOWL.L,BOY.L,BP.L,BPCR.L,BPT.L,BR,BRBY.L,BREE.L,BRGE.L,BRK-B,BRO,BRSC.L,BRWM.L,BSX,BT-A.L,BTRW.L,BUT.L,BWY.L,BX,BXP,BYG.L,BYIT.L,C,CAH,CARR,CASY,CAT,CB,CBG.L,CBOE,CBRE,CCC.L,CCEP.L,CCH.L,CCI,CCL,CDNS,CDW,CEG,CF,CFG,CGT.L,CHD,CHG.L,CHRW,CHTR,CI,CIEN,CINF,CKN.L,CL,CLDN.L,CLX,CMCSA,CMCX.L,CME,CMG,CMI,CMS,CNA.L,CNC,CNP,COA.L,COF,COHR,COIN,COO,COP,COR,CORD.L,COST,COST.L,CPAY,CPG.L,CPRT,CPT,CRDA.L,CRH,CRL,CRM,CRWD,CSCO,CSGP,CSN.L,CSX,CTAS,CTEC.L,CTSH,CTVA,CTY.L,CURY.L,CVNA,CVS,CVSG.L,CVX,CWK.L,CWR.L,D,DAL,DASH,DATA.L,DCC.L,DD,DDOG,DE,DECK,DELL,DG,DGE.L,DGX,DHI,DHR,DIS,DLN.L,DLR,DLTR,DNLM.L,DOC,DOCS.L,DOM.L,DOV,DOW,DPLM.L,DPZ,DRI,DRX.L,DSCV.L,DTE,DUK,DVA,DVN,DXCM,EBAY,ECHO,ECL,ED,EDIN.L,EDV.L,EFX,EG,EIX,EL,ELM.L,ELV,EME,EMG.L,EMR,ENOG.L,ENT.L,EOG,EQIX,EQT,ERIE,ES,ESCT.L,ESS,ETN,ETR,EVRG,EW,EWG.L,EWI.L,EXC,EXE,EXPD,EXPE,EXPN.L,EXR,EZJ.L,F,FAN.L,FANG,FAST,FCH.L,FCIT.L,FCSS.L,FCX,FDS,FDX,FDXF,FE,FEML.L,FERG,FEV.L,FFIV,FGEN.L,FGP.L,FGT.L,FICO,FIS,FISV,FITB,FIX,FLEX,FOUR.L,FOX,FOXA,FRAS.L,FRES.L,FRT,FSG.L,FSLR,FSV.L,FTNT,FTV,GAMA.L,GAW.L,GBG.L,GCP.L,GD,GDDY,GDWN.L,GE,GEHC,GEN,GEN.L,GEV,GFRD.L,GFTU.L,GILD,GIS,GL,GLEN.L,GLW,GM,GNC.L,GNRC,GNS.L,GOOG,GOOGL,GPC,GPE.L,GPN,GRG.L,GRI.L,GRMN,GROW.L,GS,GSCT.L,GSK.L,GWW,HAL,HANA.L,HAS,HAS.L,HBAN,HBR.L,HCA,HD,HFD.L,HFEL.L,HFG.L,HGT.L,HICL.L,HIG,HII,HIK.L,HILS.L,HLMA.L,HLN.L,HLT,HMSO.L,HOC.L,HON,HONA,HOOD,HPE,HPQ,HRI.L,HRL,HSBA.L,HSIC,HSL.L,HST,HSX.L,HSY,HTG.L,HTWS.L,HUBB,HUM,HVPE.L,HWDN.L,HWG.L,HWM,IAD.L,IAG.L,IBKR,IBM,ICE,ICG.L,ICGT.L,IDXX,IEX,IFF,IGG.L,IHG.L,IHP.L,III.L,IMB.L,IMI.L,INCH.L,INCY,INF.L,INPP.L,INTC,INTU,INVH,INVP.L,IP,IPO.L,IQV,IR,IRM,ISRG,IT,ITH.L,ITRK.L,ITV.L,ITW,IVZ,IWG.L,J,JAM.L,JBHT,JBL,JCH.L,JCI,JD.L,JDW.L,JEDT.L,JEGI.L,JEMI.L,JFJ.L,JGGI.L,JKHY,JMAT.L,JMGI.L,JNJ,JPM,JSG.L,JUP.L,KDP,KEY,KEYS,KGF.L,KHC,KIE.L,KIM,KKR,KLAC,KLR.L,KMB,KMI,KNOS.L,KO,KR,KVUE,L,LAND.L,LDOS,LEN,LGEN.L,LH,LHX,LII,LIN,LITE,LLOY.L,LLY,LMP.L,LMT,LNT,LRCX,LRE.L,LSEG.L,LULU,LUV,LVS,LWDB.L,LYB,LYV,MA,MAA,MAB.L,MAR,MAS,MCD,MCHP,MCK,MCO,MDLZ,MDT,MEGP.L,MET,META,MGAM.L,MGM,MGNS.L,MKC,MKS.L,MLM,MMM,MNDI.L,MNG.L,MNKS.L,MNST,MNTN.L,MO,MONY.L,MOON.L,MOS,MPC,MPWR,MRC.L,MRCH.L,MRK,MRNA,MRO.L,MRSH,MRVL,MS,MSCI,MSFT,MSI,MTB,MTD,MTLN.L,MTO.L,MTRO.L,MU,MUT.L,MYI.L,NAIT.L,NAS.L,NBPE.L,NCC.L,NCLH,NDAQ,NDSN,NEE,NEM,NFLX,NG.L,NI,NKE,NOC,NOW,NRG,NSC,NTAP,NTRS,NUE,NVDA,NVR,NWG.L,NWS,NWSA,NXPI,NXT.L,O,OCDO.L,OCI.L,ODFL,OKE,OMC,ON,ONT.L,ORCL,ORLY,OSB.L,OTIS,OXB.L,OXIG.L,OXY,PAF.L,PAG.L,PAGE.L,PANW,PAYX,PCAR,PCG,PCGH.L,PCT.L,PEG,PEP,PETS.L,PEY.L,PFD.L,PFE,PFG,PG,PGR,PH,PHI.L,PHM,PHP.L,PIN.L,PINT.L,PKG,PLD,PLTR,PLUS.L,PM,PNC,PNL.L,PNN.L,PNR,PNW,PODD,POLN.L,PPET.L,PPG,PPH.L,PPL,PRN.L,PRU,PRU.L,PSA,PSH.L,PSKY,PSN.L,PSON.L,PSX,PTC,PTEC.L,PWR,PYPL,Q,QCOM,QLT.L,QQ.L,RAT.L,RCL,RCP.L,RDDT,REG,REGN,REL.L,RF,RHIM.L,RICA.L,RIO.L,RJF,RKT.L,RL,RMD,RMV.L,RNK.L,ROK,ROL,ROP,ROR.L,ROSE.L,ROST,RPI.L,RR.L,RSG,RSW.L,RTO.L,RTW.L,RTX,RVTY,SAFE.L,SAGA.L,SAIN.L,SBAC,SBRY.L,SBUX,SCHW,SCT.L,SDLF.L,SDP.L,SDR.L,SEIT.L,SEQI.L,SGE.L,SGRO.L,SHAW.L,SHC.L,SHEL.L,SHW,SJM,SLB,SMCI,SMIN.L,SMT.L,SMWH.L,SN.L,SNA,SNDK,SNPS,SNR.L,SO,SOI.L,SOLV,SPG,SPGI,SPI.L,SPX.L,SRE,SRE.L,SRP.L,SSE.L,SSIT.L,SSPG.L,STAN.L,STE,STJ.L,STLD,STT,STX,STZ,SUPR.L,SVS.L,SVT.L,SW,SWK,SWKS,SYF,SYK,SYNC.L,SYY,T,TAP,TATE.L,TBCG.L,TCAP.L,TDG,TDY,TECH,TEL,TEM.L,TEP.L,TER,TFC,TFIF.L,TGT,THG.L,THRL.L,TJX,TKO,TMO,TMPL.L,TMUS,TPK.L,TPL,TPR,TRGP,TRIG.L,TRMB,TRN.L,TROW,TRST.L,TRV,TRY.L,TSCO,TSCO.L,TSLA,TSN,TT,TTD,TTWO,TW.L,TXN,TXT,TYL,UAL,UBER,UDR,UEM.L,UHS,UKW.L,ULTA,ULVR.L,UNH,UNP,UPS,URI,USA.L,USB,UTG.L,UU.L,V,VCT.L,VEEV,VEIL.L,VICI,VLO,VLTO,VMC,VMRK,VOD.L,VOF.L,VRSK,VRSN,VRT,VRTX,VST,VSVS.L,VTR,VTRS,VTY.L,VZ,WAB,WAT,WBD,WDAY,WDC,WEC,WEIR.L,WELL,WFC,WIX.L,WIZZ.L,WKP.L,WM,WMB,WMT,WOSG.L,WPP.L,WRB,WSM,WST,WTB.L,WTW,WWH.L,WY,WYNN,XEL,XOM,XPP.L,XPS.L,XYL,XYZ,YUM,ZBH,ZBRA,ZIG.L,ZTS",
+        "costs_bps": 8.0,
+        "notes": "Full S&P 500 + FTSE 350, 5y+ history"
+      },
+      {
+        "week": 1,
+        "published": "2026-08-24",
+        "universe_size": 1,
+        "tickers": "AAPL",
+        "costs_bps": 8.0,
+        "notes": "AAPL pilot"
+      }
+    ],
+    "archive_weeks_shown": 4,
+    "upgrade_note": "The full ranked table across every stock and indicator tested, the raw data, and the complete archive are available to Pro members."
+  }
+}

@@ -522,10 +522,10 @@ def review_block(review: Dict[str, Any]) -> str:
     <p class="eyebrow">The week</p>
     <h2>What this week found</h2>
   </div>
-<p>{esc(review.get('combinations_tested', 0))} combinations were
-   tested this week. {esc(review.get('survivors', 0))} scored 8 or above.
-   The median was {num(review.get('median_score'), 1)}, and
-   {esc(review.get('positive_after_costs', 0))} finished with a positive
+<p>{review.get('combinations_tested', 0):,} combinations were tested this
+   week. {review.get('survivors', 0):,} scored 8 or above. The median was
+   {num(review.get('median_score'), 1)}, and
+   {review.get('positive_after_costs', 0):,} finished with a positive
    out-of-sample Sharpe ratio after costs.</p>
 {table}
 <div class="note">
