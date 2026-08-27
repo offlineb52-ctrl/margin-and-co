@@ -437,6 +437,153 @@ def positions_table(positions: List[Dict[str, Any]], currency: str) -> str:
 </div>"""
 
 
+def fills_table(fills: List[Dict[str, Any]], currency: str) -> str:
+    """Every individual execution, newest first.
+
+    The round-trip table above answers "did this trade make money". This one
+    answers "when was this decided, and when could it actually have been
+    traded", which is the question a backtest usually gets wrong. Each row
+    carries both dates precisely because the gap between them is the whole
+    discipline: a signal read from Monday's close cannot be acted on until
+    Tuesday's open, and the price paid is Tuesday's, not Monday's.
+    """
+    if not fills:
+        return '<div class="note"><p>No orders have been filled yet.</p></div>'
+
+    rows = []
+    for f in fills:
+        flag = ('<span class="pill pill--weakened">reconstructed</span>'
+                if f.get("backfilled") else '<span class="pill pill--survived">live</span>')
+        side = esc(f.get("side", ""))
+        side_class = "num--pos" if side == "BUY" else ""
+        rows.append(f"""      <tr>
+        <td class="num">{esc(f.get('decided_on', ''))}</td>
+        <td class="num">{esc(f.get('filled_on', ''))}</td>
+        <td>{esc(f.get('ticker', ''))}</td>
+        <td class="{side_class}">{side}</td>
+        <td class="num">{esc(f.get('shares', ''))}</td>
+        <td class="num">{num(f.get('price'))}</td>
+        <td class="num">{num(f.get('cost'))}</td>
+        <td class="reason">{esc(f.get('reason', ''))}</td>
+        <td>{flag}</td>
+      </tr>""")
+
+    return f"""<div class="table-scroll">
+  <table>
+    <caption class="visually-hidden">Every order filled in this book, newest
+      first, with the date each was decided and the date it was filled.</caption>
+    <thead><tr>
+      <th scope="col">Decided</th><th scope="col">Filled</th>
+      <th scope="col">Ticker</th><th scope="col">Side</th>
+      <th scope="col">Shares</th>
+      <th scope="col">Price ({esc(currency)})</th>
+      <th scope="col">Cost ({esc(currency)})</th>
+      <th scope="col">Why</th><th scope="col">Record</th>
+    </tr></thead>
+    <tbody>
+{chr(10).join(rows)}
+    </tbody>
+  </table>
+</div>"""
+
+
+def review_block(review: Dict[str, Any]) -> str:
+    """This week's result, and whether last week's findings held up."""
+    if not review:
+        return ""
+
+    by_ind = review.get("by_indicator") or {}
+    rows = "\n".join(
+        f"""      <tr>
+        <td>{esc(name)}</td>
+        <td class="num">{num(vals.get('median_score'), 1)}</td>
+        <td class="num">{esc(vals.get('survivors', 0))}</td>
+      </tr>"""
+        for name, vals in sorted(by_ind.items())
+    )
+
+    table = f"""<div class="table-scroll">
+  <table>
+    <caption class="visually-hidden">Median Survival Score and number of
+      survivors by indicator this week.</caption>
+    <thead><tr>
+      <th scope="col">Indicator</th>
+      <th scope="col">Median score</th>
+      <th scope="col">Survived (8+)</th>
+    </tr></thead>
+    <tbody>
+{rows}
+    </tbody>
+  </table>
+</div>""" if rows else ""
+
+    return f"""<section class="wrap section section--ruled">
+  <div class="section__head">
+    <p class="eyebrow">The week</p>
+    <h2>What this week found</h2>
+  </div>
+<p>{esc(review.get('combinations_tested', 0))} combinations were
+   tested this week. {esc(review.get('survivors', 0))} scored 8 or above.
+   The median was {num(review.get('median_score'), 1)}, and
+   {esc(review.get('positive_after_costs', 0))} finished with a positive
+   out-of-sample Sharpe ratio after costs.</p>
+{table}
+<div class="note">
+  <p><strong>Against last week.</strong> {esc(review.get('change_note', ''))}</p>
+</div>
+</section>"""
+
+
+def ahead_block(ahead: Dict[str, Any]) -> str:
+    """The claims next week's run will re-test. Not a forecast."""
+    if not ahead:
+        return ""
+
+    claims = ahead.get("claims_to_recheck") or []
+    if claims:
+        rows = "\n".join(
+            f"""      <tr>
+        <td>{esc(c.get('indicator',''))}</td>
+        <td>{esc(c.get('ticker',''))}</td>
+        <td class="num">{num(c.get('score'), 1)}</td>
+        <td class="num">{num(c.get('out_sample_sharpe_net'))}</td>
+      </tr>"""
+            for c in claims
+        )
+        table = f"""<div class="table-scroll">
+  <table>
+    <caption class="visually-hidden">The highest-scoring combinations from this
+      week, each of which is re-tested next week on data that did not exist
+      when the score was assigned.</caption>
+    <thead><tr>
+      <th scope="col">Indicator</th><th scope="col">Ticker</th>
+      <th scope="col">Score</th>
+      <th scope="col">OOS Sharpe<br><span class="meta">after costs</span></th>
+    </tr></thead>
+    <tbody>
+{rows}
+    </tbody>
+  </table>
+</div>"""
+    else:
+        table = ('<div class="note"><p>Nothing scored 8 or above this week, so '
+                 'there is no survivor to re-test. That is a result, and it is '
+                 'the one this project expects most weeks.</p></div>')
+
+    return f"""<section class="wrap section section--ruled">
+  <div class="section__head">
+    <p class="eyebrow">Next week</p>
+    <h2>What next week puts to the test</h2>
+  </div>
+<p>{esc(ahead.get('test', ''))}</p>
+{table}
+<p>{esc(ahead.get('what_would_be_wrong', ''))}</p>
+<div class="note note--flag">
+  <p><strong>Not a forecast.</strong> {esc(ahead.get('not_a_forecast', ''))}</p>
+</div>
+</section>"""
+
+
 def trades_table(trades: List[Dict[str, Any]]) -> str:
     if not trades:
         return '<div class="note"><p>No completed round trips yet.</p></div>'
@@ -556,7 +703,6 @@ class Builder:
             stylesheet=f"{self.root}css/{self.stylesheet}",
             repo_url=site_config.REPO_URL,
             year=self.build_date.year,
-            build_date=self.build_date.strftime("%-d %B %Y"),
             content=content,
             head_extra=head_extra,
             nav_home=current if nav == "home" else "",
@@ -610,10 +756,13 @@ class Builder:
   </article>
 </div>"""
 
+        sections = report.get("sections", {})
         return {
             "headline": esc(report.get("headline", "")),
             "summary": esc(report.get("summary", "")),
             "flagship": card,
+            "review": review_block(sections.get("week_in_review") or {}),
+            "ahead": ahead_block(sections.get("week_ahead") or {}),
         }
 
     def build_index(self, weeks: List[Dict[str, Any]]) -> str:
@@ -660,6 +809,8 @@ class Builder:
             score_headline=survival["headline"],
             score_summary=survival["summary"],
             score_flagship=survival["flagship"],
+            score_review=survival["review"],
+            score_ahead=survival["ahead"],
             repo_url=site_config.REPO_URL,
         )
         return self.shell(
@@ -797,6 +948,38 @@ class Builder:
             f"across the life of the book."
         ) if trades else "No completed round trips yet."
 
+        # The order log. Buys and sells are counted separately because the
+        # two numbers rarely match: a position opened but not yet closed shows
+        # as a buy with no sell, which is the honest shape of an open book.
+        fills = live.get("fills", [])
+        buys = sum(1 for f in fills if f.get("side") == "BUY")
+        sells = len(fills) - buys
+        forward = sum(1 for f in fills if not f.get("backfilled"))
+        if fills:
+            open_names = len(live.get("positions", []))
+            fills_summary = (
+                f"{len(fills)} orders filled — {buys} buys and {sells} sells. "
+                f"Every one was decided on a close and filled at the next open, "
+                f"never the same day. ")
+            if buys != sells:
+                fills_summary += (
+                    f"Buys outnumber sells because a position can be added to "
+                    f"more than once and is then closed in a single sell, and "
+                    f"because {open_names} position"
+                    f"{'' if open_names == 1 else 's'} "
+                    f"{'is' if open_names == 1 else 'are'} still open. ")
+            if forward:
+                fills_summary += (
+                    f"{forward} of them were recorded forward; the rest were "
+                    f"reconstructed when the book was opened.")
+            else:
+                fills_summary += (
+                    "All of them were reconstructed when the book was opened — "
+                    "no order has yet been filled in the period recorded forward, "
+                    "so none of this was published before it happened.")
+        else:
+            fills_summary = "No orders have been filled yet."
+
         rules = "\n".join(f"    <li>{esc(r)}</li>" for r in strat["rules"])
 
         names = strat["universe"]
@@ -831,6 +1014,8 @@ class Builder:
             positions_table=positions_table(live.get("positions", []), currency),
             trades_summary=trades_summary,
             trades_table=trades_table(trades),
+            fills_summary=fills_summary,
+            fills_table=fills_table(fills, currency),
             rules_list=rules,
             universe_line=universe_line,
             ledger_url="ledger.json",

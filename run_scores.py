@@ -83,13 +83,24 @@ def main(argv: List[str] | None = None) -> int:
     weeks = archive.weeks()
     charts = {"decay": f"decay_curve_week{args.week:02d}.png"}
 
+    # Last week's scores, so the report can say what held up and what did
+    # not. If the previous week covered a different universe the comparison
+    # is refused inside the report rather than fudged here.
+    previous = None
+    if args.week > 1:
+        try:
+            prior = archive.week_table(args.week - 1)
+            previous = prior if not prior.empty else None
+        except Exception:
+            previous = None
+
     free = tiers.generate_free_report(
         scores, args.week, list(frames), DEFAULT_COSTS.total_bps_per_side,
-        charts=charts, archive_weeks=weeks)
+        charts=charts, archive_weeks=weeks, previous=previous)
     pro = tiers.generate_pro_report(
         scores, args.week, list(frames), DEFAULT_COSTS.total_bps_per_side,
         charts=charts, archive_weeks=weeks,
-        score_history=archive.trend(min_weeks=1))
+        score_history=archive.trend(min_weeks=1), previous=previous)
 
     for report in (free, pro):
         for kind, path in tiers.write_report(report).items():

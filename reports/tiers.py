@@ -185,6 +185,150 @@ def _summary(scores: pd.DataFrame) -> str:
 # FREE
 # --------------------------------------------------------------------------
 
+SURVIVED_THRESHOLD = 8.0
+
+
+def _week_in_review(scores: pd.DataFrame,
+                    previous: Optional[pd.DataFrame] = None) -> Dict[str, Any]:
+    """What this week's run actually found, and how it moved against last week.
+
+    Every figure here is read off the two score tables. Nothing is asserted
+    that a reader could not recompute from the published data, because the
+    point of a wrap-up is to state the result plainly, not to narrate it.
+    """
+    survivors = scores[scores["score"] >= SURVIVED_THRESHOLD]
+    review: Dict[str, Any] = {
+        "combinations_tested": int(len(scores)),
+        "survivors": int(len(survivors)),
+        "median_score": round(float(scores["score"].median()), 2),
+        "positive_after_costs": int((scores["out_sample_sharpe_net"] > 0).sum()),
+        "by_indicator": {
+            str(name): {
+                "median_score": round(float(group["score"].median()), 2),
+                "survivors": int((group["score"] >= SURVIVED_THRESHOLD).sum()),
+            }
+            for name, group in scores.groupby("indicator")
+        },
+    }
+
+    if previous is None or previous.empty:
+        review["change"] = None
+        review["change_note"] = (
+            "This is the first week on record for this universe, so there is "
+            "nothing to compare it against yet. The comparison is the whole "
+            "point, and it starts next week."
+        )
+        return review
+
+    # Only compare like with like.
+    #
+    # Week 1 here was a single-ticker pilot and week 2 was 827 companies.
+    # Reporting that "the median score fell 1.3" across those two is a
+    # meaningless number that reads like a finding, which is precisely the
+    # kind of thing this project exists to not do. If the two runs do not
+    # cover substantially the same universe, the comparison is refused and
+    # the reason is stated.
+    now_tickers = set(scores["ticker"])
+    prev_tickers = set(previous["ticker"])
+    shared = now_tickers & prev_tickers
+    comparable = bool(shared) and len(shared) >= 0.8 * max(len(now_tickers),
+                                                           len(prev_tickers))
+    if not comparable:
+        review["change"] = None
+        review["change_note"] = (
+            f"Last week's run covered {len(prev_tickers)} "
+            f"{'company' if len(prev_tickers) == 1 else 'companies'} and this "
+            f"week's covered {len(now_tickers)}, so the two are not the same "
+            f"test and no week-on-week comparison is drawn. Comparing them "
+            f"would produce a number that looks like a finding and is not one. "
+            f"The comparison resumes once two consecutive weeks cover the same "
+            f"universe."
+        )
+        return review
+
+    prev_survivors = previous[previous["score"] >= SURVIVED_THRESHOLD]
+    prev_median = round(float(previous["score"].median()), 2)
+
+    # The question that matters: of the combinations that survived last week,
+    # how many survived again? A rule that only survives once is what noise
+    # looks like.
+    prev_pairs = set(zip(prev_survivors["indicator"], prev_survivors["ticker"]))
+    now_pairs = set(zip(survivors["indicator"], survivors["ticker"]))
+    repeated = sorted(prev_pairs & now_pairs)
+
+    review["change"] = {
+        "survivors_last_week": len(prev_pairs),
+        "survivors_this_week": len(now_pairs),
+        "repeated": [{"indicator": i, "ticker": t} for i, t in repeated],
+        "repeat_count": len(repeated),
+        "median_score_last_week": prev_median,
+        "median_score_change": round(review["median_score"] - prev_median, 2),
+    }
+
+    if not prev_pairs:
+        note = ("Nothing survived last week, so there was nothing that could "
+                "repeat.")
+    elif not repeated:
+        note = (f"None of last week's {len(prev_pairs)} survivors survived "
+                f"again. That is what a list of coincidences looks like when "
+                f"it is re-tested, and it is the result this project expects "
+                f"more often than not.")
+    else:
+        note = (f"{len(repeated)} of last week's {len(prev_pairs)} survivors "
+                f"survived again. Repeating twice is weak evidence, not "
+                f"strong: with this many combinations tested, some will "
+                f"repeat by chance alone.")
+    review["change_note"] = note
+    return review
+
+
+def _week_ahead(scores: pd.DataFrame) -> Dict[str, Any]:
+    """What next week's data will test about this week's claims.
+
+    Deliberately NOT a market outlook. This project does not forecast prices,
+    and saying what a stock might do next week would be exactly the kind of
+    tip it refuses to give at any price. What can honestly be written in
+    advance is which of this week's results are checkable next week, and what
+    result would count as being wrong.
+    """
+    survivors = (scores[scores["score"] >= SURVIVED_THRESHOLD]
+                 .sort_values("score", ascending=False))
+
+    watch = [
+        {
+            "indicator": str(r["indicator"]),
+            "ticker": str(r["ticker"]),
+            "score": round(float(r["score"]), 1),
+            "out_sample_sharpe_net": (
+                None if pd.isna(r["out_sample_sharpe_net"])
+                else round(float(r["out_sample_sharpe_net"]), 3)),
+        }
+        for _, r in survivors.head(10).iterrows()
+    ]
+
+    return {
+        "claims_to_recheck": watch,
+        "claims_total": int(len(survivors)),
+        "test": (
+            "Every one of these is re-scored next week on a window that "
+            "includes days which did not exist when the score was assigned. "
+            "No result is re-used and nothing is carried over."
+        ),
+        "what_would_be_wrong": (
+            "If these were real, most should still clear 8 next week. If they "
+            "were noise, most should fall away. Either outcome is published, "
+            "and the second is the more likely one: test thousands of "
+            "combinations and a handful will look good by accident."
+        ),
+        "not_a_forecast": (
+            "This is a list of claims being checked, not a list of stocks to "
+            "buy. Nothing here is a prediction about any company, and a high "
+            "Survival Score is a statement about a rule's past behaviour "
+            "after costs, not about what a share price will do next."
+        ),
+    }
+
+
 def generate_free_report(
     scores: pd.DataFrame,
     week: int,
@@ -193,6 +337,7 @@ def generate_free_report(
     charts: Optional[Dict[str, str]] = None,
     archive_weeks: Optional[pd.DataFrame] = None,
     published: Optional[str] = None,
+    previous: Optional[pd.DataFrame] = None,
 ) -> Report:
     """The public report.
 
@@ -217,6 +362,11 @@ def generate_free_report(
         sections={
             "flagship": _flagship(scores),
             "combinations_tested": int(len(scores)),
+            # The wrap-up and the week-ahead are free on purpose. Whether last
+            # week's findings held up is the result, and the result is the part
+            # that belongs in public.
+            "week_in_review": _week_in_review(scores, previous),
+            "week_ahead": _week_ahead(scores),
             "archive": recent,
             "archive_weeks_shown": FREE_ARCHIVE_WEEKS,
             "upgrade_note": (
@@ -250,6 +400,7 @@ def generate_pro_report(
     archive_weeks: Optional[pd.DataFrame] = None,
     score_history: Optional[pd.DataFrame] = None,
     published: Optional[str] = None,
+    previous: Optional[pd.DataFrame] = None,
 ) -> Report:
     """The members' report: the full table, the raw data, and the history."""
     columns = [c for c in PRO_TABLE_COLUMNS if c in scores.columns]
@@ -272,6 +423,8 @@ def generate_pro_report(
             "flagship": _flagship(scores),
             "table": table.to_dict("records"),
             "combinations_tested": int(len(scores)),
+            "week_in_review": _week_in_review(scores, previous),
+            "week_ahead": _week_ahead(scores),
             "universe": sorted(universe),
             "archive": (archive_weeks.to_dict("records")
                         if archive_weeks is not None and not archive_weeks.empty
