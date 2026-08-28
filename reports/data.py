@@ -56,6 +56,8 @@ def build_payload(
     charts: Optional[Dict[str, Path]] = None,
     week_number: Optional[int] = None,
     markdown_file: Optional[str] = None,
+    published: Optional[str] = None,
+    reconstructed: bool = False,
 ) -> Dict[str, Any]:
     """Assemble one week's complete results as a JSON-serialisable dict."""
     bench_net = benchmark.get("out_sample_net")
@@ -93,7 +95,16 @@ def build_payload(
     payload = {
         "schema_version": SCHEMA_VERSION,
         "week": week_number,
-        "published": dt.date.today().isoformat(),
+        # The date this week was published, which is not always the date the
+        # file was generated. A week rebuilt afterwards must carry the date it
+        # actually went out, or the archive silently reorders itself and a
+        # later week appears to precede an earlier one.
+        "published": published or dt.date.today().isoformat(),
+        # True when the report was generated after the fact from the data as
+        # it stood at the time, rather than published on the day. The live
+        # portfolio draws the same distinction, and for the same reason: a
+        # reconstruction is honest, and pretending it was not is not.
+        "reconstructed": bool(reconstructed),
         "period": {"start": period_start, "end": period_end},
         "out_of_sample": {"start": test_start, "end": test_end},
         "universe": list(universe),

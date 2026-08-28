@@ -1,6 +1,7 @@
 <article>
 <section class="wrap hero">
   <p class="eyebrow eyebrow--accent">{{ week_label }} &middot; {{ published_long }}</p>
+{{ reconstruction_note }}
   <h1>{{ headline }}</h1>
   <p class="lede">{{ headline_detail }}</p>
 </section>
@@ -100,7 +101,7 @@
   <div class="note">
     <p><strong>Reproduce this.</strong> Every figure above comes from one
        command against public data:
-       <code>python run_pipeline.py --universe all --week {{ week_number }}</code>.
+       <code>{{ reproduce_command }}</code>.
        The <a href="{{ markdown_url }}">plain-text report</a> and the
        <a href="{{ json_url }}">underlying data</a> are both published.</p>
   </div>

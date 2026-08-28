@@ -227,6 +227,14 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--tickers", type=str, default=None,
                         help="comma-separated tickers, overrides --universe")
     parser.add_argument("--start", type=str, default=None, help="start date YYYY-MM-DD")
+    parser.add_argument("--published", type=str, default=None,
+                        help="the date this week actually went out, "
+                             "YYYY-MM-DD. Defaults to --end when rebuilding a "
+                             "past week, otherwise today.")
+    parser.add_argument("--end", type=str, default=None,
+                        help="last date to include, YYYY-MM-DD. Use this to "
+                             "reproduce a past week on the window it actually "
+                             "had, rather than on everything since.")
     parser.add_argument("--no-cache", action="store_true", help="force fresh download")
     parser.add_argument("--week", type=int, default=None, help="week number for the report")
     parser.add_argument("--min-history-years", type=int, default=10,
@@ -269,7 +277,25 @@ def main(argv: Optional[List[str]] = None) -> int:
     # for at least `--min-history-years`, so recent listings are excluded. That
     # is a form of survivorship bias, it is disclosed in the report, and it is
     # far less damaging than silently truncating the sample period.
-    cutoff = pd.Timestamp.today() - pd.DateOffset(years=args.min_history_years)
+    # Reproducing a past week means cutting the data back to what existed when
+    # that week was published. Without this the report would carry the right
+    # week number over the wrong window -- a number that never appeared at the
+    # time, presented as though it had. The minimum-history cutoff is measured
+    # from the same date for the same reason, so a ticker is judged on the
+    # history it had then, not the history it has now.
+    as_of = pd.Timestamp(args.end) if args.end else pd.Timestamp.today()
+    if args.end:
+        data_frames = {t: df.loc[:as_of] for t, df in data_frames.items()}
+        data_frames = {t: df for t, df in data_frames.items() if not df.empty}
+        print(f"  cut to {as_of.date()}: reproducing the window as it stood")
+
+    # A run pinned to a past date is a reconstruction, and carries the date
+    # the week actually went out rather than the date the file was made.
+    today = pd.Timestamp.today().normalize()
+    is_reconstruction = bool(args.end) and pd.Timestamp(args.end) < today
+    published_on = args.published or (args.end if is_reconstruction else None)
+
+    cutoff = as_of - pd.DateOffset(years=args.min_history_years)
     long_enough = {t: df for t, df in data_frames.items() if df.index[0] <= cutoff}
     dropped = len(data_frames) - len(long_enough)
 
@@ -402,6 +428,8 @@ def main(argv: Optional[List[str]] = None) -> int:
         charts=chart_paths,
         week_number=args.week,
         markdown_file=path.name,
+        published=published_on,
+        reconstructed=is_reconstruction,
     )
     json_path = data.write_payload(payload)
 

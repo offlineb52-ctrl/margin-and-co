@@ -858,6 +858,27 @@ class Builder:
 
     def build_report(self, week: Dict[str, Any]) -> str:
         slug = slug_for(week)
+
+        # A week rebuilt after the fact says so, in the same way the live
+        # portfolio marks a reconstructed session. The figures are honest
+        # either way -- the data was cut back to the window the week actually
+        # had -- but "this was worked out afterwards" and "this was published
+        # on the day" are different claims and should not look identical.
+        reconstruction_note = ""
+        reproduce_command = (f"python run_pipeline.py --universe all "
+                             f"--week {week.get('week')}")
+        if week.get("reconstructed"):
+            period_end = (week.get("period") or {}).get("end", "")
+            reproduce_command += f" --end {period_end}"
+            reconstruction_note = f"""  <div class="note note--flag">
+    <p><strong>Rebuilt after the fact.</strong> This report was generated
+       later than the week it covers, from the data as it stood on
+       {esc(long_date(period_end)) if period_end else "the closing date"}. No
+       information from after that date touched any figure on this page, and
+       the command below reproduces it exactly. But it was not published on
+       the day, and a record built afterwards is worth less than one published
+       in advance.</p>
+  </div>"""
         charts = week.get("charts", {})
         oos = week["out_of_sample"]
         years = (dt.date.fromisoformat(oos["end"]) - dt.date.fromisoformat(oos["start"])).days / 365.25
@@ -895,6 +916,8 @@ class Builder:
             load_template("report.html"),
             week_label=week_label(week.get("week")),
             week_number=week.get("week") or 1,
+            reconstruction_note=reconstruction_note,
+            reproduce_command=reproduce_command,
             published_long=long_date(week["published"]),
             headline=headline_for(week),
             headline_detail=headline_detail(week),
