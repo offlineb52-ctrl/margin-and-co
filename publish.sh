@@ -18,6 +18,7 @@ PY=".venv/bin/python"
 echo "==> Sanity checks"
 "$PY" -m tests.test_indicators | tail -2
 "$PY" -m tests.test_lookup | tail -2
+"$PY" -m tests.test_cleanup | tail -2
 command -v node >/dev/null && node tests/js/test_csv_export.mjs | tail -2
 
 echo
