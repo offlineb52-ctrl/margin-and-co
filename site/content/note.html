@@ -1,0 +1,54 @@
+title: This week's note
+eyebrow: Note
+heading: NVIDIA doubled its revenue. The indicators still failed on it.
+date: 28 August 2026
+<!--/meta-->
+
+<p>NVIDIA reported second-quarter results on 26 August: revenue of $96.2bn, up
+106% on a year earlier, with data centre revenue of $89.0bn, up 117%. It
+guided the current quarter to $108bn. By any measure the business had an
+extraordinary year.</p>
+
+<p>Here is what the four indicators scored on NVDA in this week's run:</p>
+
+<div class="table-scroll">
+<table>
+  <caption class="visually-hidden">Survival Scores for NVDA, week 3.</caption>
+  <thead><tr>
+    <th scope="col">Indicator</th><th scope="col">Score</th>
+    <th scope="col">OOS Sharpe after costs</th><th scope="col">Verdict</th>
+  </tr></thead>
+  <tbody>
+    <tr><td>EMA</td><td class="num">3.8</td><td class="num">0.18</td><td>Did not survive</td></tr>
+    <tr><td>VWAP</td><td class="num">3.4</td><td class="num">0.24</td><td>Did not survive</td></tr>
+    <tr><td>MACD</td><td class="num">2.4</td><td class="num">-0.08</td><td>Did not survive</td></tr>
+    <tr><td>RSI</td><td class="num">1.0</td><td class="num">-0.96</td><td>Did not survive</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>RSI scored 1.0, which is the floor. That is the same rule the live paper
+portfolio trades: buy when the fourteen-day RSI drops below 30, sell when it
+recovers through 50. Applied to NVDA, out of sample and after costs, it
+produced a Sharpe ratio of &minus;0.96 &mdash; it lost money, reliably, across a
+period in which the company more than doubled its revenue.</p>
+
+<p>That is the whole argument of this project in one stock. The indicator has
+no opinion about NVIDIA. It cannot see revenue, margin, or guidance. It sees a
+number derived from recent prices, and a rule that buys dips in a stock that
+mostly went up will sell the winners early and buy the falls that keep
+falling. Being right about the company and being right about the rule are
+different things, and only one of them is being tested here.</p>
+
+<div class="note note--flag">
+  <p><strong>This is not a view on NVIDIA.</strong> Nothing here says the
+     shares are cheap, expensive, or worth owning. It says that four specific
+     technical rules, tested the same way as every other stock in the
+     universe, did not survive costs on this one. A Survival Score is a
+     statement about a rule's past behaviour, never a forecast about a share
+     price.</p>
+</div>
+
+<p class="meta">Figures from NVIDIA's results announcement of 26 August 2026.
+   Scores from the week 3 run, published 27 August 2026, and reproducible from
+   the published code.</p>

@@ -765,6 +765,35 @@ class Builder:
             "ahead": ahead_block(sections.get("week_ahead") or {}),
         }
 
+    def note_section(self) -> str:
+        """This week's written note, if one has been left.
+
+        A slot for the one thing worth saying in prose that the generated
+        report cannot say for itself. Optional by design: delete
+        site/content/note.html and the section disappears rather than sitting
+        there stale, which is the failure mode of every "latest news" box that
+        was last updated in March.
+        """
+        source = CONTENT_DIR / "note.html"
+        if not source.exists():
+            return ""
+
+        raw = source.read_text(encoding="utf-8")
+        meta, body = raw.split("<!--/meta-->", 1)
+        fields = dict(re.findall(r"(\w+):\s*(.+)", meta))
+        dateline = fields.get("date", "").strip()
+
+        return f"""<section class="wrap section section--ruled">
+  <div class="section__head">
+    <p class="eyebrow">{esc(fields.get('eyebrow', 'Note'))}</p>
+    <h2>{esc(fields.get('heading', 'This week'))}</h2>
+    {f'<p class="meta">{esc(dateline)}</p>' if dateline else ''}
+  </div>
+  <div class="prose">
+{render(body.strip(), repo_url=site_config.REPO_URL)}
+  </div>
+</section>"""
+
     def build_index(self, weeks: List[Dict[str, Any]]) -> str:
         latest = weeks[0]
         survival = self.survival_section()
@@ -811,6 +840,7 @@ class Builder:
             score_flagship=survival["flagship"],
             score_review=survival["review"],
             score_ahead=survival["ahead"],
+            note_section=self.note_section(),
             repo_url=site_config.REPO_URL,
         )
         return self.shell(
