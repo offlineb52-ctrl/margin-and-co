@@ -701,7 +701,6 @@ class Builder:
             og_image=f"{self.domain}{self.root}{og_image}",
             root=self.root,
             stylesheet=f"{self.root}css/{self.stylesheet}",
-            repo_url=site_config.REPO_URL,
             year=self.build_date.year,
             content=content,
             head_extra=head_extra,
@@ -790,7 +789,7 @@ class Builder:
     {f'<p class="meta">{esc(dateline)}</p>' if dateline else ''}
   </div>
   <div class="prose">
-{render(body.strip(), repo_url=site_config.REPO_URL)}
+{body.strip()}
   </div>
 </section>"""
 
@@ -841,7 +840,6 @@ class Builder:
             score_review=survival["review"],
             score_ahead=survival["ahead"],
             note_section=self.note_section(),
-            repo_url=site_config.REPO_URL,
         )
         return self.shell(
             content, path="", title=site_config.SITE_NAME,
@@ -1076,16 +1074,11 @@ class Builder:
         meta, body = raw.split("<!--/meta-->", 1)
         fields = dict(re.findall(r"(\w+):\s*(.+)", meta))
 
-        # The body is rendered first, on its own. render() inserts a value
-        # verbatim rather than re-scanning it, so a {{ repo_url }} written
-        # inside a content file would otherwise survive into the published
-        # page as literal braces.
         content = render(load_template("page.html"),
                          eyebrow=fields.get("eyebrow", ""),
                          heading=fields.get("heading", name.title()),
                          lede=fields.get("lede", ""),
-                         body=render(body.strip(),
-                                     repo_url=site_config.REPO_URL))
+                         body=body.strip())
         return self.shell(content, path=f"{name}/",
                           title=fields.get("title", name.title()),
                           description=fields.get("description", site_config.DESCRIPTION),

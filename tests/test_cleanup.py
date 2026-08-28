@@ -23,10 +23,19 @@ def check(name: str, condition: bool, detail: str = "") -> None:
 
 
 def test_real_accounts_are_never_deleted():
-    """The accounts actually in the store on 28 August, plus ordinary shapes."""
+    """Ordinary address shapes, including the ones members actually use.
+
+    These are invented. Real members' addresses do not belong in a public
+    repository, whoever they are -- putting a live account address into a test
+    fixture publishes it to anyone who clones this, which is the same mistake
+    as printing it on the site. The shapes below cover what the classifier
+    needs to see: plain addresses, dotted local parts, subdomained providers,
+    and this project's own domain.
+    """
     for email in [
-        "a.person@gmail.com", "someone@outlook.com", "first.last@mail.example-provider.net",
-        "someone@outlook.com", "a.b.c@company.co.uk", "hello@marginco.co.uk",
+        "a.person@gmail.com", "someone@outlook.com", "a.b.c@company.co.uk",
+        "first.last@mail.example-provider.net", "hello@marginco.co.uk",
+        "j.smith@universityofsomewhere.ac.uk",
     ]:
         check(f"keeps {email}", not is_test_address(email))
 
