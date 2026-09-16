@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "decided_on": "2026-09-14",
+    "ticker": "WMT",
+    "side": "SELL",
+    "shares": 209,
+    "reason": "Closing position \u2014 RSI 52.8 \u2014 no oversold signal",
+    "signal_value": 52.77
+  }
+]
