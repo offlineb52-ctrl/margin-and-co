@@ -362,5 +362,18 @@
     "reason": "Opening position \u2014 RSI 29.8 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
     "signal_value": 29.78,
     "backfilled": true
+  },
+  {
+    "decided_on": "2026-09-14",
+    "filled_on": "2026-09-15",
+    "ticker": "WMT",
+    "side": "SELL",
+    "shares": 209,
+    "price": 108.61,
+    "gross": 22699.49,
+    "cost": 18.16,
+    "reason": "Closing position \u2014 RSI 52.8 \u2014 no oversold signal",
+    "signal_value": 52.77,
+    "backfilled": true
   }
 ]
