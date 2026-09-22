@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated": "2026-09-19",
+  "generated": "2026-09-22",
   "strategy": {
     "name": "RSI(14) mean reversion, long only",
     "rationale": "Across 763 S&P 500 and FTSE 350 companies, RSI was the only one of the four indicators to post a positive out-of-sample Sharpe ratio after costs (0.48). The other three are trend-following, and all three went negative net of what it cost to trade them. RSI still lost to buy & hold, which is why this portfolio publishes both side by side. It is being traded live because a rule that survived one honest test deserves a second one that cannot be re-run.",
@@ -42,26 +42,43 @@
     "inception": "2026-02-20",
     "currency": "USD",
     "starting_capital": 100000.0,
-    "sessions": 145,
-    "last_mark": "2026-09-17"
+    "sessions": 146,
+    "last_mark": "2026-09-18"
   },
   "performance": {
     "nav": 109493.22,
     "cash": 109493.22,
     "market_value": 0.0,
     "total_return": 0.0949,
-    "benchmark_nav": 109194.08,
-    "benchmark_return": 0.0919,
-    "excess_return": 0.003,
+    "benchmark_nav": 108920.87,
+    "benchmark_return": 0.0892,
+    "excess_return": 0.0057,
     "max_drawdown": -0.0458,
-    "avg_invested": 0.3041,
+    "avg_invested": 0.302,
     "current_invested": 0.0,
     "total_costs_paid": 455.87,
     "closed_trades": 14,
     "win_rate": 0.7143
   },
   "positions": [],
-  "pending_orders": [],
+  "pending_orders": [
+    {
+      "decided_on": "2026-09-18",
+      "ticker": "HD",
+      "side": "BUY",
+      "shares": 73,
+      "reason": "Opening position \u2014 RSI 29.7 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 29.7
+    },
+    {
+      "decided_on": "2026-09-18",
+      "ticker": "PEP",
+      "side": "BUY",
+      "shares": 168,
+      "reason": "Opening position \u2014 RSI 26.4 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 26.43
+    }
+  ],
   "closed_trades_list": [
     {
       "ticker": "WMT",
@@ -776,7 +793,7 @@
     {
       "date": "2026-03-19",
       "nav": 99582.27,
-      "benchmark": 97304.95,
+      "benchmark": 97304.94,
       "invested": 0.3908,
       "backfilled": true
     },
@@ -930,7 +947,7 @@
     {
       "date": "2026-04-21",
       "nav": 104207.12,
-      "benchmark": 102415.67,
+      "benchmark": 102415.68,
       "invested": 0.0,
       "backfilled": true
     },
@@ -1175,7 +1192,7 @@
     {
       "date": "2026-06-10",
       "nav": 106398.74,
-      "benchmark": 105111.84,
+      "benchmark": 105111.85,
       "invested": 0.2047,
       "backfilled": true
     },
@@ -1287,7 +1304,7 @@
     {
       "date": "2026-07-06",
       "nav": 106737.31,
-      "benchmark": 105847.89,
+      "benchmark": 105847.9,
       "invested": 0.602,
       "backfilled": true
     },
@@ -1343,7 +1360,7 @@
     {
       "date": "2026-07-16",
       "nav": 109119.66,
-      "benchmark": 107779.08,
+      "benchmark": 107779.09,
       "invested": 0.1902,
       "backfilled": true
     },
@@ -1357,7 +1374,7 @@
     {
       "date": "2026-07-20",
       "nav": 108623.1,
-      "benchmark": 106691.9,
+      "benchmark": 106691.91,
       "invested": 0.1865,
       "backfilled": true
     },
@@ -1654,8 +1671,15 @@
       "benchmark": 109194.08,
       "invested": 0.0,
       "backfilled": true
+    },
+    {
+      "date": "2026-09-18",
+      "nav": 109493.22,
+      "benchmark": 108920.87,
+      "invested": 0.0,
+      "backfilled": true
     }
   ],
   "live_since": "2026-08-24",
-  "backfilled_sessions": 143
+  "backfilled_sessions": 144
 }
