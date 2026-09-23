@@ -375,5 +375,31 @@
     "reason": "Closing position \u2014 RSI 52.8 \u2014 no oversold signal",
     "signal_value": 52.77,
     "backfilled": true
+  },
+  {
+    "decided_on": "2026-09-18",
+    "filled_on": "2026-09-21",
+    "ticker": "HD",
+    "side": "BUY",
+    "shares": 73,
+    "price": 301.0,
+    "gross": 21973.0,
+    "cost": 17.58,
+    "reason": "Opening position \u2014 RSI 29.7 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+    "signal_value": 29.7,
+    "backfilled": true
+  },
+  {
+    "decided_on": "2026-09-18",
+    "filled_on": "2026-09-21",
+    "ticker": "PEP",
+    "side": "BUY",
+    "shares": 168,
+    "price": 129.65,
+    "gross": 21781.2,
+    "cost": 17.42,
+    "reason": "Opening position \u2014 RSI 26.4 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+    "signal_value": 26.43,
+    "backfilled": true
   }
 ]
