@@ -1670,5 +1670,16 @@
     "live_signals": 3,
     "orders_committed": 0,
     "backfilled": true
+  },
+  {
+    "date": "2026-09-29",
+    "nav": 107812.89,
+    "cash": 43873.87,
+    "market_value": 63939.02,
+    "positions": 3,
+    "invested_pct": 0.5931,
+    "live_signals": 3,
+    "orders_committed": 0,
+    "backfilled": true
   }
 ]
