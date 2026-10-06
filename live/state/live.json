@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated": "2026-10-03",
+  "generated": "2026-10-06",
   "strategy": {
     "name": "RSI(14) mean reversion, long only",
     "rationale": "Across 763 S&P 500 and FTSE 350 companies, RSI was the only one of the four indicators to post a positive out-of-sample Sharpe ratio after costs (0.48). The other three are trend-following, and all three went negative net of what it cost to trade them. RSI still lost to buy & hold, which is why this portfolio publishes both side by side. It is being traded live because a rule that survived one honest test deserves a second one that cannot be re-run.",
@@ -42,20 +42,20 @@
     "inception": "2026-02-20",
     "currency": "USD",
     "starting_capital": 100000.0,
-    "sessions": 155,
-    "last_mark": "2026-10-01"
+    "sessions": 157,
+    "last_mark": "2026-10-05"
   },
   "performance": {
-    "nav": 106690.78,
+    "nav": 106713.66,
     "cash": 43873.87,
-    "market_value": 62816.91,
-    "total_return": 0.0669,
-    "benchmark_nav": 107638.3,
-    "benchmark_return": 0.0764,
-    "excess_return": -0.0095,
+    "market_value": 62839.79,
+    "total_return": 0.0671,
+    "benchmark_nav": 109046.06,
+    "benchmark_return": 0.0905,
+    "excess_return": -0.0233,
     "max_drawdown": -0.0458,
-    "avg_invested": 0.3151,
-    "current_invested": 0.5888,
+    "avg_invested": 0.3186,
+    "current_invested": 0.5889,
     "total_costs_paid": 508.32,
     "closed_trades": 14,
     "win_rate": 0.7143
@@ -83,7 +83,16 @@
       "value_at_cost": 21781.2
     }
   ],
-  "pending_orders": [],
+  "pending_orders": [
+    {
+      "decided_on": "2026-10-05",
+      "ticker": "JNJ",
+      "side": "BUY",
+      "shares": 84,
+      "reason": "Opening position \u2014 RSI 29.6 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 29.57
+    }
+  ],
   "closed_trades_list": [
     {
       "ticker": "WMT",
@@ -704,1089 +713,1103 @@
     {
       "date": "2026-02-20",
       "nav": 100000.0,
-      "benchmark": 100682.87,
+      "benchmark": 100682.63,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-02-23",
       "nav": 98736.73,
-      "benchmark": 100274.89,
+      "benchmark": 100275.0,
       "invested": 0.5861,
       "backfilled": true
     },
     {
       "date": "2026-02-24",
       "nav": 98703.68,
-      "benchmark": 100669.15,
+      "benchmark": 100669.16,
       "invested": 0.5859,
       "backfilled": true
     },
     {
       "date": "2026-02-25",
       "nav": 100176.75,
-      "benchmark": 101199.63,
+      "benchmark": 101199.41,
       "invested": 0.592,
       "backfilled": true
     },
     {
       "date": "2026-02-26",
       "nav": 100141.6,
-      "benchmark": 100694.61,
+      "benchmark": 100694.64,
       "invested": 0.5919,
       "backfilled": true
     },
     {
       "date": "2026-02-27",
       "nav": 100342.01,
-      "benchmark": 101395.75,
+      "benchmark": 101395.43,
       "invested": 0.5927,
       "backfilled": true
     },
     {
       "date": "2026-03-02",
       "nav": 100591.4,
-      "benchmark": 101086.56,
+      "benchmark": 101086.26,
       "invested": 0.5937,
       "backfilled": true
     },
     {
       "date": "2026-03-03",
       "nav": 100471.48,
-      "benchmark": 100582.28,
+      "benchmark": 100582.09,
       "invested": 0.3976,
       "backfilled": true
     },
     {
       "date": "2026-03-04",
       "nav": 101303.28,
-      "benchmark": 100769.36,
+      "benchmark": 100768.7,
       "invested": 0.4025,
       "backfilled": true
     },
     {
       "date": "2026-03-05",
       "nav": 101479.96,
-      "benchmark": 99823.06,
+      "benchmark": 99822.62,
       "invested": 0.2015,
       "backfilled": true
     },
     {
       "date": "2026-03-06",
       "nav": 101394.31,
-      "benchmark": 99178.04,
+      "benchmark": 99177.93,
       "invested": 0.2009,
       "backfilled": true
     },
     {
       "date": "2026-03-09",
       "nav": 101416.72,
-      "benchmark": 99562.27,
+      "benchmark": 99562.76,
       "invested": 0.201,
       "backfilled": true
     },
     {
       "date": "2026-03-10",
       "nav": 101234.95,
-      "benchmark": 99538.97,
+      "benchmark": 99539.09,
       "invested": 0.1996,
       "backfilled": true
     },
     {
       "date": "2026-03-11",
       "nav": 101191.13,
-      "benchmark": 99442.07,
+      "benchmark": 99442.09,
       "invested": 0.1992,
       "backfilled": true
     },
     {
       "date": "2026-03-12",
       "nav": 101040.74,
-      "benchmark": 98732.91,
+      "benchmark": 98733.02,
       "invested": 0.1981,
       "backfilled": true
     },
     {
       "date": "2026-03-13",
       "nav": 100551.82,
-      "benchmark": 98613.97,
+      "benchmark": 98613.94,
       "invested": 0.3967,
       "backfilled": true
     },
     {
       "date": "2026-03-16",
       "nav": 100982.35,
-      "benchmark": 99298.61,
+      "benchmark": 99298.43,
       "invested": 0.3993,
       "backfilled": true
     },
     {
       "date": "2026-03-17",
       "nav": 100886.97,
-      "benchmark": 99291.24,
+      "benchmark": 99290.98,
       "invested": 0.3987,
       "backfilled": true
     },
     {
       "date": "2026-03-18",
       "nav": 99882.2,
-      "benchmark": 97691.38,
+      "benchmark": 97691.53,
       "invested": 0.3926,
       "backfilled": true
     },
     {
       "date": "2026-03-19",
       "nav": 99582.27,
-      "benchmark": 97305.13,
+      "benchmark": 97305.05,
       "invested": 0.3908,
       "backfilled": true
     },
     {
       "date": "2026-03-20",
       "nav": 98781.95,
-      "benchmark": 96320.97,
+      "benchmark": 96321.11,
       "invested": 0.3859,
       "backfilled": true
     },
     {
       "date": "2026-03-23",
       "nav": 99442.69,
-      "benchmark": 97088.44,
+      "benchmark": 97088.28,
       "invested": 0.39,
       "backfilled": true
     },
     {
       "date": "2026-03-24",
       "nav": 98932.35,
-      "benchmark": 97028.3,
+      "benchmark": 97027.65,
       "invested": 0.3868,
       "backfilled": true
     },
     {
       "date": "2026-03-25",
       "nav": 99040.43,
-      "benchmark": 97540.37,
+      "benchmark": 97539.48,
       "invested": 0.787,
       "backfilled": true
     },
     {
       "date": "2026-03-26",
       "nav": 98162.0,
-      "benchmark": 96543.68,
+      "benchmark": 96542.71,
       "invested": 0.7851,
       "backfilled": true
     },
     {
       "date": "2026-03-27",
       "nav": 96831.01,
-      "benchmark": 95574.27,
+      "benchmark": 95573.85,
       "invested": 0.9984,
       "backfilled": true
     },
     {
       "date": "2026-03-30",
       "nav": 97541.81,
-      "benchmark": 95942.89,
+      "benchmark": 95943.17,
       "invested": 0.9985,
       "backfilled": true
     },
     {
       "date": "2026-03-31",
       "nav": 99662.53,
-      "benchmark": 97432.47,
+      "benchmark": 97432.62,
       "invested": 0.9985,
       "backfilled": true
     },
     {
       "date": "2026-04-01",
       "nav": 100025.47,
-      "benchmark": 97197.17,
+      "benchmark": 97197.24,
       "invested": 0.9985,
       "backfilled": true
     },
     {
       "date": "2026-04-02",
       "nav": 99476.77,
-      "benchmark": 97518.2,
+      "benchmark": 97517.89,
       "invested": 0.9985,
       "backfilled": true
     },
     {
       "date": "2026-04-06",
       "nav": 100096.79,
-      "benchmark": 98154.62,
+      "benchmark": 98153.96,
       "invested": 0.9985,
       "backfilled": true
     },
     {
       "date": "2026-04-07",
       "nav": 99299.05,
-      "benchmark": 98092.7,
+      "benchmark": 98091.99,
       "invested": 0.966,
       "backfilled": true
     },
     {
       "date": "2026-04-08",
       "nav": 102339.5,
-      "benchmark": 99732.71,
+      "benchmark": 99731.25,
       "invested": 0.967,
       "backfilled": true
     },
     {
       "date": "2026-04-09",
       "nav": 103361.84,
-      "benchmark": 100483.54,
+      "benchmark": 100482.21,
       "invested": 0.7615,
       "backfilled": true
     },
     {
       "date": "2026-04-10",
       "nav": 102870.09,
-      "benchmark": 99875.58,
+      "benchmark": 99874.49,
       "invested": 0.5631,
       "backfilled": true
     },
     {
       "date": "2026-04-13",
       "nav": 103250.06,
-      "benchmark": 100239.09,
+      "benchmark": 100237.97,
       "invested": 0.5647,
       "backfilled": true
     },
     {
       "date": "2026-04-14",
       "nav": 103439.74,
-      "benchmark": 100930.99,
+      "benchmark": 100929.8,
       "invested": 0.3789,
       "backfilled": true
     },
     {
       "date": "2026-04-15",
       "nav": 103495.06,
-      "benchmark": 101286.34,
+      "benchmark": 101285.21,
       "invested": 0.3792,
       "backfilled": true
     },
     {
       "date": "2026-04-16",
       "nav": 103502.32,
-      "benchmark": 101793.56,
+      "benchmark": 101791.9,
       "invested": 0.3792,
       "backfilled": true
     },
     {
       "date": "2026-04-17",
       "nav": 104308.89,
-      "benchmark": 102740.95,
+      "benchmark": 102738.86,
       "invested": 0.384,
       "backfilled": true
     },
     {
       "date": "2026-04-20",
       "nav": 104207.12,
-      "benchmark": 102437.88,
+      "benchmark": 102435.43,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-04-21",
       "nav": 104207.12,
-      "benchmark": 102415.51,
+      "benchmark": 102412.58,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-04-22",
       "nav": 104183.25,
-      "benchmark": 103102.44,
+      "benchmark": 103099.47,
       "invested": 0.1985,
       "backfilled": true
     },
     {
       "date": "2026-04-23",
       "nav": 104599.46,
-      "benchmark": 103175.59,
+      "benchmark": 103172.92,
       "invested": 0.2017,
       "backfilled": true
     },
     {
       "date": "2026-04-24",
       "nav": 104311.32,
-      "benchmark": 103603.49,
+      "benchmark": 103600.72,
       "invested": 0.1995,
       "backfilled": true
     },
     {
       "date": "2026-04-27",
       "nav": 104113.73,
-      "benchmark": 103286.66,
+      "benchmark": 103284.08,
       "invested": 0.198,
       "backfilled": true
     },
     {
       "date": "2026-04-28",
       "nav": 104337.84,
-      "benchmark": 103786.34,
+      "benchmark": 103784.1,
       "invested": 0.1997,
       "backfilled": true
     },
     {
       "date": "2026-04-29",
       "nav": 104297.6,
-      "benchmark": 104343.14,
+      "benchmark": 104340.23,
       "invested": 0.1994,
       "backfilled": true
     },
     {
       "date": "2026-04-30",
       "nav": 104526.28,
-      "benchmark": 104768.61,
+      "benchmark": 104765.24,
       "invested": 0.2011,
       "backfilled": true
     },
     {
       "date": "2026-05-01",
       "nav": 104282.96,
-      "benchmark": 104609.55,
+      "benchmark": 104606.08,
       "invested": 0.1993,
       "backfilled": true
     },
     {
       "date": "2026-05-04",
       "nav": 104009.45,
-      "benchmark": 104147.04,
+      "benchmark": 104143.38,
       "invested": 0.1972,
       "backfilled": true
     },
     {
       "date": "2026-05-05",
       "nav": 104132.94,
-      "benchmark": 104479.0,
+      "benchmark": 104474.93,
       "invested": 0.1981,
       "backfilled": true
     },
     {
       "date": "2026-05-06",
       "nav": 104047.87,
-      "benchmark": 104737.1,
+      "benchmark": 104733.68,
       "invested": 0.1975,
       "backfilled": true
     },
     {
       "date": "2026-05-07",
       "nav": 103854.86,
-      "benchmark": 104618.26,
+      "benchmark": 104614.72,
       "invested": 0.196,
       "backfilled": true
     },
     {
       "date": "2026-05-08",
       "nav": 103746.01,
-      "benchmark": 104804.88,
+      "benchmark": 104800.25,
       "invested": 0.1951,
       "backfilled": true
     },
     {
       "date": "2026-05-11",
       "nav": 103648.0,
-      "benchmark": 104534.48,
+      "benchmark": 104529.32,
       "invested": 0.3928,
       "backfilled": true
     },
     {
       "date": "2026-05-12",
       "nav": 103924.75,
-      "benchmark": 105356.61,
+      "benchmark": 105351.31,
       "invested": 0.3944,
       "backfilled": true
     },
     {
       "date": "2026-05-13",
       "nav": 104552.3,
-      "benchmark": 106107.08,
+      "benchmark": 106101.14,
       "invested": 0.398,
       "backfilled": true
     },
     {
       "date": "2026-05-14",
       "nav": 104534.07,
-      "benchmark": 107348.61,
+      "benchmark": 107339.31,
       "invested": 0.196,
       "backfilled": true
     },
     {
       "date": "2026-05-15",
       "nav": 104639.85,
-      "benchmark": 107365.03,
+      "benchmark": 107355.07,
       "invested": 0.1968,
       "backfilled": true
     },
     {
       "date": "2026-05-18",
       "nav": 105092.78,
-      "benchmark": 108047.4,
+      "benchmark": 108037.28,
       "invested": 0.2002,
       "backfilled": true
     },
     {
       "date": "2026-05-19",
       "nav": 104968.37,
-      "benchmark": 107585.51,
+      "benchmark": 107576.25,
       "invested": 0.1993,
       "backfilled": true
     },
     {
       "date": "2026-05-20",
       "nav": 104928.89,
-      "benchmark": 107348.56,
+      "benchmark": 107339.56,
       "invested": 0.199,
       "backfilled": true
     },
     {
       "date": "2026-05-21",
       "nav": 105220.16,
-      "benchmark": 107218.24,
+      "benchmark": 107208.28,
       "invested": 0.2012,
       "backfilled": true
     },
     {
       "date": "2026-05-22",
       "nav": 105077.88,
-      "benchmark": 107295.59,
+      "benchmark": 107285.09,
       "invested": 0.2001,
       "backfilled": true
     },
     {
       "date": "2026-05-26",
       "nav": 104853.65,
-      "benchmark": 106036.96,
+      "benchmark": 106026.97,
       "invested": 0.1984,
       "backfilled": true
     },
     {
       "date": "2026-05-27",
       "nav": 104977.31,
-      "benchmark": 106700.05,
+      "benchmark": 106689.73,
       "invested": 0.1993,
       "backfilled": true
     },
     {
       "date": "2026-05-28",
       "nav": 104757.55,
-      "benchmark": 106626.04,
+      "benchmark": 106615.98,
       "invested": 0.1977,
       "backfilled": true
     },
     {
       "date": "2026-05-29",
       "nav": 104849.18,
-      "benchmark": 105939.06,
+      "benchmark": 105928.55,
       "invested": 0.1984,
       "backfilled": true
     },
     {
       "date": "2026-06-01",
       "nav": 104578.95,
-      "benchmark": 105495.26,
+      "benchmark": 105484.53,
       "invested": 0.3946,
       "backfilled": true
     },
     {
       "date": "2026-06-02",
       "nav": 104459.12,
-      "benchmark": 105486.8,
+      "benchmark": 105474.43,
       "invested": 0.3939,
       "backfilled": true
     },
     {
       "date": "2026-06-03",
       "nav": 104920.45,
-      "benchmark": 105149.99,
+      "benchmark": 105138.0,
       "invested": 0.3965,
       "backfilled": true
     },
     {
       "date": "2026-06-04",
       "nav": 105031.18,
-      "benchmark": 106443.48,
+      "benchmark": 106430.62,
       "invested": 0.3972,
       "backfilled": true
     },
     {
       "date": "2026-06-05",
       "nav": 105771.03,
-      "benchmark": 105524.32,
+      "benchmark": 105513.52,
       "invested": 0.4014,
       "backfilled": true
     },
     {
       "date": "2026-06-08",
       "nav": 105788.07,
-      "benchmark": 105524.17,
+      "benchmark": 105512.75,
       "invested": 0.4015,
       "backfilled": true
     },
     {
       "date": "2026-06-09",
       "nav": 105951.78,
-      "benchmark": 105533.94,
+      "benchmark": 105523.46,
       "invested": 0.4024,
       "backfilled": true
     },
     {
       "date": "2026-06-10",
       "nav": 106398.74,
-      "benchmark": 105112.22,
+      "benchmark": 105102.12,
       "invested": 0.2047,
       "backfilled": true
     },
     {
       "date": "2026-06-11",
       "nav": 106382.49,
-      "benchmark": 105215.7,
+      "benchmark": 105204.86,
       "invested": 0.2045,
       "backfilled": true
     },
     {
       "date": "2026-06-12",
       "nav": 106479.99,
-      "benchmark": 105510.17,
+      "benchmark": 105499.5,
       "invested": 0.2053,
       "backfilled": true
     },
     {
       "date": "2026-06-15",
       "nav": 106440.27,
-      "benchmark": 105993.58,
+      "benchmark": 105983.14,
       "invested": 0.205,
       "backfilled": true
     },
     {
       "date": "2026-06-16",
       "nav": 106478.19,
-      "benchmark": 106382.0,
+      "benchmark": 106371.71,
       "invested": 0.2052,
       "backfilled": true
     },
     {
       "date": "2026-06-17",
       "nav": 105954.54,
-      "benchmark": 104450.8,
+      "benchmark": 104441.06,
       "invested": 0.2013,
       "backfilled": true
     },
     {
       "date": "2026-06-18",
       "nav": 105783.0,
-      "benchmark": 104497.56,
+      "benchmark": 104487.27,
       "invested": 0.2,
       "backfilled": true
     },
     {
       "date": "2026-06-22",
       "nav": 105783.0,
-      "benchmark": 103706.66,
+      "benchmark": 103695.88,
       "invested": 0.2,
       "backfilled": true
     },
     {
       "date": "2026-06-23",
       "nav": 106187.47,
-      "benchmark": 104089.5,
+      "benchmark": 104078.82,
       "invested": 0.2031,
       "backfilled": true
     },
     {
       "date": "2026-06-24",
       "nav": 106111.64,
-      "benchmark": 103949.39,
+      "benchmark": 103939.06,
       "invested": 0.2025,
       "backfilled": true
     },
     {
       "date": "2026-06-25",
       "nav": 105530.21,
-      "benchmark": 102767.85,
+      "benchmark": 102757.71,
       "invested": 0.1981,
       "backfilled": true
     },
     {
       "date": "2026-06-26",
       "nav": 106428.75,
-      "benchmark": 103561.79,
+      "benchmark": 103552.93,
       "invested": 0.4027,
       "backfilled": true
     },
     {
       "date": "2026-06-29",
       "nav": 105972.82,
-      "benchmark": 104065.86,
+      "benchmark": 104056.03,
       "invested": 0.4001,
       "backfilled": true
     },
     {
       "date": "2026-06-30",
       "nav": 105992.92,
-      "benchmark": 103896.52,
+      "benchmark": 103886.75,
       "invested": 0.4002,
       "backfilled": true
     },
     {
       "date": "2026-07-01",
       "nav": 105953.8,
-      "benchmark": 104851.44,
+      "benchmark": 104841.78,
       "invested": 0.599,
       "backfilled": true
     },
     {
       "date": "2026-07-02",
       "nav": 107313.69,
-      "benchmark": 106005.61,
+      "benchmark": 105997.02,
       "invested": 0.6041,
       "backfilled": true
     },
     {
       "date": "2026-07-06",
       "nav": 106737.31,
-      "benchmark": 105848.11,
+      "benchmark": 105839.09,
       "invested": 0.602,
       "backfilled": true
     },
     {
       "date": "2026-07-07",
       "nav": 107777.47,
-      "benchmark": 106718.17,
+      "benchmark": 106709.69,
       "invested": 0.6058,
       "backfilled": true
     },
     {
       "date": "2026-07-08",
       "nav": 107985.92,
-      "benchmark": 106165.94,
+      "benchmark": 106156.96,
       "invested": 0.6066,
       "backfilled": true
     },
     {
       "date": "2026-07-09",
       "nav": 107639.75,
-      "benchmark": 106180.49,
+      "benchmark": 106170.4,
       "invested": 0.6053,
       "backfilled": true
     },
     {
       "date": "2026-07-10",
       "nav": 108289.01,
-      "benchmark": 106908.46,
+      "benchmark": 106897.63,
       "invested": 0.6077,
       "backfilled": true
     },
     {
       "date": "2026-07-13",
       "nav": 109536.49,
-      "benchmark": 107208.53,
+      "benchmark": 107198.21,
       "invested": 0.6121,
       "backfilled": true
     },
     {
       "date": "2026-07-14",
       "nav": 108893.95,
-      "benchmark": 106932.43,
+      "benchmark": 106922.64,
       "invested": 0.1885,
       "backfilled": true
     },
     {
       "date": "2026-07-15",
       "nav": 108682.69,
-      "benchmark": 107195.59,
+      "benchmark": 107187.11,
       "invested": 0.187,
       "backfilled": true
     },
     {
       "date": "2026-07-16",
       "nav": 109119.66,
-      "benchmark": 107778.94,
+      "benchmark": 107770.99,
       "invested": 0.1902,
       "backfilled": true
     },
     {
       "date": "2026-07-17",
       "nav": 108991.46,
-      "benchmark": 106940.28,
+      "benchmark": 106931.76,
       "invested": 0.1893,
       "backfilled": true
     },
     {
       "date": "2026-07-20",
       "nav": 108623.1,
-      "benchmark": 106691.87,
+      "benchmark": 106683.66,
       "invested": 0.1865,
       "backfilled": true
     },
     {
       "date": "2026-07-21",
       "nav": 108296.27,
-      "benchmark": 106935.97,
+      "benchmark": 106927.4,
       "invested": 0.1841,
       "backfilled": true
     },
     {
       "date": "2026-07-22",
       "nav": 108104.87,
-      "benchmark": 106850.7,
+      "benchmark": 106842.11,
       "invested": 0.1826,
       "backfilled": true
     },
     {
       "date": "2026-07-23",
       "nav": 107936.95,
-      "benchmark": 105573.46,
+      "benchmark": 105564.74,
       "invested": 0.1813,
       "backfilled": true
     },
     {
       "date": "2026-07-24",
       "nav": 108130.15,
-      "benchmark": 106309.99,
+      "benchmark": 106300.92,
       "invested": 0.1828,
       "backfilled": true
     },
     {
       "date": "2026-07-27",
       "nav": 108540.04,
-      "benchmark": 106812.56,
+      "benchmark": 106803.39,
       "invested": 0.1859,
       "backfilled": true
     },
     {
       "date": "2026-07-28",
       "nav": 108785.61,
-      "benchmark": 107902.15,
+      "benchmark": 107892.73,
       "invested": 0.1877,
       "backfilled": true
     },
     {
       "date": "2026-07-29",
       "nav": 108987.85,
-      "benchmark": 107213.24,
+      "benchmark": 107204.59,
       "invested": 0.1892,
       "backfilled": true
     },
     {
       "date": "2026-07-30",
       "nav": 108500.44,
-      "benchmark": 107250.18,
+      "benchmark": 107241.26,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-07-31",
       "nav": 108500.44,
-      "benchmark": 108522.34,
+      "benchmark": 108512.82,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-03",
       "nav": 108500.44,
-      "benchmark": 109507.98,
+      "benchmark": 109498.5,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-04",
       "nav": 108500.44,
-      "benchmark": 110206.95,
+      "benchmark": 110196.02,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-05",
       "nav": 108500.44,
-      "benchmark": 110084.31,
+      "benchmark": 110073.43,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-06",
       "nav": 108500.44,
-      "benchmark": 110147.84,
+      "benchmark": 110137.12,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-07",
       "nav": 108500.44,
-      "benchmark": 110242.59,
+      "benchmark": 110231.73,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-10",
       "nav": 108500.44,
-      "benchmark": 110783.42,
+      "benchmark": 110772.28,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-11",
       "nav": 108500.44,
-      "benchmark": 110183.79,
+      "benchmark": 110173.17,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-12",
       "nav": 108500.44,
-      "benchmark": 110202.75,
+      "benchmark": 110191.29,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-13",
       "nav": 108500.44,
-      "benchmark": 109833.72,
+      "benchmark": 109824.83,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-14",
       "nav": 108500.44,
-      "benchmark": 109688.06,
+      "benchmark": 109679.61,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-17",
       "nav": 108500.44,
-      "benchmark": 108979.44,
+      "benchmark": 108970.69,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-18",
       "nav": 108500.44,
-      "benchmark": 109397.1,
+      "benchmark": 109388.66,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-19",
       "nav": 108500.44,
-      "benchmark": 109752.38,
+      "benchmark": 109744.21,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-20",
       "nav": 108500.44,
-      "benchmark": 108424.44,
+      "benchmark": 108416.51,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-21",
       "nav": 108485.19,
-      "benchmark": 108938.71,
+      "benchmark": 108930.42,
       "invested": 0.1998,
       "backfilled": true
     },
     {
       "date": "2026-08-24",
       "nav": 109068.3,
-      "benchmark": 109775.88,
+      "benchmark": 109767.79,
       "invested": 0.2041,
       "backfilled": false
     },
     {
       "date": "2026-08-25",
       "nav": 108836.31,
-      "benchmark": 109559.85,
+      "benchmark": 109551.54,
       "invested": 0.2024,
       "backfilled": false
     },
     {
       "date": "2026-08-26",
       "nav": 108618.95,
-      "benchmark": 109321.09,
+      "benchmark": 109312.47,
       "invested": 0.2008,
       "backfilled": true
     },
     {
       "date": "2026-08-27",
       "nav": 108261.56,
-      "benchmark": 108844.0,
+      "benchmark": 108835.43,
       "invested": 0.1981,
       "backfilled": true
     },
     {
       "date": "2026-08-28",
       "nav": 108357.7,
-      "benchmark": 109442.02,
+      "benchmark": 109434.0,
       "invested": 0.1988,
       "backfilled": true
     },
     {
       "date": "2026-08-31",
       "nav": 108729.72,
-      "benchmark": 109177.46,
+      "benchmark": 109169.31,
       "invested": 0.2016,
       "backfilled": true
     },
     {
       "date": "2026-09-01",
       "nav": 108949.17,
-      "benchmark": 109223.58,
+      "benchmark": 109215.6,
       "invested": 0.2032,
       "backfilled": true
     },
     {
       "date": "2026-09-02",
       "nav": 108984.7,
-      "benchmark": 109730.83,
+      "benchmark": 109722.93,
       "invested": 0.2034,
       "backfilled": true
     },
     {
       "date": "2026-09-03",
       "nav": 109471.67,
-      "benchmark": 110496.71,
+      "benchmark": 110489.01,
       "invested": 0.207,
       "backfilled": true
     },
     {
       "date": "2026-09-04",
       "nav": 109204.15,
-      "benchmark": 109662.84,
+      "benchmark": 109655.01,
       "invested": 0.205,
       "backfilled": true
     },
     {
       "date": "2026-09-08",
       "nav": 108976.34,
-      "benchmark": 109024.37,
+      "benchmark": 109016.54,
       "invested": 0.2034,
       "backfilled": true
     },
     {
       "date": "2026-09-09",
       "nav": 108930.36,
-      "benchmark": 108724.55,
+      "benchmark": 108716.65,
       "invested": 0.2031,
       "backfilled": true
     },
     {
       "date": "2026-09-10",
       "nav": 108909.46,
-      "benchmark": 108483.88,
+      "benchmark": 108476.47,
       "invested": 0.2029,
       "backfilled": true
     },
     {
       "date": "2026-09-11",
       "nav": 109206.24,
-      "benchmark": 109337.85,
+      "benchmark": 109329.29,
       "invested": 0.2051,
       "backfilled": true
     },
     {
       "date": "2026-09-14",
       "nav": 109609.61,
-      "benchmark": 109735.47,
+      "benchmark": 109727.42,
       "invested": 0.208,
       "backfilled": true
     },
     {
       "date": "2026-09-15",
       "nav": 109493.22,
-      "benchmark": 109411.62,
+      "benchmark": 109403.57,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-09-16",
       "nav": 109493.22,
-      "benchmark": 108428.23,
+      "benchmark": 108420.75,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-09-17",
       "nav": 109493.22,
-      "benchmark": 109193.84,
+      "benchmark": 109185.74,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-09-18",
       "nav": 109493.22,
-      "benchmark": 108920.72,
+      "benchmark": 108912.8,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-09-21",
       "nav": 109170.74,
-      "benchmark": 109708.17,
+      "benchmark": 109699.77,
       "invested": 0.3982,
       "backfilled": true
     },
     {
       "date": "2026-09-22",
       "nav": 109458.22,
-      "benchmark": 109270.55,
+      "benchmark": 109263.39,
       "invested": 0.3997,
       "backfilled": true
     },
     {
       "date": "2026-09-23",
       "nav": 109234.82,
-      "benchmark": 108614.74,
+      "benchmark": 108607.59,
       "invested": 0.3985,
       "backfilled": true
     },
     {
       "date": "2026-09-24",
       "nav": 108301.03,
-      "benchmark": 108769.96,
+      "benchmark": 108762.68,
       "invested": 0.5949,
       "backfilled": true
     },
     {
       "date": "2026-09-25",
       "nav": 108408.81,
-      "benchmark": 109115.55,
+      "benchmark": 109108.33,
       "invested": 0.5953,
       "backfilled": true
     },
     {
       "date": "2026-09-28",
       "nav": 107881.44,
-      "benchmark": 108766.8,
+      "benchmark": 108759.57,
       "invested": 0.5933,
       "backfilled": true
     },
     {
       "date": "2026-09-29",
       "nav": 107812.89,
-      "benchmark": 108300.17,
+      "benchmark": 108292.89,
       "invested": 0.5931,
       "backfilled": true
     },
     {
       "date": "2026-09-30",
       "nav": 106946.14,
-      "benchmark": 107710.2,
+      "benchmark": 107702.75,
       "invested": 0.5898,
       "backfilled": true
     },
     {
       "date": "2026-10-01",
       "nav": 106690.78,
-      "benchmark": 107638.3,
+      "benchmark": 107630.57,
       "invested": 0.5888,
+      "backfilled": true
+    },
+    {
+      "date": "2026-10-02",
+      "nav": 106773.43,
+      "benchmark": 108357.23,
+      "invested": 0.5891,
+      "backfilled": true
+    },
+    {
+      "date": "2026-10-05",
+      "nav": 106713.66,
+      "benchmark": 109046.06,
+      "invested": 0.5889,
       "backfilled": true
     }
   ],
   "live_since": "2026-08-24",
-  "backfilled_sessions": 153
+  "backfilled_sessions": 155
 }

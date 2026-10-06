@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "decided_on": "2026-10-05",
+    "ticker": "JNJ",
+    "side": "BUY",
+    "shares": 84,
+    "reason": "Opening position \u2014 RSI 29.6 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+    "signal_value": 29.57
+  }
+]
