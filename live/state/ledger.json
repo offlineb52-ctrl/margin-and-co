@@ -414,5 +414,18 @@
     "reason": "Opening position \u2014 RSI 26.2 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
     "signal_value": 26.24,
     "backfilled": true
+  },
+  {
+    "decided_on": "2026-10-05",
+    "filled_on": "2026-10-06",
+    "ticker": "JNJ",
+    "side": "BUY",
+    "shares": 84,
+    "price": 254.15,
+    "gross": 21348.6,
+    "cost": 17.08,
+    "reason": "Opening position \u2014 RSI 29.6 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+    "signal_value": 29.57,
+    "backfilled": true
   }
 ]
