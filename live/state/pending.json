@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "decided_on": "2026-10-12",
+    "ticker": "JNJ",
+    "side": "SELL",
+    "shares": 84,
+    "reason": "Closing position \u2014 RSI 50.3 \u2014 no oversold signal",
+    "signal_value": 50.3
+  }
+]
