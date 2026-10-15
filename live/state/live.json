@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated": "2026-10-14",
+  "generated": "2026-10-15",
   "strategy": {
     "name": "RSI(14) mean reversion, long only",
     "rationale": "Across 763 S&P 500 and FTSE 350 companies, RSI was the only one of the four indicators to post a positive out-of-sample Sharpe ratio after costs (0.48). The other three are trend-following, and all three went negative net of what it cost to trade them. RSI still lost to buy & hold, which is why this portfolio publishes both side by side. It is being traded live because a rule that survived one honest test deserves a second one that cannot be re-run.",
@@ -42,23 +42,23 @@
     "inception": "2026-02-20",
     "currency": "USD",
     "starting_capital": 100000.0,
-    "sessions": 162,
-    "last_mark": "2026-10-12"
+    "sessions": 163,
+    "last_mark": "2026-10-13"
   },
   "performance": {
-    "nav": 108603.16,
-    "cash": 22508.19,
-    "market_value": 86094.97,
-    "total_return": 0.086,
-    "benchmark_nav": 111719.77,
-    "benchmark_return": 0.1172,
-    "excess_return": -0.0312,
+    "nav": 108175.39,
+    "cash": 43874.12,
+    "market_value": 64301.27,
+    "total_return": 0.0818,
+    "benchmark_nav": 111825.94,
+    "benchmark_return": 0.1183,
+    "excess_return": -0.0365,
     "max_drawdown": -0.0458,
-    "avg_invested": 0.3332,
-    "current_invested": 0.7927,
-    "total_costs_paid": 525.4,
-    "closed_trades": 14,
-    "win_rate": 0.7143
+    "avg_invested": 0.3348,
+    "current_invested": 0.5944,
+    "total_costs_paid": 542.51,
+    "closed_trades": 15,
+    "win_rate": 0.7333
   },
   "positions": [
     {
@@ -67,13 +67,6 @@
       "cost_basis": 301.0,
       "opened_on": "2026-09-21",
       "value_at_cost": 21973.0
-    },
-    {
-      "ticker": "JNJ",
-      "shares": 84,
-      "cost_basis": 254.15,
-      "opened_on": "2026-10-06",
-      "value_at_cost": 21348.6
     },
     {
       "ticker": "MCD",
@@ -90,17 +83,22 @@
       "value_at_cost": 21781.2
     }
   ],
-  "pending_orders": [
-    {
-      "decided_on": "2026-10-12",
-      "ticker": "JNJ",
-      "side": "SELL",
-      "shares": 84,
-      "reason": "Closing position \u2014 RSI 50.3 \u2014 no oversold signal",
-      "signal_value": 50.3
-    }
-  ],
+  "pending_orders": [],
   "closed_trades_list": [
+    {
+      "ticker": "JNJ",
+      "opened_on": "2026-10-06",
+      "closed_on": "2026-10-13",
+      "shares": 84,
+      "avg_entry": 254.15,
+      "avg_exit": 254.56,
+      "fees": 34.19,
+      "pnl": 0.25,
+      "pnl_pct": 0.0,
+      "open_reason": "Opening position \u2014 RSI 29.6 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "close_reason": "Closing position \u2014 RSI 50.3 \u2014 no oversold signal",
+      "backfilled": true
+    },
     {
       "ticker": "WMT",
       "opened_on": "2026-08-21",
@@ -299,6 +297,19 @@
     }
   ],
   "fills": [
+    {
+      "decided_on": "2026-10-12",
+      "filled_on": "2026-10-13",
+      "ticker": "JNJ",
+      "side": "SELL",
+      "shares": 84,
+      "price": 254.56,
+      "gross": 21383.04,
+      "cost": 17.11,
+      "reason": "Closing position \u2014 RSI 50.3 \u2014 no oversold signal",
+      "signal_value": 50.3,
+      "backfilled": true
+    },
     {
       "decided_on": "2026-10-05",
       "filled_on": "2026-10-06",
@@ -775,7 +786,7 @@
     {
       "date": "2026-03-02",
       "nav": 100591.4,
-      "benchmark": 101087.14,
+      "benchmark": 101087.13,
       "invested": 0.5937,
       "backfilled": true
     },
@@ -1027,7 +1038,7 @@
     {
       "date": "2026-04-22",
       "nav": 104183.25,
-      "benchmark": 103099.0,
+      "benchmark": 103099.01,
       "invested": 0.1985,
       "backfilled": true
     },
@@ -1090,7 +1101,7 @@
     {
       "date": "2026-05-05",
       "nav": 104132.94,
-      "benchmark": 104474.74,
+      "benchmark": 104474.75,
       "invested": 0.1981,
       "backfilled": true
     },
@@ -1202,7 +1213,7 @@
     {
       "date": "2026-05-28",
       "nav": 104757.55,
-      "benchmark": 106616.79,
+      "benchmark": 106616.8,
       "invested": 0.1977,
       "backfilled": true
     },
@@ -1727,7 +1738,7 @@
     {
       "date": "2026-09-15",
       "nav": 109493.22,
-      "benchmark": 109399.85,
+      "benchmark": 109399.86,
       "invested": 0.0,
       "backfilled": true
     },
@@ -1825,7 +1836,7 @@
     {
       "date": "2026-10-05",
       "nav": 106713.66,
-      "benchmark": 109043.94,
+      "benchmark": 109043.95,
       "invested": 0.5889,
       "backfilled": true
     },
@@ -1853,18 +1864,25 @@
     {
       "date": "2026-10-09",
       "nav": 108262.06,
-      "benchmark": 111090.06,
+      "benchmark": 111090.07,
       "invested": 0.7921,
       "backfilled": true
     },
     {
       "date": "2026-10-12",
       "nav": 108603.16,
-      "benchmark": 111719.77,
+      "benchmark": 111719.78,
       "invested": 0.7927,
+      "backfilled": true
+    },
+    {
+      "date": "2026-10-13",
+      "nav": 108175.39,
+      "benchmark": 111825.94,
+      "invested": 0.5944,
       "backfilled": true
     }
   ],
   "live_since": "2026-08-24",
-  "backfilled_sessions": 160
+  "backfilled_sessions": 161
 }
