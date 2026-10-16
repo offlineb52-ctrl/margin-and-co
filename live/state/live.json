@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated": "2026-10-15",
+  "generated": "2026-10-16",
   "strategy": {
     "name": "RSI(14) mean reversion, long only",
     "rationale": "Across 763 S&P 500 and FTSE 350 companies, RSI was the only one of the four indicators to post a positive out-of-sample Sharpe ratio after costs (0.48). The other three are trend-following, and all three went negative net of what it cost to trade them. RSI still lost to buy & hold, which is why this portfolio publishes both side by side. It is being traded live because a rule that survived one honest test deserves a second one that cannot be re-run.",
@@ -42,20 +42,20 @@
     "inception": "2026-02-20",
     "currency": "USD",
     "starting_capital": 100000.0,
-    "sessions": 163,
-    "last_mark": "2026-10-13"
+    "sessions": 164,
+    "last_mark": "2026-10-14"
   },
   "performance": {
-    "nav": 108175.39,
+    "nav": 108849.92,
     "cash": 43874.12,
-    "market_value": 64301.27,
-    "total_return": 0.0818,
-    "benchmark_nav": 111825.94,
-    "benchmark_return": 0.1183,
-    "excess_return": -0.0365,
+    "market_value": 64975.8,
+    "total_return": 0.0885,
+    "benchmark_nav": 112321.91,
+    "benchmark_return": 0.1232,
+    "excess_return": -0.0347,
     "max_drawdown": -0.0458,
-    "avg_invested": 0.3348,
-    "current_invested": 0.5944,
+    "avg_invested": 0.3364,
+    "current_invested": 0.5969,
     "total_costs_paid": 542.51,
     "closed_trades": 15,
     "win_rate": 0.7333
@@ -835,7 +835,7 @@
     {
       "date": "2026-03-11",
       "nav": 101191.13,
-      "benchmark": 99443.76,
+      "benchmark": 99443.75,
       "invested": 0.1992,
       "backfilled": true
     },
@@ -877,14 +877,14 @@
     {
       "date": "2026-03-19",
       "nav": 99582.27,
-      "benchmark": 97306.68,
+      "benchmark": 97306.67,
       "invested": 0.3908,
       "backfilled": true
     },
     {
       "date": "2026-03-20",
       "nav": 98781.95,
-      "benchmark": 96322.85,
+      "benchmark": 96322.84,
       "invested": 0.3859,
       "backfilled": true
     },
@@ -1038,21 +1038,21 @@
     {
       "date": "2026-04-22",
       "nav": 104183.25,
-      "benchmark": 103099.01,
+      "benchmark": 103099.0,
       "invested": 0.1985,
       "backfilled": true
     },
     {
       "date": "2026-04-23",
       "nav": 104599.46,
-      "benchmark": 103172.56,
+      "benchmark": 103172.55,
       "invested": 0.2017,
       "backfilled": true
     },
     {
       "date": "2026-04-24",
       "nav": 104311.32,
-      "benchmark": 103600.63,
+      "benchmark": 103600.62,
       "invested": 0.1995,
       "backfilled": true
     },
@@ -1101,14 +1101,14 @@
     {
       "date": "2026-05-05",
       "nav": 104132.94,
-      "benchmark": 104474.75,
+      "benchmark": 104474.74,
       "invested": 0.1981,
       "backfilled": true
     },
     {
       "date": "2026-05-06",
       "nav": 104047.87,
-      "benchmark": 104733.07,
+      "benchmark": 104733.06,
       "invested": 0.1975,
       "backfilled": true
     },
@@ -1185,7 +1185,7 @@
     {
       "date": "2026-05-21",
       "nav": 105220.16,
-      "benchmark": 107208.61,
+      "benchmark": 107208.6,
       "invested": 0.2012,
       "backfilled": true
     },
@@ -1199,7 +1199,7 @@
     {
       "date": "2026-05-26",
       "nav": 104853.65,
-      "benchmark": 106027.0,
+      "benchmark": 106026.99,
       "invested": 0.1984,
       "backfilled": true
     },
@@ -1213,7 +1213,7 @@
     {
       "date": "2026-05-28",
       "nav": 104757.55,
-      "benchmark": 106616.8,
+      "benchmark": 106616.79,
       "invested": 0.1977,
       "backfilled": true
     },
@@ -1234,7 +1234,7 @@
     {
       "date": "2026-06-02",
       "nav": 104459.12,
-      "benchmark": 105474.92,
+      "benchmark": 105474.91,
       "invested": 0.3939,
       "backfilled": true
     },
@@ -1297,14 +1297,14 @@
     {
       "date": "2026-06-15",
       "nav": 106440.27,
-      "benchmark": 105982.17,
+      "benchmark": 105982.16,
       "invested": 0.205,
       "backfilled": true
     },
     {
       "date": "2026-06-16",
       "nav": 106478.19,
-      "benchmark": 106369.81,
+      "benchmark": 106369.8,
       "invested": 0.2052,
       "backfilled": true
     },
@@ -1367,14 +1367,14 @@
     {
       "date": "2026-06-30",
       "nav": 105992.92,
-      "benchmark": 103885.15,
+      "benchmark": 103885.14,
       "invested": 0.4002,
       "backfilled": true
     },
     {
       "date": "2026-07-01",
       "nav": 105953.8,
-      "benchmark": 104839.65,
+      "benchmark": 104839.64,
       "invested": 0.599,
       "backfilled": true
     },
@@ -1409,7 +1409,7 @@
     {
       "date": "2026-07-09",
       "nav": 107639.75,
-      "benchmark": 106168.04,
+      "benchmark": 106168.03,
       "invested": 0.6053,
       "backfilled": true
     },
@@ -1430,7 +1430,7 @@
     {
       "date": "2026-07-14",
       "nav": 108893.95,
-      "benchmark": 106919.69,
+      "benchmark": 106919.68,
       "invested": 0.1885,
       "backfilled": true
     },
@@ -1444,7 +1444,7 @@
     {
       "date": "2026-07-16",
       "nav": 109119.66,
-      "benchmark": 107768.02,
+      "benchmark": 107768.01,
       "invested": 0.1902,
       "backfilled": true
     },
@@ -1500,7 +1500,7 @@
     {
       "date": "2026-07-28",
       "nav": 108785.61,
-      "benchmark": 107888.64,
+      "benchmark": 107888.63,
       "invested": 0.1877,
       "backfilled": true
     },
@@ -1612,21 +1612,21 @@
     {
       "date": "2026-08-19",
       "nav": 108500.44,
-      "benchmark": 109740.12,
+      "benchmark": 109740.11,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-20",
       "nav": 108500.44,
-      "benchmark": 108412.87,
+      "benchmark": 108412.86,
       "invested": 0.0,
       "backfilled": true
     },
     {
       "date": "2026-08-21",
       "nav": 108485.19,
-      "benchmark": 108926.78,
+      "benchmark": 108926.77,
       "invested": 0.1998,
       "backfilled": true
     },
@@ -1682,7 +1682,7 @@
     {
       "date": "2026-09-02",
       "nav": 108984.7,
-      "benchmark": 109718.92,
+      "benchmark": 109718.91,
       "invested": 0.2034,
       "backfilled": true
     },
@@ -1738,7 +1738,7 @@
     {
       "date": "2026-09-15",
       "nav": 109493.22,
-      "benchmark": 109399.86,
+      "benchmark": 109399.85,
       "invested": 0.0,
       "backfilled": true
     },
@@ -1794,7 +1794,7 @@
     {
       "date": "2026-09-25",
       "nav": 108408.81,
-      "benchmark": 109105.37,
+      "benchmark": 109105.36,
       "invested": 0.5953,
       "backfilled": true
     },
@@ -1829,21 +1829,21 @@
     {
       "date": "2026-10-02",
       "nav": 106773.43,
-      "benchmark": 108355.12,
+      "benchmark": 108355.11,
       "invested": 0.5891,
       "backfilled": true
     },
     {
       "date": "2026-10-05",
       "nav": 106713.66,
-      "benchmark": 109043.95,
+      "benchmark": 109043.94,
       "invested": 0.5889,
       "backfilled": true
     },
     {
       "date": "2026-10-06",
       "nav": 107110.31,
-      "benchmark": 109892.53,
+      "benchmark": 109892.52,
       "invested": 0.7899,
       "backfilled": true
     },
@@ -1857,32 +1857,39 @@
     {
       "date": "2026-10-08",
       "nav": 108740.84,
-      "benchmark": 110228.31,
+      "benchmark": 110228.3,
       "invested": 0.793,
       "backfilled": true
     },
     {
       "date": "2026-10-09",
       "nav": 108262.06,
-      "benchmark": 111090.07,
+      "benchmark": 111090.06,
       "invested": 0.7921,
       "backfilled": true
     },
     {
       "date": "2026-10-12",
       "nav": 108603.16,
-      "benchmark": 111719.78,
+      "benchmark": 111719.77,
       "invested": 0.7927,
       "backfilled": true
     },
     {
       "date": "2026-10-13",
       "nav": 108175.39,
-      "benchmark": 111825.94,
+      "benchmark": 111825.93,
       "invested": 0.5944,
+      "backfilled": true
+    },
+    {
+      "date": "2026-10-14",
+      "nav": 108849.92,
+      "benchmark": 112321.91,
+      "invested": 0.5969,
       "backfilled": true
     }
   ],
   "live_since": "2026-08-24",
-  "backfilled_sessions": 161
+  "backfilled_sessions": 162
 }
