@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "decided_on": "2026-10-15",
+    "ticker": "HD",
+    "side": "SELL",
+    "shares": 73,
+    "reason": "Closing position \u2014 RSI 59.2 \u2014 no oversold signal",
+    "signal_value": 59.21
+  },
+  {
+    "decided_on": "2026-10-15",
+    "ticker": "MCD",
+    "side": "SELL",
+    "shares": 91,
+    "reason": "Closing position \u2014 RSI 51.5 \u2014 no oversold signal",
+    "signal_value": 51.51
+  }
+]
