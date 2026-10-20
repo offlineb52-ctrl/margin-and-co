@@ -440,5 +440,31 @@
     "reason": "Closing position \u2014 RSI 50.3 \u2014 no oversold signal",
     "signal_value": 50.3,
     "backfilled": true
+  },
+  {
+    "decided_on": "2026-10-15",
+    "filled_on": "2026-10-16",
+    "ticker": "HD",
+    "side": "SELL",
+    "shares": 73,
+    "price": 309.66,
+    "gross": 22605.18,
+    "cost": 18.08,
+    "reason": "Closing position \u2014 RSI 59.2 \u2014 no oversold signal",
+    "signal_value": 59.21,
+    "backfilled": true
+  },
+  {
+    "decided_on": "2026-10-15",
+    "filled_on": "2026-10-16",
+    "ticker": "MCD",
+    "side": "SELL",
+    "shares": 91,
+    "price": 244.31,
+    "gross": 22232.21,
+    "cost": 17.79,
+    "reason": "Closing position \u2014 RSI 51.5 \u2014 no oversold signal",
+    "signal_value": 51.51,
+    "backfilled": true
   }
 ]

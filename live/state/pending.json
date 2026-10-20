@@ -1,18 +1,10 @@
 [
   {
-    "decided_on": "2026-10-15",
-    "ticker": "HD",
+    "decided_on": "2026-10-16",
+    "ticker": "PEP",
     "side": "SELL",
-    "shares": 73,
-    "reason": "Closing position \u2014 RSI 59.2 \u2014 no oversold signal",
-    "signal_value": 59.21
-  },
-  {
-    "decided_on": "2026-10-15",
-    "ticker": "MCD",
-    "side": "SELL",
-    "shares": 91,
-    "reason": "Closing position \u2014 RSI 51.5 \u2014 no oversold signal",
-    "signal_value": 51.51
+    "shares": 168,
+    "reason": "Closing position \u2014 RSI 54.6 \u2014 no oversold signal",
+    "signal_value": 54.6
   }
 ]
