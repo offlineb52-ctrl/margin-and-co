@@ -466,5 +466,18 @@
     "reason": "Closing position \u2014 RSI 51.5 \u2014 no oversold signal",
     "signal_value": 51.51,
     "backfilled": true
+  },
+  {
+    "decided_on": "2026-10-16",
+    "filled_on": "2026-10-19",
+    "ticker": "PEP",
+    "side": "SELL",
+    "shares": 168,
+    "price": 130.88,
+    "gross": 21987.84,
+    "cost": 17.59,
+    "reason": "Closing position \u2014 RSI 54.6 \u2014 no oversold signal",
+    "signal_value": 54.6,
+    "backfilled": true
   }
 ]

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated": "2026-10-20",
+  "generated": "2026-10-21",
   "strategy": {
     "name": "RSI(14) mean reversion, long only",
     "rationale": "Across 763 S&P 500 and FTSE 350 companies, RSI was the only one of the four indicators to post a positive out-of-sample Sharpe ratio after costs (0.48). The other three are trend-following, and all three went negative net of what it cost to trade them. RSI still lost to buy & hold, which is why this portfolio publishes both side by side. It is being traded live because a rule that survived one honest test deserves a second one that cannot be re-run.",
@@ -42,44 +42,41 @@
     "inception": "2026-02-20",
     "currency": "USD",
     "starting_capital": 100000.0,
-    "sessions": 166,
-    "last_mark": "2026-10-16"
+    "sessions": 167,
+    "last_mark": "2026-10-19"
   },
   "performance": {
-    "nav": 110765.96,
-    "cash": 88675.64,
-    "market_value": 22090.32,
-    "total_return": 0.1077,
-    "benchmark_nav": 112483.22,
-    "benchmark_return": 0.1248,
-    "excess_return": -0.0172,
+    "nav": 110645.89,
+    "cash": 110645.89,
+    "market_value": 0.0,
+    "total_return": 0.1065,
+    "benchmark_nav": 112807.77,
+    "benchmark_return": 0.1281,
+    "excess_return": -0.0216,
     "max_drawdown": -0.0458,
-    "avg_invested": 0.3371,
-    "current_invested": 0.1994,
-    "total_costs_paid": 578.38,
-    "closed_trades": 17,
-    "win_rate": 0.7647
+    "avg_invested": 0.3351,
+    "current_invested": 0.0,
+    "total_costs_paid": 595.97,
+    "closed_trades": 18,
+    "win_rate": 0.7778
   },
-  "positions": [
-    {
-      "ticker": "PEP",
-      "shares": 168,
-      "cost_basis": 129.65,
-      "opened_on": "2026-09-21",
-      "value_at_cost": 21781.2
-    }
-  ],
-  "pending_orders": [
-    {
-      "decided_on": "2026-10-16",
-      "ticker": "PEP",
-      "side": "SELL",
-      "shares": 168,
-      "reason": "Closing position \u2014 RSI 54.6 \u2014 no oversold signal",
-      "signal_value": 54.6
-    }
-  ],
+  "positions": [],
+  "pending_orders": [],
   "closed_trades_list": [
+    {
+      "ticker": "PEP",
+      "opened_on": "2026-09-21",
+      "closed_on": "2026-10-19",
+      "shares": 168,
+      "avg_entry": 129.65,
+      "avg_exit": 130.88,
+      "fees": 35.01,
+      "pnl": 171.63,
+      "pnl_pct": 0.0079,
+      "open_reason": "Opening position \u2014 RSI 26.4 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "close_reason": "Closing position \u2014 RSI 54.6 \u2014 no oversold signal",
+      "backfilled": true
+    },
     {
       "ticker": "HD",
       "opened_on": "2026-09-21",
@@ -320,6 +317,19 @@
     }
   ],
   "fills": [
+    {
+      "decided_on": "2026-10-16",
+      "filled_on": "2026-10-19",
+      "ticker": "PEP",
+      "side": "SELL",
+      "shares": 168,
+      "price": 130.88,
+      "gross": 21987.84,
+      "cost": 17.59,
+      "reason": "Closing position \u2014 RSI 54.6 \u2014 no oversold signal",
+      "signal_value": 54.6,
+      "backfilled": true
+    },
     {
       "decided_on": "2026-10-15",
       "filled_on": "2026-10-16",
@@ -1024,7 +1034,7 @@
     {
       "date": "2026-04-09",
       "nav": 103361.84,
-      "benchmark": 100481.96,
+      "benchmark": 100481.95,
       "invested": 0.7615,
       "backfilled": true
     },
@@ -1150,14 +1160,14 @@
     {
       "date": "2026-05-05",
       "nav": 104132.94,
-      "benchmark": 104474.74,
+      "benchmark": 104474.75,
       "invested": 0.1981,
       "backfilled": true
     },
     {
       "date": "2026-05-06",
       "nav": 104047.87,
-      "benchmark": 104733.06,
+      "benchmark": 104733.07,
       "invested": 0.1975,
       "backfilled": true
     },
@@ -1262,7 +1272,7 @@
     {
       "date": "2026-05-28",
       "nav": 104757.55,
-      "benchmark": 106616.79,
+      "benchmark": 106616.8,
       "invested": 0.1977,
       "backfilled": true
     },
@@ -1353,7 +1363,7 @@
     {
       "date": "2026-06-16",
       "nav": 106478.19,
-      "benchmark": 106369.81,
+      "benchmark": 106369.8,
       "invested": 0.2052,
       "backfilled": true
     },
@@ -1423,7 +1433,7 @@
     {
       "date": "2026-07-01",
       "nav": 105953.8,
-      "benchmark": 104839.64,
+      "benchmark": 104839.65,
       "invested": 0.599,
       "backfilled": true
     },
@@ -1951,8 +1961,15 @@
       "benchmark": 112483.22,
       "invested": 0.1994,
       "backfilled": true
+    },
+    {
+      "date": "2026-10-19",
+      "nav": 110645.89,
+      "benchmark": 112807.77,
+      "invested": 0.0,
+      "backfilled": true
     }
   ],
   "live_since": "2026-08-24",
-  "backfilled_sessions": 164
+  "backfilled_sessions": 165
 }
