@@ -479,5 +479,18 @@
     "reason": "Closing position \u2014 RSI 54.6 \u2014 no oversold signal",
     "signal_value": 54.6,
     "backfilled": true
+  },
+  {
+    "decided_on": "2026-10-26",
+    "filled_on": "2026-10-27",
+    "ticker": "GOOGL",
+    "side": "BUY",
+    "shares": 69,
+    "price": 317.0,
+    "gross": 21873.0,
+    "cost": 17.5,
+    "reason": "Opening position \u2014 RSI 29.6 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+    "signal_value": 29.55,
+    "backfilled": true
   }
 ]
