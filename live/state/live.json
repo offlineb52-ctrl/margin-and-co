@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated": "2026-11-05",
+  "generated": "2026-11-06",
   "strategy": {
     "name": "RSI(14) mean reversion, long only",
     "rationale": "Across 763 S&P 500 and FTSE 350 companies, RSI was the only one of the four indicators to post a positive out-of-sample Sharpe ratio after costs (0.48). The other three are trend-following, and all three went negative net of what it cost to trade them. RSI still lost to buy & hold, which is why this portfolio publishes both side by side. It is being traded live because a rule that survived one honest test deserves a second one that cannot be re-run.",
@@ -42,20 +42,20 @@
     "inception": "2026-02-20",
     "currency": "USD",
     "starting_capital": 100000.0,
-    "sessions": 178,
-    "last_mark": "2026-11-03"
+    "sessions": 180,
+    "last_mark": "2026-11-05"
   },
   "performance": {
-    "nav": 108077.46,
+    "nav": 108252.72,
     "cash": 88755.39,
-    "market_value": 19322.07,
-    "total_return": 0.0808,
-    "benchmark_nav": 111933.38,
-    "benchmark_return": 0.1193,
-    "excess_return": -0.0386,
+    "market_value": 19497.33,
+    "total_return": 0.0825,
+    "benchmark_nav": 111821.66,
+    "benchmark_return": 0.1182,
+    "excess_return": -0.0357,
     "max_drawdown": -0.0458,
-    "avg_invested": 0.3207,
-    "current_invested": 0.1788,
+    "avg_invested": 0.3192,
+    "current_invested": 0.1801,
     "total_costs_paid": 613.47,
     "closed_trades": 18,
     "win_rate": 0.7778
@@ -69,7 +69,16 @@
       "value_at_cost": 21873.0
     }
   ],
-  "pending_orders": [],
+  "pending_orders": [
+    {
+      "decided_on": "2026-11-05",
+      "ticker": "NVDA",
+      "side": "BUY",
+      "shares": 119,
+      "reason": "Opening position \u2014 RSI 25.4 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+      "signal_value": 25.4
+    }
+  ],
   "closed_trades_list": [
     {
       "ticker": "PEP",
@@ -1132,7 +1141,7 @@
     {
       "date": "2026-04-24",
       "nav": 104311.32,
-      "benchmark": 103595.45,
+      "benchmark": 103595.44,
       "invested": 0.1995,
       "backfilled": true
     },
@@ -1188,7 +1197,7 @@
     {
       "date": "2026-05-06",
       "nav": 104047.87,
-      "benchmark": 104728.41,
+      "benchmark": 104728.42,
       "invested": 0.1975,
       "backfilled": true
     },
@@ -1265,7 +1274,7 @@
     {
       "date": "2026-05-21",
       "nav": 105220.16,
-      "benchmark": 107206.56,
+      "benchmark": 107206.57,
       "invested": 0.2012,
       "backfilled": true
     },
@@ -1307,7 +1316,7 @@
     {
       "date": "2026-06-01",
       "nav": 104578.95,
-      "benchmark": 105482.41,
+      "benchmark": 105482.42,
       "invested": 0.3946,
       "backfilled": true
     },
@@ -1363,14 +1372,14 @@
     {
       "date": "2026-06-11",
       "nav": 106382.49,
-      "benchmark": 105207.63,
+      "benchmark": 105207.62,
       "invested": 0.2045,
       "backfilled": true
     },
     {
       "date": "2026-06-12",
       "nav": 106479.99,
-      "benchmark": 105502.46,
+      "benchmark": 105502.47,
       "invested": 0.2053,
       "backfilled": true
     },
@@ -1384,7 +1393,7 @@
     {
       "date": "2026-06-16",
       "nav": 106478.19,
-      "benchmark": 106375.69,
+      "benchmark": 106375.7,
       "invested": 0.2052,
       "backfilled": true
     },
@@ -2007,7 +2016,7 @@
     {
       "date": "2026-10-22",
       "nav": 110645.89,
-      "benchmark": 113497.92,
+      "benchmark": 113497.93,
       "invested": 0.0,
       "backfilled": true
     },
@@ -2066,8 +2075,22 @@
       "benchmark": 111933.38,
       "invested": 0.1788,
       "backfilled": true
+    },
+    {
+      "date": "2026-11-04",
+      "nav": 108691.56,
+      "benchmark": 114631.37,
+      "invested": 0.1834,
+      "backfilled": true
+    },
+    {
+      "date": "2026-11-05",
+      "nav": 108252.72,
+      "benchmark": 111821.66,
+      "invested": 0.1801,
+      "backfilled": true
     }
   ],
   "live_since": "2026-08-24",
-  "backfilled_sessions": 176
+  "backfilled_sessions": 178
 }
