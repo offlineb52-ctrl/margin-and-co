@@ -492,5 +492,18 @@
     "reason": "Opening position \u2014 RSI 29.6 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
     "signal_value": 29.55,
     "backfilled": true
+  },
+  {
+    "decided_on": "2026-11-05",
+    "filled_on": "2026-11-06",
+    "ticker": "NVDA",
+    "side": "BUY",
+    "shares": 119,
+    "price": 191.1,
+    "gross": 22740.9,
+    "cost": 18.19,
+    "reason": "Opening position \u2014 RSI 25.4 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+    "signal_value": 25.4,
+    "backfilled": true
   }
 ]
