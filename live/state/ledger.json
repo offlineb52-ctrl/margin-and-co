@@ -505,5 +505,18 @@
     "reason": "Opening position \u2014 RSI 25.4 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
     "signal_value": 25.4,
     "backfilled": true
+  },
+  {
+    "decided_on": "2026-11-06",
+    "filled_on": "2026-11-09",
+    "ticker": "CSCO",
+    "side": "BUY",
+    "shares": 229,
+    "price": 95.5,
+    "gross": 21869.5,
+    "cost": 17.5,
+    "reason": "Opening position \u2014 RSI 28.3 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+    "signal_value": 28.34,
+    "backfilled": true
   }
 ]
