@@ -518,5 +518,18 @@
     "reason": "Opening position \u2014 RSI 28.3 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
     "signal_value": 28.34,
     "backfilled": true
+  },
+  {
+    "decided_on": "2026-11-18",
+    "filled_on": "2026-11-19",
+    "ticker": "UNH",
+    "side": "BUY",
+    "shares": 59,
+    "price": 351.13,
+    "gross": 20716.67,
+    "cost": 16.57,
+    "reason": "Opening position \u2014 RSI 28.5 \u2014 below 30 or holding since it was; waiting for a recovery through 50",
+    "signal_value": 28.52,
+    "backfilled": true
   }
 ]
